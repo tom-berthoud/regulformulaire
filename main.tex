@@ -1,0 +1,110 @@
+% ============================================================
+% FORMULAIRE D'EXAMEN - RÉGULATION AUTOMATIQUE
+% Design tcolorbox, paysage, 6 pages, 3 colonnes
+% ============================================================
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\DeclareUnicodeCharacter{00B0}{\ensuremath{^\circ}}
+\usepackage[a4paper,landscape,margin=0.75cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[expansion=false]{microtype}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, shapes.geometric, fit}
+\usepackage{array}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\multicolsep}{0pt}
+\setlength{\columnsep}{0.32cm}
+\setlength{\columnseprule}{0.1pt}
+\setlength{\abovedisplayskip}{2pt}
+\setlength{\belowdisplayskip}{2pt}
+\setlength{\abovedisplayshortskip}{1pt}
+\setlength{\belowdisplayshortskip}{1pt}
+\raggedcolumns
+\renewcommand{\arraystretch}{0.92}
+
+% --- Couleurs par chapitre ---
+\definecolor{ch1blue}{HTML}{0B6E8A}
+\definecolor{ch2orange}{HTML}{C96B1D}
+\definecolor{ch3green}{HTML}{2E8B57}
+\definecolor{ch4purple}{HTML}{6B2FB3}
+\definecolor{ch5red}{HTML}{A63D40}
+\definecolor{ch6teal}{HTML}{1A7A6D}
+
+% --- tcolorbox global ---
+\tcbset{
+  colback=white,
+  boxrule=0.4pt,
+  arc=0.6mm,
+  left=0.65mm, right=0.65mm, top=0.55mm, bottom=0.55mm,
+  before skip=1.0pt, after skip=1.0pt,
+  fonttitle=\bfseries\fontsize{6.8}{7.2}\selectfont,
+  breakable
+}
+
+% --- Listes compactes ---
+\setlist[itemize]{label=\textbullet,leftmargin=*,itemsep=0pt,topsep=0pt,parsep=0pt,partopsep=0pt}
+\setlist[enumerate]{leftmargin=*,itemsep=0pt,topsep=0pt,parsep=0pt,partopsep=0pt}
+
+% --- Bannière chapitre ---
+\newcommand{\chapterbanner}[2]{%
+  \vspace{1.2pt}%
+  \begin{tcolorbox}[colback=#2!8,colframe=#2!85!black,left=0.8mm,right=0.8mm,top=0.35mm,bottom=0.35mm,boxsep=0pt,arc=0.8mm]
+  {\fontsize{7.2}{7.6}\selectfont\bfseries\color{#2!50!black} #1}
+  \end{tcolorbox}
+  \vspace{0.5pt}%
+}
+
+% --- Note/variable en petit ---
+\newcommand{\vars}[1]{%
+  {\vspace{1pt}\fontsize{6}{7}\selectfont\color{black!75}\textit{#1}\par}%
+}
+
+% --- Math compact ---
+\newcommand{\tightmath}[1]{%
+  \[
+  \setlength{\abovedisplayskip}{1.5pt}%
+  \setlength{\belowdisplayskip}{1.5pt}%
+  #1
+  \]
+}
+
+% --- Piège / Attention ---
+\newcommand{\piege}[1]{%
+  {\color{red!70!black}\textbf{!}~\fontsize{5.4}{6.2}\selectfont #1}%
+}
+
+% --- Astuce ---
+\newcommand{\astuce}[1]{%
+  {\color{green!50!black}\textbf{$\star$}~\fontsize{5.4}{6.2}\selectfont #1}%
+}
+
+% --- Raccourcis ---
+\newcommand{\Lap}{\mathcal{L}}
+\newcommand{\jw}{j\omega}
+
+% ============================================================
+\begin{document}
+\fontsize{7.4pt}{8.0pt}\selectfont
+
+\begin{multicols*}{3}
+
+\input{chapitre1}
+\input{chapitre2}
+\input{chapitre3}
+\input{chapitre4}
+\input{chapitre5}
+\input{chapitre6}
+
+\end{multicols*}
+\end{document}

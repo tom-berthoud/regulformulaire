@@ -1,0 +1,174 @@
+% ============================================================
+% CHAPITRE 3 : Systèmes du 1er et 2nd ordre
+% ============================================================
+\chapterbanner{Chapitre 3 --- Syst\`emes 1\textsuperscript{er} et 2\textsuperscript{nd} ordre}{ch3green}
+
+\begin{tcolorbox}[colback=ch3green!4,colframe=ch3green!80!black,title={Syst\`eme du 1\textsuperscript{er} ordre}]
+\tightmath{
+\boxed{G(s) = \frac{K}{1 + \tau s}} \quad \text{P\^ole : } s_1 = -1/\tau
+}
+\textbf{R\'ep. indicielle} (\'echelon $u_0$) :
+\tightmath{
+\boxed{y(t) = K u_0\!\left(1 - e^{-t/\tau}\right)}
+}
+\begin{center}
+\begin{tikzpicture}[scale=0.44, transform shape, >=Stealth]
+  \draw[->] (0,0) -- (5.5,0) node[right]{$t$};
+  \draw[->] (0,0) -- (0,2.3) node[above]{$y$};
+  \draw[dashed, gray] (0,1.8) -- (5.5,1.8) node[right]{$Ku_0$};
+  \draw[thick, ch3green!80!black] (0,0) .. controls (0.8,1.5) and (2,1.75) .. (5.5,1.8);
+  \draw[dashed, gray] (1,0) -- (1,1.14); \node[below] at (1,0) {$\tau$};
+  \draw[dashed, gray] (2,0) -- (2,1.56); \node[below] at (2,0) {$2\tau$};
+  \draw[dashed, gray] (3,0) -- (3,1.71); \node[below] at (3,0) {$3\tau$};
+  \draw[red!70, thin, dashed] (0,0) -- (1,1.8);
+  \node[above right, red!70] at (0.3,1.8) {tangente};
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1}
+\scriptsize
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$t$ & $y/(Ku_0)$ & \% & Remarque \\
+\midrule
+$\tau$ & $0.632$ & 63\% & Tangente coupe $Ku_0$ \\
+$2\tau$ & $0.865$ & 86\% & \\
+$3\tau$ & $0.950$ & 95\% & $\approx t_s$ \`a 5\% \\
+$4\tau$ & $0.982$ & 98\% & $\approx t_s$ \`a 2\% \\
+$5\tau$ & $0.993$ & 99\% & \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vars{$t_s(5\%) \approx 3\tau$, $t_s(2\%) \approx 4\tau$. Pente init. $= Ku_0/\tau$. Pas de d\'epassement. R\'ep. impuls. : $y(t) = \frac{K}{\tau}e^{-t/\tau}$.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch3green!2,colframe=ch3green!80!black,title={1\textsuperscript{er} ordre : rampe \& identification}]
+\textbf{R\'eponse \`a rampe} $u(t){=}t$ : $y(t) = K[t - \tau + \tau e^{-t/\tau}]$. Erreur perm. : $e_\infty = K\tau$.
+
+\textbf{Identification :}
+\begin{enumerate}
+  \item $K = y_\infty / u_0$ (gain statique)
+  \item $\tau$ = temps pour 63\% de $y_\infty$, ou tangente \`a l'origine coupe $y_\infty$ en $t{=}\tau$
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch3green!4,colframe=ch3green!80!black,title={Syst\`eme du 2\textsuperscript{nd} ordre}]
+\tightmath{
+\boxed{G(s) = \frac{K\,\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}} \quad \boxed{s_{1,2} = -\zeta\omega_n \pm \omega_n\sqrt{\zeta^2 - 1}}
+}
+\tightmath{
+\boxed{s^2 + 2\zeta\omega_n s + \omega_n^2 = (s+\zeta\omega_n)^2 + \omega_n^2(1-\zeta^2)}
+}
+\tightmath{
+\boxed{\omega_n = \sqrt{\sigma^2+\omega_0^2}} \quad \boxed{\zeta = \frac{\sigma}{\omega_n} = \frac{-\Re(s)}{\omega_n}}
+}
+\tightmath{
+\boxed{G(s)=\frac{b_0}{s^2+as+b}\ \Rightarrow\ \omega_n=\sqrt{b},\ \zeta=\frac{a}{2\sqrt{b}},\ K=\frac{b_0}{b}}
+}
+\begin{itemize}
+  \item $\omega_n$ : pulsation naturelle non amortie (rad/s)
+  \item $\zeta$ : taux d'amortissement (sans unit\'e)
+  \item $K$ : gain statique ($= G(0)$)
+\end{itemize}
+\begin{center}
+\renewcommand{\arraystretch}{1}
+\scriptsize
+\begin{tabular}{@{}llll@{}}
+\toprule
+$\zeta$ & R\'egime & P\^oles & Comportement \\
+\midrule
+$0$ & Oscillant pur & $\pm j\omega_n$ & Oscil. perp\'etuelle \\
+$0{<}\zeta{<}1$ & \textbf{Sous-amorti} & $-\sigma \pm j\omega_0$ & Oscil. amorties \\
+$1$ & Critique & $-\omega_n$ (dble) & + rapide sans $D_\%$ \\
+$>1$ & Sur-amorti & 2 r\'eels n\'eg. & Lent, pas de $D_\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch3green!2,colframe=ch3green!80!black,title={Cas sous-amorti ($0 < \zeta < 1$) : formules cl\'es}]
+\tightmath{
+\boxed{\omega_0 = \omega_n\sqrt{1{-}\zeta^2}} \quad \sigma = \zeta\omega_n \quad \varphi = \arccos(\zeta)
+}
+R\'eponse indicielle :
+\tightmath{
+y(t) = K\!\left[1 - \frac{e^{-\sigma t}}{\sqrt{1{-}\zeta^2}}\sin(\omega_0 t + \varphi)\right]
+}
+\tightmath{
+\boxed{D_\% = e^{-\pi\zeta/\sqrt{1-\zeta^2}} \times 100\%} \quad \boxed{\zeta = \frac{-\ln(D_\%/100)}{\sqrt{\pi^2 + \ln^2(D_\%/100)}}}
+}
+\tightmath{
+\boxed{t_p = \frac{\pi}{\omega_0}} \quad \boxed{t_{s2} \approx \frac{4}{\zeta\omega_n}} \quad \boxed{t_{s5} \approx \frac{3}{\zeta\omega_n}} \quad t_r \approx \frac{1.8}{\omega_n}
+}
+\piege{$\zeta \approx 0.7 \Rightarrow D_\% \approx 5\%$ : bon compromis rapidit\'e/stabilit\'e.}
+\begin{center}
+\renewcommand{\arraystretch}{1}
+\scriptsize
+\begin{tabular}{@{}ccccccccc@{}}
+\toprule
+$\zeta$ & 0.1 & 0.2 & 0.3 & 0.4 & 0.5 & 0.6 & 0.7 & 0.8 \\
+\midrule
+$D_\%$ & 73 & 53 & 37 & 25 & 16 & 9.5 & 4.6 & 1.5 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch3green!4,colframe=ch3green!80!black,title={Position des p\^oles dans le plan $s$}]
+\begin{center}
+\begin{tikzpicture}[scale=0.62, transform shape, >=Stealth]
+  \draw[->] (-2.8,0) -- (0.8,0) node[right]{Re};
+  \draw[->] (0,-2.2) -- (0,2.2) node[above]{Im};
+  \filldraw[ch3green!80!black] (-1.2,1.5) circle (2pt) node[right]{$s_1$};
+  \filldraw[ch3green!80!black] (-1.2,-1.5) circle (2pt) node[right]{$\bar{s}_1$};
+  \draw[dashed, gray, thin] (0,0) -- (-1.2,1.5);
+  \draw[<->, thin, red!70] (-1.2,0) -- (-1.2,1.5) node[midway, right]{$\omega_0$};
+  \draw[<->, thin, red!70] (0,0) -- (-1.2,0) node[midway, below]{$\sigma$};
+  \node at (-0.3,1.0) {$\omega_n$};
+  \draw[thin] (-0.35,0) arc (180:128:0.35); \node at (-0.55,0.28) {$\theta$};
+  \draw[dotted, gray] (0,0) -- (-2.5,2.1) node[above]{$\zeta$ cst};
+  \draw[dotted, gray] (-1.2,-2) -- (-1.2,2) node[above]{$\sigma$ cst};
+\end{tikzpicture}
+\end{center}
+\vars{$\cos\theta = \zeta$, $|s| = \omega_n$, Re$(s) = -\sigma = -\zeta\omega_n$, Im$(s) = \pm\omega_0$. Iso-$\zeta$ = droites. Iso-$\sigma$ = verticales. Iso-$\omega_n$ = cercles.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch3green!2,colframe=ch3green!80!black,title={Cas critique, sur-amorti \& identification}]
+\textbf{Critique ($\zeta{=}1$)} : $y(t) = K[1-(1{+}\omega_n t)e^{-\omega_n t}]$. $t_s \approx 4.75/\omega_n$.
+
+\textbf{Sur-amorti ($\zeta{>}1$)} : 2 p\^oles r\'eels, $\tau_{1,2} = -1/s_{1,2}$.
+\tightmath{
+G(s) = \frac{K}{(1{+}\tau_1 s)(1{+}\tau_2 s)}
+}
+\vars{\textbf{P\^ole dominant} = plus petite $|\text{Re}|$ (le plus lent, $\tau$ le plus grand). Approx. : $G \approx K/(1{+}\tau_{\max}s)$ si rapport $\tau_1/\tau_2 \geq 5$.}
+
+\textbf{Identification 2\textsuperscript{nd} ordre :}
+\begin{enumerate}
+  \item $K = y_\infty/u_0$
+  \item $D_\% \Rightarrow \zeta$ (formule inverse)
+  \item $t_p \Rightarrow \omega_0 = \pi/t_p \Rightarrow \omega_n = \omega_0/\sqrt{1{-}\zeta^2}$
+\end{enumerate}
+\piege{Z\'ero demi-plan droit ($\tau_z{<}0$) $\Rightarrow$ r\'ep. inverse initiale = non-minimum de phase.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch3green!4,colframe=ch3green!80!black,title={Abaque rapide des performances (2\textsuperscript{nd} ordre)}]
+\begin{center}
+\renewcommand{\arraystretch}{1.02}
+\scriptsize
+\begin{tabular}{@{}cccccc@{}}
+\toprule
+$\zeta$ & $D_\%$ & $MP$ approx. & $Q=1/(2\zeta)$ & $t_{s5}\omega_n$ & Commentaire \\
+\midrule
+0.2 & 53\% & $\sim 20°$ & 2.5 & 15 & Tr\`es oscillant \\
+0.4 & 25\% & $\sim 40°$ & 1.25 & 7.5 & Oscillant \\
+0.5 & 16\% & $\sim 50°$ & 1.0 & 6 & Compromis \\
+0.7 & 4.6\% & $\sim 65°$ & 0.71 & 4.3 & Bon amort. \\
+1.0 & 0\% & $>$70° & 0.5 & 3.0--4.8 & Critique \\
+\bottomrule
+\end{tabular}
+\end{center}
+\tightmath{
+t_{s2} \approx \frac{4}{\zeta\omega_n},\quad t_{s5} \approx \frac{3}{\zeta\omega_n},\quad t_p=\frac{\pi}{\omega_0}
+}
+\astuce{Quand l'\'enonc\'e impose un d\'epassement max, commencer par $D_\% \to \zeta$, puis remonter vers $\omega_n$ via $t_s$ ou $t_p$.}
+\end{tcolorbox}

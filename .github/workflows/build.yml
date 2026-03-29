@@ -1,0 +1,37 @@
+name: Build PDF
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          latexmk_use_lualatex: false
+          latexmk_shell_escape: false
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: formulaire-regulation
+          path: main.pdf
+          retention-days: 90
+
+      - name: Release latest PDF
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Dernière version
+          body: PDF compilé automatiquement depuis le dernier commit.
+          files: main.pdf
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

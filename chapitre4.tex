@@ -1,0 +1,236 @@
+% ============================================================
+% CHAPITRE 4 : Réponse fréquentielle & Bode
+% ============================================================
+\chapterbanner{Chapitre 4 --- R\'eponse fr\'equentielle \& Bode}{ch4purple}
+
+\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Principe fondamental}]
+Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
+\tightmath{
+\boxed{y_{rp}(t) = A\,|G(\jw)|\,\sin\!\big(\omega t + \angle G(\jw)\big)}
+}
+\vars{L'amplitude est $\times |G(\jw)|$ et la phase est d\'ecal\'ee de $\angle G(\jw)$.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={Diagramme de Bode : 2 graphiques vs $\log\omega$}]
+\begin{itemize}
+  \item \textbf{Module} : $|G(\jw)|_{\text{dB}} = 20\log_{10}|G(\jw)|$
+  \item \textbf{Phase} : $\angle G(\jw)$ en degr\'es
+\end{itemize}
+\astuce{\textbf{Propri\'et\'e cl\'e} : les contributions de chaque facteur s'\textbf{additionnent} en dB et en phase.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={\'El\'ements de base du Bode}]
+{\fontsize{5.4}{6.2}\selectfont
+\begin{minipage}[t]{0.64\linewidth}
+\textbf{Gain pur} : $K$ \\
+Module horizontal \`a $20\log|K|$. Phase : $0^\circ$ si $K>0$, $-180^\circ$ si $K<0$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+\raggedleft
+\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
+  \draw[->] (0,1.0) -- (2.4,1.0);
+  \draw[->] (0,0.0) -- (0,1.8);
+  \draw[thick, ch4purple!80!black] (0.15,1.35) -- (2.2,1.35);
+  \node[left] at (0,1.35) {$20\log|K|$};
+  \node[above left] at (0,1.8) {dB};
+  \node[below right] at (2.35,1.0) {$\omega$};
+  \draw[->] (0,-0.8) -- (2.4,-0.8);
+  \draw[->] (0,-1.6) -- (0,-0.1);
+  \draw[thick, ch4purple!80!black] (0.15,-0.45) -- (2.2,-0.45);
+  \node[above left] at (0,-0.1) {$\varphi$};
+  \node[left] at (0,-0.45) {$0^\circ$};
+\end{tikzpicture}
+\end{minipage}
+\par\smallskip
+
+\begin{minipage}[t]{0.64\linewidth}
+\textbf{Int\'egrateur} : $\dfrac{1}{s}$ \\
+Pente $-20$ dB/d\'ec, phase constante $-90^\circ$. Double int\'egrateur : $-40$ dB/d\'ec et $-180^\circ$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+\raggedleft
+\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
+  \draw[->] (0,1.0) -- (2.4,1.0);
+  \draw[->] (0,0.0) -- (0,1.8);
+  \draw[thick, ch4purple!80!black] (0.15,1.65) -- (2.2,0.35);
+  \node[above left] at (0,1.8) {dB};
+  \node[left] at (0,1.6) {$0$ dB};
+  \node[below right] at (2.35,1.0) {$\omega$};
+  \draw[->] (0,-0.8) -- (2.4,-0.8);
+  \draw[->] (0,-1.6) -- (0,-0.1);
+  \draw[thick, ch4purple!80!black] (0.15,-1.25) -- (2.2,-1.25);
+  \node[above left] at (0,-0.1) {$\varphi$};
+  \node[left] at (0,-1.25) {$-90^\circ$};
+\end{tikzpicture}
+\end{minipage}
+\par\smallskip
+
+\begin{minipage}[t]{0.64\linewidth}
+\textbf{D\'erivateur} : $s$ \\
+Sym\'etrique de l'int\'egrateur : pente $+20$ dB/d\'ec, phase constante $+90^\circ$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+\raggedleft
+\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
+  \draw[->] (0,1.0) -- (2.4,1.0);
+  \draw[->] (0,0.0) -- (0,1.8);
+  \draw[thick, ch4purple!80!black] (0.15,0.35) -- (2.2,1.65);
+  \node[above left] at (0,1.8) {dB};
+  \node[left] at (0,0.4) {$0$ dB};
+  \node[below right] at (2.35,1.0) {$\omega$};
+  \draw[->] (0,-0.8) -- (2.4,-0.8);
+  \draw[->] (0,-1.6) -- (0,-0.1);
+  \draw[thick, ch4purple!80!black] (0.15,-0.35) -- (2.2,-0.35);
+  \node[above left] at (0,-0.1) {$\varphi$};
+  \node[left] at (0,-0.35) {$+90^\circ$};
+\end{tikzpicture}
+\end{minipage}
+\par\smallskip
+
+\begin{minipage}[t]{0.64\linewidth}
+\textbf{P\^ole r\'eel} : $\dfrac{1}{1+\tau s}$ \\
+Cassure $\omega_c=1/\tau$, pente HF $-20$ dB/d\'ec, phase $0^\circ \to -90^\circ$, $-3$ dB \`a la cassure.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+\raggedleft
+\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
+  \draw[->] (0,1.0) -- (2.4,1.0);
+  \draw[->] (0,0.0) -- (0,1.8);
+  \draw[thick, ch4purple!80!black] (0.15,1.35) -- (1.15,1.35) -- (2.2,0.3);
+  \draw[dashed, gray] (1.15,0.0) -- (1.15,1.55);
+  \node[above left] at (0,1.8) {dB};
+  \node[left] at (0,1.35) {$0$ dB};
+  \node[above right] at (1.15,1.35) {$-3$ dB};
+  \node[below] at (1.15,0.0) {$\omega_c$};
+  \node[below right] at (2.35,1.0) {$\omega$};
+  \draw[->] (0,-0.8) -- (2.4,-0.8);
+  \draw[->] (0,-1.6) -- (0,-0.1);
+  \draw[thick, ch4purple!80!black] (0.15,-0.35) -- (1.15,-0.8) -- (2.2,-1.25);
+  \node[above left] at (0,-0.1) {$\varphi$};
+  \node[left] at (0,-0.35) {$0^\circ$};
+  \node[left] at (0,-0.8) {$-45^\circ$};
+  \node[left] at (0,-1.25) {$-90^\circ$};
+\end{tikzpicture}
+\end{minipage}
+\par\smallskip
+
+\begin{minipage}[t]{0.64\linewidth}
+\textbf{Z\'ero r\'eel} : $(1+\tau s)$ \\
+Sym\'etrique du p\^ole r\'eel : pente HF $+20$ dB/d\'ec, phase $0^\circ \to +90^\circ$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+\raggedleft
+\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
+  \draw[->] (0,1.0) -- (2.4,1.0);
+  \draw[->] (0,0.0) -- (0,1.8);
+  \draw[thick, ch4purple!80!black] (0.15,0.3) -- (1.15,0.3) -- (2.2,1.35);
+  \draw[dashed, gray] (1.15,0.0) -- (1.15,1.55);
+  \node[above left] at (0,1.8) {dB};
+  \node[left] at (0,0.3) {$0$ dB};
+  \node[below] at (1.15,0.0) {$\omega_c$};
+  \node[below right] at (2.35,1.0) {$\omega$};
+  \draw[->] (0,-0.8) -- (2.4,-0.8);
+  \draw[->] (0,-1.6) -- (0,-0.1);
+  \draw[thick, ch4purple!80!black] (0.15,-1.25) -- (1.15,-0.8) -- (2.2,-0.35);
+  \node[above left] at (0,-0.1) {$\varphi$};
+  \node[left] at (0,-1.25) {$0^\circ$};
+  \node[left] at (0,-0.8) {$+45^\circ$};
+  \node[left] at (0,-0.35) {$+90^\circ$};
+\end{tikzpicture}
+\end{minipage}
+\par\smallskip
+
+\begin{minipage}[t]{0.64\linewidth}
+\textbf{P\^ole 2\textsuperscript{nd} ordre} : $\dfrac{1}{1+2\zeta\frac{s}{\omega_n}+\frac{s^2}{\omega_n^2}}$ \\
+Cassure \`a $\omega_n$, pente HF $-40$ dB/d\'ec, phase finale $-180^\circ$. Pic de r\'esonance si $\zeta<0.707$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+\raggedleft
+\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
+  \draw[->] (0,1.0) -- (2.4,1.0);
+  \draw[->] (0,0.0) -- (0,1.8);
+  \draw[thick, ch4purple!80!black] (0.15,1.25) .. controls (0.65,1.55) and (1.0,1.4) .. (1.15,1.05) -- (2.2,-0.05);
+  \draw[dashed, gray] (1.15,0.0) -- (1.15,1.55);
+  \node[above left] at (0,1.8) {dB};
+  \node[left] at (0,1.25) {$0$ dB};
+  \node[right] at (0.7,1.42) {$M_r$};
+  \node[below] at (1.15,0.0) {$\omega_n$};
+  \node[below right] at (2.35,1.0) {$\omega$};
+  \draw[->] (0,-0.8) -- (2.4,-0.8);
+  \draw[->] (0,-1.6) -- (0,-0.1);
+  \draw[thick, ch4purple!80!black] (0.15,-0.2) -- (1.15,-0.8) -- (2.2,-1.45);
+  \node[above left] at (0,-0.1) {$\varphi$};
+  \node[left] at (0,-0.2) {$0^\circ$};
+  \node[left] at (0,-0.8) {$-90^\circ$};
+  \node[left] at (0,-1.45) {$-180^\circ$};
+\end{tikzpicture}
+\end{minipage}
+\par}
+\vars{Lecture rapide : pente BF $\Rightarrow$ type $\alpha$ ; cassures $\Rightarrow$ z\'eros/p\^oles ; pente HF $\Rightarrow$ degr\'e relatif $d$.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={R\'esonance (2\textsuperscript{nd} ordre)}]
+\tightmath{
+\boxed{\omega_r = \omega_n\sqrt{1 - 2\zeta^2}} \quad \boxed{M_r = \frac{K}{2\zeta\sqrt{1{-}\zeta^2}}}
+}
+\vars{Existe si $\zeta < 1/\sqrt{2}$. $M_{r,\text{dB}} = -20\log(2\zeta\sqrt{1{-}\zeta^2}) + 20\log K$. Si $K{=}1$ et $\zeta$ faible : $M_{r,\text{dB}} \approx 20\log\!\big(\frac{1}{2\zeta}\big)$.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Construction du Bode -- M\'ethode pas-\`a-pas}]
+\begin{enumerate}
+  \item Mettre $G(s)$ sous \textbf{forme de Bode} ($1{+}\tau s$ normalis\'es)
+  \item Identifier : $K$, type $\alpha$, chaque $\tau_i$ ou $(\omega_{n_j}, \zeta_j)$
+  \item Tracer asymptote BF : $20\log K - 20\alpha\log\omega$
+  \item \`A chaque $\omega_{c_i} = 1/\tau_i$ : \textbf{casser} la pente de $\pm 20$ dB/d\'ec
+  \item Pour 2\textsuperscript{nd} ordre : casser de $\pm 40$ dB/d\'ec \`a $\omega_n$
+  \item Phase : sommer les contributions
+  \item Corriger : $\pm 3$ dB aux cassures, pic si $\zeta < 0.707$
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={Identification depuis un Bode}]
+\begin{itemize}
+  \item Pente BF ($\omega \to 0$) $= -20\alpha$ dB/d\'ec $\Rightarrow$ type $\alpha$
+  \item Pente HF $= -20(n{-}m)$ dB/d\'ec $\Rightarrow$ degr\'e relatif
+  \item Prolonger asymptote BF \`a $\omega{=}1$ : ordonn\'ee $= 20\log K$. Ou \`a $\omega_0$ quelconque : $K = |G(\jw_0)| \cdot \omega_0^\alpha$ (lin.)
+  \item Cassures = fr\'equences de coupure $\omega_c = 1/\tau$
+  \item $-20 \to -40$ : p\^ole 2\textsuperscript{nd} ordre. $-40 \to -20$ : z\'ero
+  \item Pic de r\'esonance : lire $M_r$ pour trouver $\zeta$
+\end{itemize}
+\astuce{Cassure vers le BAS = p\^ole. Cassure vers le HAUT = z\'ero.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Bande passante \& Nyquist (rappel)}]
+\textbf{Bande passante} $\omega_B$ : $|G(\jw_B)| = |G(0)|/\sqrt{2}$ ($-3$ dB).\\
+1\textsuperscript{er} ordre : $\omega_B = 1/\tau$. Relation : $\omega_B \cdot t_r \approx 1.5$ \`a $2.5$.
+
+\textbf{Nyquist} : lieu de $G(\jw)$ dans le plan complexe (Re, Im) pour $\omega : 0 \to +\infty$.
+\begin{itemize}
+  \item $\omega{=}0$ : d\'epart (souvent $K$ ou $\infty$)
+  \item $\omega \to \infty$ : tend vers l'origine
+  \item Compl\'eter par sym\'etrie conjugu\'ee pour $\omega < 0$
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={Exemples de Bode classiques}]
+\textbf{1\textsuperscript{er} o.} $\frac{10}{1{+}0.1s}$ : $K{=}10$ (20 dB), $\omega_c{=}10$, pente $0 \to -20$ dB/d\'ec.
+
+\textbf{Intég. + 1\textsuperscript{er} o.} $\frac{5}{s(1{+}0.01s)}$ : pente init. $-20$, cassure \`a $\omega{=}100$ vers $-40$ dB/d\'ec. Phase $-90° \to -180°$.
+
+\textbf{Avec retard} $\frac{2e^{-0.5s}}{1{+}s}$ : m\^eme module que sans retard, phase suppl. $= -0.5\omega$ rad.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Checklist express de trac\'e Bode}]
+\begin{itemize}
+  \item R\'e\'ecrire $G(s)$ avec facteurs unitaires $(1+s/\omega_i)$
+  \item Lister les fr\'equences de cassure tri\'ees : $\omega_1<\omega_2<\cdots$
+  \item D\'emarrer \`a basse fr\'equence avec pente $-20\alpha$ (type)
+  \item Modifier la pente \`a chaque cassure : p\^ole $-20$, z\'ero $+20$, 2\textsuperscript{nd} ordre $\pm40$ dB/d\'ec
+  \item Ajouter la correction locale ($\pm3$ dB au coin, pic si $\zeta<0.707$)
+  \item Tracer ensuite la phase par superposition des contributions
+\end{itemize}
+\tightmath{
+\omega_c: |G(\jw_c)|=1,\quad MP = 180^\circ + \angle G(\jw_c),\quad MG_{dB} = -|G(\jw_\pi)|_{dB}
+}
+\piege{Si un retard pur est pr\'esent, recalculer MP avec la phase suppl\'ementaire $-\omega T_r$ (rad).}
+\end{tcolorbox}
