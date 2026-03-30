@@ -94,18 +94,26 @@
 \newcommand{\Lap}{\mathcal{L}}
 \newcommand{\jw}{j\omega}
 
+% --- Version ---
+% \TEtrue  → version Te1 (chapitres 1–4 seulement)
+% \TEfalse → version complète (chapitres 1–6)
+\newif\ifTE
+\TEtrue
+
 % ============================================================
 \begin{document}
 \fontsize{7.4pt}{8.0pt}\selectfont
 
-\begin{multicols*}{3}
+\begin{multicols}{3}
 
 \input{chapitre1}
 \input{chapitre2}
 \input{chapitre3}
 \input{chapitre4}
-\input{chapitre5}
-\input{chapitre6}
+\ifTE\else
+  \input{chapitre5}
+  \input{chapitre6}
+\fi
 
-\end{multicols*}
+\end{multicols}
 \end{document}

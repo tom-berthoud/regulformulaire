@@ -288,6 +288,101 @@ $A = \lim_{s\to p}(s{-}p)^2 G(s)$, \; $B = \lim_{s\to p}\frac{d}{ds}[(s{-}p)^2 G
 \end{center}
 \end{tcolorbox}
 
+\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Lecture d'un diagramme de Bode}]
+\textbf{Type $\alpha$} $\leftarrow$ pente \`a basse fr\'equence :
+\tightmath{
+  \alpha = -\frac{\text{pente BF (dB/d\'ec)}}{20}
+}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\scriptsize
+\begin{tabular}{@{}ccc@{}}
+\toprule
+Pente BF & Type $\alpha$ & Exemple \\
+\midrule
+$0$ dB/d\'ec & $0$ & $G(s)=\frac{K}{1+\tau s}$ \\
+$-20$ dB/d\'ec & $1$ & $G(s)=\frac{K}{s(1+\tau s)}$ \\
+$-40$ dB/d\'ec & $2$ & $G(s)=\frac{K}{s^2(\cdots)}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Degr\'e relatif $d$} $\leftarrow$ pente \`a haute fr\'equence :
+\tightmath{
+  d = \frac{-\text{pente HF (dB/d\'ec)}}{20}
+}
+\begin{center}
+\begin{tikzpicture}[>=Stealth, scale=0.60, transform shape,
+  lbl/.style={font=\fontsize{11}{12.5}\selectfont}]
+\colorlet{asym}{red!75!black}
+\colorlet{bode}{ch2orange!80!black}
+\colorlet{zcol}{green!40!black}
+\colorlet{pcol}{red!60!black}
+
+% Grille legere
+\foreach \x in {2.5,5.0} \draw[gray!22, thin] (\x,-0.3) -- (\x,5.7);
+
+% Axes
+\draw[->, thick] (-0.3,0) -- (7.8,0)
+  node[right, lbl]{$\omega$ (log)};
+\draw[->, thick] (0,-0.4) -- (0,5.9)
+  node[above, lbl]{$|G|_{\mathrm{dB}}$};
+
+% Asymptote pointillee rouge
+% alpha=1 : pente -20 dB/dec jusqu'a wz
+% zero a wz : pente 0 jusqu'a wp
+% double pole a wp : pente -40 dB/dec -> d=2
+\draw[asym, dashed, line width=0.9pt]
+  (0,5.0) -- (2.5,2.5) -- (5.0,2.5) -- (6.25,0);
+
+% Courbe Bode lisse (approximation avec pic de resonance a wp)
+\draw[bode, line width=1.2pt]
+  (0,4.85)
+  .. controls (0.8,4.10) and (1.7,3.20) ..
+  (2.4,2.68)
+  .. controls (2.90,2.48) and (3.80,2.50) ..
+  (4.55,2.58)
+  .. controls (4.80,2.72) and (4.93,3.20) ..
+  (5.05,3.55)
+  .. controls (5.18,3.25) and (5.38,2.45) ..
+  (5.55,1.62)
+  .. controls (5.78,0.92) and (6.02,0.38) ..
+  (6.28,0.06);
+
+% Pointilles verticaux aux frequences cles
+\draw[gray!45, dashed, thin] (2.5,0) -- (2.5,2.5);
+\draw[gray!45, dashed, thin] (5.05,0) -- (5.05,3.55);
+
+% Marqueurs sur la courbe
+\fill[zcol] (2.5,2.5)  circle (2.5pt);
+\fill[pcol] (5.05,3.55) circle (2.5pt);
+
+% Labels frequences
+\node[below, lbl] at (2.5,-0.05)  {$\omega_z$};
+\node[below, lbl] at (5.05,-0.05) {$\omega_p$};
+
+% Annotation pente BF -> alpha
+\node[asym, lbl, above right] at (0.1,4.55) {$-20$\,dB/d\'ec};
+\node[lbl, above right]       at (0.8,4.2) {$\Rightarrow\boldsymbol{\alpha=1}$};
+
+% Annotation zero
+\draw[zcol, ->, thin] (2.5,2) -- (2.5,2.4);
+\node[zcol, lbl, below] at (2.5,2) {z\'ero\;($+20$\,dB/d\'ec)};
+
+% Annotation pole(s)
+\draw[pcol, ->, thin] (5.62,4.15) -- (5.23,3.70);
+\node[pcol, lbl, right] at (3.85,4.38) {p\^ole(s) ($-20$\,dB/d\'ec chacun)};
+\node[pcol, lbl, right] at (8.75,4.38) {+ r\'esonance si $\zeta{<}0.7$};
+
+% Annotation pente HF -> d
+\node[asym, lbl, right] at (5.80,1.95) {$-40$\,dB/d\'ec};
+\node[lbl, right]        at (5.80,1.32) {$\Rightarrow\boldsymbol{d=2}$};
+
+\end{tikzpicture}
+\end{center}
+\piege{\textbf{Sur graph} : lire la pente avant tout p\^ole/z\'ero (zone plate ou rampe), pas autour d'un pic de r\'esonance.}
+\end{tcolorbox}
+
 \begin{tcolorbox}[colback=ch2orange!2,colframe=ch2orange!80!black,title={Astuces \& Pi\`eges Ch.2},top=0.4mm,bottom=0.4mm,before skip=1pt,after skip=1pt]
 \begin{itemize}
   \item VF : $\lim_{t\to\infty}f(t)=\lim_{s\to0}sF(s)$ \textbf{ssi stable}
