@@ -377,6 +377,28 @@ $A = \lim_{s\to p}(s{-}p)^2 G(s)$, \; $B = \lim_{s\to p}\frac{d}{ds}[(s{-}p)^2 G
 \end{center}
 \end{tcolorbox}
 
+\begin{tcolorbox}[colback=ch2orange!2,colframe=ch2orange!80!black,title={Identification d'un syst\`eme oscillant}]
+\tightmath{
+G(s)=\frac{K_0}{1+\frac{2\zeta}{\omega_n}s+\frac{s^2}{\omega_n^2}}
+}
+\tightmath{
+K_0=\frac{y(\infty)}{\Delta U}
+\qquad
+\omega_0=\omega_n\sqrt{1-\zeta^2}
+}
+\tightmath{
+\boxed{\zeta=\frac{|\ln D_1|}{\sqrt{\pi^2+\ln^2 D_1}}}
+\qquad
+D_1=\frac{y_{\max}-y(\infty)}{y(\infty)}
+}
+\tightmath{
+\boxed{\omega_n=\frac{2\pi}{T_p\sqrt{1-\zeta^2}}}
+\qquad
+T_p=\text{p\'eriode des oscillations}
+}
+\vars{$D_1$ = 1\textsuperscript{er} d\'epassement relatif. Pour un \'echelon de hauteur $\Delta U$, on a $y(\infty)=K_0\Delta U$.}
+\end{tcolorbox}
+
 \begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Lecture d'un diagramme de Bode}]
 \textbf{Type $\alpha$} $\leftarrow$ pente \`a basse fr\'equence :
 \tightmath{
