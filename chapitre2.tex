@@ -78,6 +78,42 @@ G(s) = \frac{b_m}{a_n}\cdot\frac{(s{-}z_1)(s{-}z_2)\cdots}{(s{-}p_1)(s{-}p_2)\cd
 \vars{\textbf{Passage} : $K = b_0/a_0$ (forme Bode, $\alpha{=}0$). Gain permanent : $K = \lim_{s\to 0} s^\alpha G(s)$. Constantes : $\tau_i = -1/p_i$.}
 \end{tcolorbox}
 
+\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Changement de forme}]
+\begin{minipage}[t]{0.48\linewidth}
+\textbf{Laplace $\rightarrow$ Bode}
+
+\tightmath{
+\frac{K}{s^2 + 2\sigma s + \omega_n^2}
+= \frac{K/\omega_n^2}{1 + \frac{2\zeta}{\omega_n}s + \frac{s^2}{\omega_n^2}}
+}
+\tightmath{
+\omega_n = \sqrt{\sigma^2 + \omega_0^2}
+\qquad
+\zeta = \frac{\sigma}{\omega_n}
+}
+\vars{Aussi : $(s+a)=a\!\left(1+\frac{s}{a}\right)$, donc $\tau=\frac{1}{a}$ et $\omega_c=a$.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\textbf{Bode $\rightarrow$ Laplace}
+
+\begin{center}
+\resizebox{0.98\linewidth}{!}{$\displaystyle
+\frac{K}{1 + \frac{2\zeta s}{\omega_n} + \frac{s^2}{\omega_n^2}}
+= \frac{K\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2}
+$}
+\end{center}
+\tightmath{
+\sigma = \zeta\omega_n
+\qquad
+\omega_0 = \omega_n\sqrt{1-\zeta^2}
+}
+\tightmath{
+K_{\text{Laplace}} = K_{\text{Bode}}\,\omega_n^2
+}
+\end{minipage}
+\vars{Id\'ee : en forme de Bode, la constante dans les parenth\`eses vaut $1$ ; en forme de Laplace, on red\'eveloppe et on r\'einjecte les facteurs sortis.}
+\end{tcolorbox}
+
 \begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Type $\alpha$, Retard pur, Gain permanent}]
 \textbf{Type $\alpha$} = nb de p\^oles en $s{=}0$ (int\'egrateurs en BO) :
 \begin{itemize}
@@ -123,7 +159,7 @@ Pt pr\'el\`evement apr\`es $G$ & Ajouter $1/G$ dans branche \\
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Cha\^ine d'action \& Mason}]
+\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Cha\^ine d'action \& Mason},unbreakable]
 \textbf{Cha\^ine d'action} : $G = G_1G_2\cdots G_n$. \quad
 \textbf{Boucle ouverte} : $L(s)=G_rG_aG_pG_m$.
 
@@ -134,7 +170,60 @@ Pt pr\'el\`evement apr\`es $G$ & Ajouter $1/G$ dans branche \\
 \text{Retour }(-):\ \boxed{G_{BF}=\frac{G}{1+GH}}
 \text{  Retour }(+):\ \boxed{G_{BF}=\frac{G}{1-GH}}
 }
+\begin{center}
+\scriptsize
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=4mm and 5mm,
+  blk/.style={draw,minimum width=9mm,minimum height=4.5mm,inner sep=1pt},
+  sum/.style={draw,circle,inner sep=0pt,minimum size=4.2mm}
+]
+  \node (in1) {$x$};
+  \node[blk,right=of in1] (g1) {$G_1$};
+  \node[blk,right=of g1] (g2) {$G_2$};
+  \node[right=of g2] (out1) {$y$};
+  \draw[->] (in1) -- (g1);
+  \draw[->] (g1) -- (g2);
+  \draw[->] (g2) -- (out1);
+  \node[below=1mm of g1.south east] {$P_1 = G_1G_2$};
+
+  \begin{scope}[xshift=40mm]
+    \node (w) {$w$};
+    \node[sum,right=of w] (s1) {$\scriptstyle\sum$};
+    \node[blk,right=of s1] (g) {$G$};
+    \node[right=of g] (y1) {$y$};
+    \node[blk,below=7mm of g] (h1) {$H$};
+    \draw[->] (w) -- (s1);
+    \draw[->] (s1) -- (g);
+    \draw[->] (g) -- (y1);
+    \draw[->] (y1) |- (h1);
+    \draw[->] (h1) -| (s1);
+    \node[above=0.4mm of s1] {\tiny $+$};
+    \node[below=0.4mm of s1, xshift=2mm] {\tiny $-$};
+    \node[below=1mm of h1] {$\text{boucle}=-GH \Rightarrow \Delta=1+GH$};
+  \end{scope}
+
+  \begin{scope}[xshift=82mm]
+    \node (w2) {$w$};
+    \node[sum,right=of w2] (s2) {$\scriptstyle\sum$};
+    \node[blk,right=of s2] (gp) {$G$};
+    \node[right=of gp] (y2) {$y$};
+    \node[blk,below=7mm of gp] (h2) {$H$};
+    \draw[->] (w2) -- (s2);
+    \draw[->] (s2) -- (gp);
+    \draw[->] (gp) -- (y2);
+    \draw[->] (y2) |- (h2);
+    \draw[->] (h2) -| (s2);
+    \node[above=0.4mm of s2] {\tiny $+$};
+    \node[below=0.4mm of s2, xshift=2mm] {\tiny $+$};
+    \node[below=1mm of h2] {$\text{boucle}=+GH \Rightarrow \Delta=1-GH$};
+  \end{scope}
+\end{tikzpicture}
+}
+\end{center}
 \vars{En BF unitaire : $L(s)=G_{BO}(s)$. En cas de doute, repartir de $y=G(u\mp Hy)$.}
+\vars{Mason : $T=\dfrac{P_1}{\Delta}$ avec $\Delta = 1 - \sum(\text{gains de boucle}) + \cdots$ ; donc une boucle n\'egative de gain $-GH$ donne bien $1+GH$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={D\'ecomposition en fractions partielles}]

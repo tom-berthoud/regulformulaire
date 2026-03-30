@@ -140,8 +140,6 @@ $D_\%$ & 73 & 53 & 37 & 25 & 16 & 9.5 & 4.6 & 1.5 \\
 \tightmath{
 G(s) = \frac{K}{(1{+}\tau_1 s)(1{+}\tau_2 s)}
 }
-\vars{\textbf{P\^ole dominant} = plus petite $|\text{Re}|$ (le plus lent, $\tau$ le plus grand). Approx. : $G \approx K/(1{+}\tau_{\max}s)$ si rapport $\tau_1/\tau_2 \geq 5$.}
-
 \textbf{Identification 2\textsuperscript{nd} ordre :}
 \begin{enumerate}
   \item $K = y_\infty/u_0$
@@ -149,6 +147,37 @@ G(s) = \frac{K}{(1{+}\tau_1 s)(1{+}\tau_2 s)}
   \item $t_p \Rightarrow \omega_0 = \pi/t_p \Rightarrow \omega_n = \omega_0/\sqrt{1{-}\zeta^2}$
 \end{enumerate}
 \piege{Z\'ero demi-plan droit ($\tau_z{<}0$) $\Rightarrow$ r\'ep. inverse initiale = non-minimum de phase.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch3green!2,colframe=ch3green!75!black,title={Approximation par p\^ole dominant}]
+\textbf{P\^ole dominant} = p\^ole r\'eel n\'egatif \textbf{le plus proche de 0} :
+\tightmath{
+\tau_i = \frac{-1}{s_i} = \frac{1}{|s_i|} \qquad s_i < 0
+}
+\vars{Plus $|s_i|$ est petit $\Rightarrow$ plus $\tau_i$ est grand $\Rightarrow$ plus lent $\Rightarrow$ domine.}
+
+\textbf{Ex.} : $s_1{=}{-}100$,\ $s_2{=}{-}20$,\ $s_3{=}{-}2$ :
+\begin{center}
+\renewcommand{\arraystretch}{1.0}\scriptsize
+\begin{tabular}{@{}ccc@{}}
+\toprule
+$s_i$ & $\tau_i$ & \\
+\midrule
+$-100$ & $0.01$\,s & n\'egligeable \\
+$-20$  & $0.05$\,s & n\'egligeable \\
+$\boldsymbol{-2}$ & $\boldsymbol{0.5}$\,\textbf{s} & \textbf{dominant} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\tightmath{
+G(s) \approx \frac{K_{\text{dom}}}{1 + 0.5\,s}
+}
+
+\textbf{Annulation p\^ole-z\'ero} : si $s_z \approx s_p$ (tous deux $< 0$) :
+\tightmath{
+\frac{1{+}\tau_z s}{1{+}\tau_p s} \approx 1
+}
+\piege{Z\'ero en demi-plan \textbf{droit} ($s_z > 0$) : pas de simplification.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch3green!4,colframe=ch3green!80!black,title={Abaque rapide des performances (2\textsuperscript{nd} ordre)}]

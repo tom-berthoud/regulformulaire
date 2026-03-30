@@ -19,154 +19,218 @@ Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
 \astuce{\textbf{Propri\'et\'e cl\'e} : les contributions de chaque facteur s'\textbf{additionnent} en dB et en phase.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={\'El\'ements de base du Bode}]
+\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={\'El\'ements de base du Bode},unbreakable]
 {\fontsize{5.4}{6.2}\selectfont
-\begin{minipage}[t]{0.64\linewidth}
-\textbf{Gain pur} : $K$ \\
-Module horizontal \`a $20\log|K|$. Phase : $0^\circ$ si $K>0$, $-180^\circ$ si $K<0$.
+\colorlet{crv}{green!52!black}
+\colorlet{asy}{red!72!black}
+
+% ---- Row 1 : Gain pur | Intégrateur & Dérivateur ----
+\begin{minipage}[t]{0.47\linewidth}\centering
+\textbf{Gain pur} $K$\\[-1pt]
+{\fontsize{4.2}{4.8}\selectfont module horizontal $=20\log|K|$, phase $0^\circ$ si $K>0$ ou $-180^\circ$ si $K<0$}\\[2pt]
+\begin{tikzpicture}[scale=0.58,>=Stealth,every node/.style={font=\fontsize{4.5}{5.5}\selectfont}]
+\draw[->](-0.1,0.8)--(3.3,0.8);
+\draw[->](0,0.3)--(0,2.2) node[above left]{\tiny dB};
+\draw[crv,thick](0.1,1.75)--(3.1,1.75) node[right]{$20\log|K|$};
+\draw[asy,thick,dashed](0.1,1.20)--(3.1,1.20) node[right]{$K{<}0$};
+\draw[->](-0.1,-0.55)--(3.3,-0.55);
+\draw[->](0,-1.45)--(0,-0.15) node[above left]{\tiny$\varphi$};
+\draw[crv,thick](0.1,-0.72)--(3.1,-0.72) node[right]{$0°$};
+\draw[asy,thick,dashed](0.1,-1.22)--(3.1,-1.22) node[right]{$-180°$};
+\node[left] at (0,-0.72){$0°$};
+\node[left] at (0,-1.22){$-180°$};
+\end{tikzpicture}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.32\linewidth}
-\raggedleft
-\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
-  \draw[->] (0,1.0) -- (2.4,1.0);
-  \draw[->] (0,0.0) -- (0,1.8);
-  \draw[thick, ch4purple!80!black] (0.15,1.35) -- (2.2,1.35);
-  \node[left] at (0,1.35) {$20\log|K|$};
-  \node[above left] at (0,1.8) {dB};
-  \node[below right] at (2.35,1.0) {$\omega$};
-  \draw[->] (0,-0.8) -- (2.4,-0.8);
-  \draw[->] (0,-1.6) -- (0,-0.1);
-  \draw[thick, ch4purple!80!black] (0.15,-0.45) -- (2.2,-0.45);
-  \node[above left] at (0,-0.1) {$\varphi$};
-  \node[left] at (0,-0.45) {$0^\circ$};
+\begin{minipage}[t]{0.47\linewidth}\centering
+\textbf{Int\'egr.} $\tfrac{1}{s}$ \& \textbf{D\'eriv.} $s$\\
+{\fontsize{4.2}{4.8}\selectfont pente $\mp 20$ dB/d\'ec, phase constante $\mp 90^\circ$}\\[2pt]
+\begin{tikzpicture}[scale=0.58,>=Stealth,every node/.style={font=\fontsize{4.5}{5.5}\selectfont}]
+\draw[->](-0.1,0.8)--(3.3,0.8);
+\draw[->](0,0.3)--(0,2.2) node[above left]{\tiny dB};
+\draw[gray!35,thin](0.1,1.60)--(3.1,1.60);
+\node[left,gray!65] at (0,1.60){$0$};
+% 1/s : pente -20dB/dec, 0dB a x=1.6
+\draw[crv,thick](0.64,2.20)--(3.2,0.60) node[right]{$\tfrac{1}{s}$};
+% s : pente +20dB/dec
+\draw[ch4purple!75!black,thick](0,0.60)--(2.56,2.20) node[above right]{$s$};
+\fill(1.6,1.60) circle(1.5pt);
+\node[below right,font=\fontsize{4}{5}\selectfont] at (1.6,1.60){$0$\,dB};
+\draw[->](-0.1,-0.50)--(3.3,-0.50);
+\draw[->](0,-1.45)--(0,-0.15) node[above left]{\tiny$\varphi$};
+\draw[gray!35,thin](0.1,-0.87)--(3.1,-0.87);
+\draw[crv,thick](0.1,-1.22)--(3.1,-1.22) node[right]{$-90°$};
+\draw[ch4purple!75!black,thick](0.1,-0.52)--(3.1,-0.52) node[right]{$+90°$};
+\node[left] at (0,-0.52){$+90°$};
+\node[left] at (0,-1.22){$-90°$};
 \end{tikzpicture}
 \end{minipage}
 \par\smallskip
 
-\begin{minipage}[t]{0.64\linewidth}
-\textbf{Int\'egrateur} : $\dfrac{1}{s}$ \\
-Pente $-20$ dB/d\'ec, phase constante $-90^\circ$. Double int\'egrateur : $-40$ dB/d\'ec et $-180^\circ$.
+% ---- Row 2 : Pôle réel | Zéro réel ----
+\begin{minipage}[t]{0.47\linewidth}\centering
+\textbf{P\^ole r\'eel} $\tfrac{1}{1{+}\tau s}$\\
+{\fontsize{4.2}{4.8}\selectfont cassure $\omega_c=\frac{1}{\tau}$, pente HF $-20$ dB/d\'ec, phase $0^\circ\to-90^\circ$}\\[2pt]
+\begin{tikzpicture}[scale=0.58,>=Stealth,every node/.style={font=\fontsize{4.5}{5.5}\selectfont}]
+% Magnitude
+\draw[->](-0.1,0.8)--(3.5,0.8);
+\draw[->](0,0.3)--(0,2.3) node[above left]{\tiny dB};
+\node[left] at (0,1.80){$0$};
+% Asymptote rouge pointillé
+\draw[asy,dashed,thick](0.1,1.80)--(1.6,1.80)--(3.2,0.80);
+% Courbe réelle verte
+\draw[crv,thick]
+  (0.1,1.79)..controls(0.7,1.78)and(1.1,1.72)..(1.6,1.65)
+             ..controls(2.0,1.57)and(2.7,1.00)..(3.2,0.82);
+\fill[crv](1.6,1.65)circle(1.5pt);
+\draw[gray!45,dashed,thin](1.6,0.8)--(1.6,1.80);
+\node[above right,crv,font=\fontsize{4}{5}\selectfont] at (1.6,1.62){$-3$\,dB};
+\node[asy,rotate=-32,font=\fontsize{4}{5}\selectfont] at (2.55,1.35){$-20$\,dB/d\'ec};
+\node[below,font=\fontsize{4}{5}\selectfont] at (0.15,0.8){$\tfrac{\omega_c}{10}$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (1.6,0.8){$\omega_c$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (3.2,0.8){$10\omega_c$};
+% Phase
+\draw[->](-0.1,-0.3)--(3.5,-0.3);
+\draw[->](0,-1.55)--(0,-0.20) node[above left]{\tiny$\varphi$};
+\node[left] at (0,-0.30){$0°$};
+\node[left] at (0,-0.80){$-45°$};
+\node[left] at (0,-1.30){$-90°$};
+% Asymptote phase (droite 0°→-90°)
+\draw[asy,dashed,thick](0.0,-0.30)--(3.2,-1.30);
+% Courbe réelle
+\draw[crv,thick]
+  (0,-0.33)..controls(0.5,-0.38)and(0.9,-0.58)..(1.6,-0.80)
+            ..controls(2.3,-1.02)and(2.7,-1.22)..(3.2,-1.27);
+\fill[crv](1.6,-0.80)circle(1.5pt);
+\node[right,crv,font=\fontsize{4}{5}\selectfont] at (1.6,-0.82){$-45°$/dec};
+\end{tikzpicture}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.32\linewidth}
-\raggedleft
-\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
-  \draw[->] (0,1.0) -- (2.4,1.0);
-  \draw[->] (0,0.0) -- (0,1.8);
-  \draw[thick, ch4purple!80!black] (0.15,1.65) -- (2.2,0.35);
-  \node[above left] at (0,1.8) {dB};
-  \node[left] at (0,1.6) {$0$ dB};
-  \node[below right] at (2.35,1.0) {$\omega$};
-  \draw[->] (0,-0.8) -- (2.4,-0.8);
-  \draw[->] (0,-1.6) -- (0,-0.1);
-  \draw[thick, ch4purple!80!black] (0.15,-1.25) -- (2.2,-1.25);
-  \node[above left] at (0,-0.1) {$\varphi$};
-  \node[left] at (0,-1.25) {$-90^\circ$};
+\begin{minipage}[t]{0.47\linewidth}\centering
+\textbf{Z\'ero r\'eel} $(1{+}\tau s)$\\[-1pt]
+{\fontsize{4.2}{4.8}\selectfont cassure $\omega_c=\frac{1}{\tau}$, pente HF $+20$ dB/d\'ec, phase $0^\circ\to+90^\circ$}\\[2pt]
+\begin{tikzpicture}[scale=0.58,>=Stealth,every node/.style={font=\fontsize{4.5}{5.5}\selectfont}]
+% Magnitude
+\draw[->](-0.1,0.8)--(3.5,0.8);
+\draw[->](0,0.3)--(0,2.5) node[above left]{\tiny dB};
+\node[left] at (0,1.30){$0$};
+\draw[asy,dashed,thick](0.1,1.30)--(1.6,1.30)--(3.2,2.30);
+\draw[crv,thick]
+  (0.1,1.31)..controls(0.7,1.32)and(1.1,1.38)..(1.6,1.45)
+             ..controls(2.0,1.52)and(2.7,2.08)..(3.2,2.28);
+\fill[crv](1.6,1.45)circle(1.5pt);
+\draw[gray!45,dashed,thin](1.6,0.8)--(1.6,1.30);
+\node[above,crv,font=\fontsize{4}{5}\selectfont] at (1.6,1.44){$+3$\,dB};
+\node[asy,rotate=32,font=\fontsize{4}{5}\selectfont] at (2.55,1.70){$+20$\,dB/d\'ec};
+\node[below,font=\fontsize{4}{5}\selectfont] at (0.15,0.8){$\tfrac{\omega_c}{10}$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (1.6,0.8){$\omega_c$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (3.2,0.8){$10\omega_c$};
+% Phase
+\draw[->](-0.1,-0.55)--(3.5,-0.55);
+\draw[->](0,-1.55)--(0,-0.20) node[above left]{\tiny$\varphi$};
+\node[left] at (0,-0.30){$+90°$};
+\node[left] at (0,-0.80){$+45°$};
+\node[left] at (0,-1.30){$0°$};
+\draw[asy,dashed,thick](0.0,-1.30)--(3.2,-0.30);
+\draw[crv,thick]
+  (0,-1.27)..controls(0.5,-1.22)and(0.9,-1.02)..(1.6,-0.80)
+            ..controls(2.3,-0.58)and(2.7,-0.38)..(3.2,-0.33);
+\fill[crv](1.6,-0.80)circle(1.5pt);
+\node[right,crv,font=\fontsize{4}{5}\selectfont] at (1.6,-0.82){$+45°$/dec};
 \end{tikzpicture}
 \end{minipage}
 \par\smallskip
 
-\begin{minipage}[t]{0.64\linewidth}
-\textbf{D\'erivateur} : $s$ \\
-Sym\'etrique de l'int\'egrateur : pente $+20$ dB/d\'ec, phase constante $+90^\circ$.
+% ---- Row 3 : Retard pur | Système vicieux ----
+\begin{minipage}[t]{0.47\linewidth}\centering
+\textbf{Retard pur} $e^{-sT_r}$\\[-1pt]
+{\fontsize{4.2}{4.8}\selectfont module inchang\'e, phase lin\'eaire $\phi(\omega)=-\omega T_r$}\\[2pt]
+\begin{tikzpicture}[scale=0.56,>=Stealth,every node/.style={font=\fontsize{4.5}{5.5}\selectfont}]
+\draw[->](-0.1,0.8)--(3.4,0.8);
+\draw[->](0,0.3)--(0,2.0) node[above left]{\tiny dB};
+\node[left] at (0,1.35){$0$};
+\draw[crv,thick](0.1,1.35)--(3.2,1.35);
+\draw[->](-0.1,-0.45)--(3.4,-0.45);
+\draw[->](0,-1.90)--(0,-0.10) node[above left]{\tiny$\varphi$};
+\node[left] at (0,-0.35){$0°$};
+\node[left] at (0,-0.85){$-90°$};
+\node[left] at (0,-1.35){$-180°$};
+\draw[crv,thick]
+  (0.1,-0.36)..controls(1.0,-0.38)and(1.8,-0.55)..(2.4,-0.95)
+             ..controls(2.8,-1.25)and(3.0,-1.55)..(3.2,-1.80);
+\node[below,font=\fontsize{4}{5}\selectfont] at (2.75,-1.80){$\varphi(\omega)=-\omega T_r$};
+\end{tikzpicture}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.32\linewidth}
-\raggedleft
-\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
-  \draw[->] (0,1.0) -- (2.4,1.0);
-  \draw[->] (0,0.0) -- (0,1.8);
-  \draw[thick, ch4purple!80!black] (0.15,0.35) -- (2.2,1.65);
-  \node[above left] at (0,1.8) {dB};
-  \node[left] at (0,0.4) {$0$ dB};
-  \node[below right] at (2.35,1.0) {$\omega$};
-  \draw[->] (0,-0.8) -- (2.4,-0.8);
-  \draw[->] (0,-1.6) -- (0,-0.1);
-  \draw[thick, ch4purple!80!black] (0.15,-0.35) -- (2.2,-0.35);
-  \node[above left] at (0,-0.1) {$\varphi$};
-  \node[left] at (0,-0.35) {$+90^\circ$};
+\begin{minipage}[t]{0.47\linewidth}\centering
+\textbf{Syst\`eme vicieux} $(1{-}\tau s)$\\[-1pt]
+{\fontsize{4.2}{4.8}\selectfont module de z\'ero, mais phase de p\^ole ($0^\circ\to-90^\circ$)}\\[2pt]
+\begin{tikzpicture}[scale=0.56,>=Stealth,every node/.style={font=\fontsize{4.5}{5.5}\selectfont}]
+% Magnitude
+\draw[->](-0.1,0.8)--(3.5,0.8);
+\draw[->](0,0.3)--(0,2.4) node[above left]{\tiny dB};
+\node[left] at (0,1.20){$0$};
+\draw[asy,dashed,thick](0.1,1.20)--(1.6,1.20)--(3.2,2.20);
+\draw[crv,thick]
+  (0.1,1.21)..controls(0.7,1.22)and(1.1,1.28)..(1.6,1.35)
+             ..controls(2.0,1.42)and(2.7,1.98)..(3.2,2.18);
+\fill[crv](1.6,1.35)circle(1.5pt);
+\node[above ,crv,font=\fontsize{4}{5}\selectfont] at (1.5,1.34){$+3$\,dB};
+\node[asy,rotate=32,font=\fontsize{4}{5}\selectfont] at (2.55,1.56){$+20$\,dB/d\'ec};
+\draw[gray!45,dashed,thin](1.6,0.8)--(1.6,1.20);
+\node[below,font=\fontsize{4}{5}\selectfont] at (1.6,0.8){$\omega_c$};
+% Phase
+\draw[->](-0.1,-0.55)--(3.5,-0.55);
+\draw[->](0,-1.55)--(0,-0.20) node[above left]{\tiny$\varphi$};
+\node[left] at (0,-0.30){$0°$};
+\node[left] at (0,-0.80){$-45°$};
+\node[left] at (0,-1.30){$-90°$};
+\draw[asy,dashed,thick](0.0,-0.30)--(3.2,-1.30);
+\draw[crv,thick]
+  (0,-0.33)..controls(0.5,-0.38)and(0.9,-0.58)..(1.6,-0.80)
+            ..controls(2.3,-1.02)and(2.7,-1.22)..(3.2,-1.27);
+\fill[crv](1.6,-0.80)circle(1.5pt);
+\node[right,crv,font=\fontsize{4}{5}\selectfont] at (1.6,-0.82){$-45°$};
 \end{tikzpicture}
 \end{minipage}
 \par\smallskip
 
-\begin{minipage}[t]{0.64\linewidth}
-\textbf{P\^ole r\'eel} : $\dfrac{1}{1+\tau s}$ \\
-Cassure $\omega_c=1/\tau$, pente HF $-20$ dB/d\'ec, phase $0^\circ \to -90^\circ$, $-3$ dB \`a la cassure.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.32\linewidth}
-\raggedleft
-\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
-  \draw[->] (0,1.0) -- (2.4,1.0);
-  \draw[->] (0,0.0) -- (0,1.8);
-  \draw[thick, ch4purple!80!black] (0.15,1.35) -- (1.15,1.35) -- (2.2,0.3);
-  \draw[dashed, gray] (1.15,0.0) -- (1.15,1.55);
-  \node[above left] at (0,1.8) {dB};
-  \node[left] at (0,1.35) {$0$ dB};
-  \node[above right] at (1.15,1.35) {$-3$ dB};
-  \node[below] at (1.15,0.0) {$\omega_c$};
-  \node[below right] at (2.35,1.0) {$\omega$};
-  \draw[->] (0,-0.8) -- (2.4,-0.8);
-  \draw[->] (0,-1.6) -- (0,-0.1);
-  \draw[thick, ch4purple!80!black] (0.15,-0.35) -- (1.15,-0.8) -- (2.2,-1.25);
-  \node[above left] at (0,-0.1) {$\varphi$};
-  \node[left] at (0,-0.35) {$0^\circ$};
-  \node[left] at (0,-0.8) {$-45^\circ$};
-  \node[left] at (0,-1.25) {$-90^\circ$};
+% ---- Row 4 : 2e ordre (pleine largeur) ----
+\begin{center}
+\textbf{P\^ole 2\textsuperscript{nd} ordre} $\dfrac{1}{1{+}\frac{2\zeta}{\omega_n}s{+}\frac{s^2}{\omega_n^2}}$\\[-1pt]
+{\fontsize{4.2}{4.8}\selectfont cassure \`a $\omega_n$, pente HF $-40$ dB/d\'ec, phase finale $-180^\circ$, pic si $\zeta<0.707$}\\[2pt]
+\begin{tikzpicture}[scale=0.70,>=Stealth,every node/.style={font=\fontsize{4.5}{5.5}\selectfont}]
+% Magnitude
+\draw[->](-0.1,0.8)--(3.7,0.8);
+\draw[->](0,0.2)--(0,2.9) node[above left]{\tiny dB};
+\node[left] at (0,1.90){$0$};
+\draw[asy,dashed,thick](0.1,1.90)--(1.75,1.90)--(3.5,0.50);
+% Courbe réelle avec pic modéré de résonance (ζ légèrement < 0.707)
+\draw[crv,thick]
+  (0.1,1.89)..controls(0.8,1.90)and(1.25,1.97)..(1.55,2.08)
+             ..controls(1.80,2.00)and(2.05,1.70)..(2.30,1.25)
+             ..controls(2.60,0.86)and(3.00,0.56)..(3.50,0.52);
+\fill[crv](1.55,2.08)circle(1.5pt);
+\node[above,crv] at (1.55,2.08){$M_r$};
+\draw[gray!45,dashed,thin](1.75,0.8)--(1.75,1.90);
+\node[below,font=\fontsize{4}{5}\selectfont] at (0.15,0.8){$\tfrac{\omega_n}{10}$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (1.75,0.8){$\omega_n$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (3.50,0.8){$10\omega_n$};
+\node[asy,rotate=-44,font=\fontsize{4}{5}\selectfont] at (2.85,1.32){$-40$\,dB/d\'ec};
+% Phase
+\draw[->](-0.1,-0.50)--(3.7,-0.50);
+\draw[->](0,-1.70)--(0,-0.15) node[above left]{\tiny$\varphi$};
+\node[left] at (0,-0.30){$0°$};
+\node[left] at (0,-0.80){$-90°$};
+\node[left] at (0,-1.50){$-180°$};
+\draw[asy,dashed,thick](0.0,-0.30)--(3.5,-1.50);
+\draw[crv,thick]
+  (0,-0.30)..controls(0.8,-0.31)and(1.2,-0.52)..(1.75,-0.80)
+            ..controls(2.30,-1.08)and(2.90,-1.42)..(3.50,-1.49);
+\fill[crv](1.75,-0.80)circle(1.5pt);
+\node[right,crv,font=\fontsize{4}{5}\selectfont] at (1.75,-0.82){$-90°$\,\`a\,$\omega_n$};
 \end{tikzpicture}
-\end{minipage}
-\par\smallskip
-
-\begin{minipage}[t]{0.64\linewidth}
-\textbf{Z\'ero r\'eel} : $(1+\tau s)$ \\
-Sym\'etrique du p\^ole r\'eel : pente HF $+20$ dB/d\'ec, phase $0^\circ \to +90^\circ$.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.32\linewidth}
-\raggedleft
-\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
-  \draw[->] (0,1.0) -- (2.4,1.0);
-  \draw[->] (0,0.0) -- (0,1.8);
-  \draw[thick, ch4purple!80!black] (0.15,0.3) -- (1.15,0.3) -- (2.2,1.35);
-  \draw[dashed, gray] (1.15,0.0) -- (1.15,1.55);
-  \node[above left] at (0,1.8) {dB};
-  \node[left] at (0,0.3) {$0$ dB};
-  \node[below] at (1.15,0.0) {$\omega_c$};
-  \node[below right] at (2.35,1.0) {$\omega$};
-  \draw[->] (0,-0.8) -- (2.4,-0.8);
-  \draw[->] (0,-1.6) -- (0,-0.1);
-  \draw[thick, ch4purple!80!black] (0.15,-1.25) -- (1.15,-0.8) -- (2.2,-0.35);
-  \node[above left] at (0,-0.1) {$\varphi$};
-  \node[left] at (0,-1.25) {$0^\circ$};
-  \node[left] at (0,-0.8) {$+45^\circ$};
-  \node[left] at (0,-0.35) {$+90^\circ$};
-\end{tikzpicture}
-\end{minipage}
-\par\smallskip
-
-\begin{minipage}[t]{0.64\linewidth}
-\textbf{P\^ole 2\textsuperscript{nd} ordre} : $\dfrac{1}{1+2\zeta\frac{s}{\omega_n}+\frac{s^2}{\omega_n^2}}$ \\
-Cassure \`a $\omega_n$, pente HF $-40$ dB/d\'ec, phase finale $-180^\circ$. Pic de r\'esonance si $\zeta<0.707$.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.32\linewidth}
-\raggedleft
-\begin{tikzpicture}[scale=0.44,baseline=(current bounding box.north),>=Stealth, every node/.style={font=\tiny}]
-  \draw[->] (0,1.0) -- (2.4,1.0);
-  \draw[->] (0,0.0) -- (0,1.8);
-  \draw[thick, ch4purple!80!black] (0.15,1.25) .. controls (0.65,1.55) and (1.0,1.4) .. (1.15,1.05) -- (2.2,-0.05);
-  \draw[dashed, gray] (1.15,0.0) -- (1.15,1.55);
-  \node[above left] at (0,1.8) {dB};
-  \node[left] at (0,1.25) {$0$ dB};
-  \node[right] at (0.7,1.42) {$M_r$};
-  \node[below] at (1.15,0.0) {$\omega_n$};
-  \node[below right] at (2.35,1.0) {$\omega$};
-  \draw[->] (0,-0.8) -- (2.4,-0.8);
-  \draw[->] (0,-1.6) -- (0,-0.1);
-  \draw[thick, ch4purple!80!black] (0.15,-0.2) -- (1.15,-0.8) -- (2.2,-1.45);
-  \node[above left] at (0,-0.1) {$\varphi$};
-  \node[left] at (0,-0.2) {$0^\circ$};
-  \node[left] at (0,-0.8) {$-90^\circ$};
-  \node[left] at (0,-1.45) {$-180^\circ$};
-\end{tikzpicture}
-\end{minipage}
-\par}
-\vars{Lecture rapide : pente BF $\Rightarrow$ type $\alpha$ ; cassures $\Rightarrow$ z\'eros/p\^oles ; pente HF $\Rightarrow$ degr\'e relatif $d$.}
+\end{center}
+\vars{Retard pur : module inchang\'e, phase lin\'eaire $\phi=-\omega T_r$ (rad). Syst\`eme vicieux = z\'ero en demi-plan droit : \textbf{m\^eme module} qu'un z\'ero, mais phase de type p\^ole.}
+\vars{\textcolor{green!52!black}{\textbf{---}} courbe r\'eelle\quad\textcolor{red!72!black}{\textbf{- - -}} asymptote.\quad Pente BF $\Rightarrow\alpha$\,; cassures $\Rightarrow$ p\^oles/z\'eros\,; pente HF $\Rightarrow d$.}
+}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={R\'esonance (2\textsuperscript{nd} ordre)}]
