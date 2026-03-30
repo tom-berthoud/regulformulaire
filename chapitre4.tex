@@ -3,22 +3,6 @@
 % ============================================================
 \chapterbanner{Chapitre 4 --- R\'eponse fr\'equentielle \& Bode}{ch4purple}
 
-\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Principe fondamental}]
-Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
-\tightmath{
-\boxed{y_{rp}(t) = A\,|G(\jw)|\,\sin\!\big(\omega t + \angle G(\jw)\big)}
-}
-\vars{L'amplitude est $\times |G(\jw)|$ et la phase est d\'ecal\'ee de $\angle G(\jw)$.}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={Diagramme de Bode : 2 graphiques vs $\log\omega$}]
-\begin{itemize}
-  \item \textbf{Module} : $|G(\jw)|_{\text{dB}} = 20\log_{10}|G(\jw)|$
-  \item \textbf{Phase} : $\angle G(\jw)$ en degr\'es
-\end{itemize}
-\astuce{\textbf{Propri\'et\'e cl\'e} : les contributions de chaque facteur s'\textbf{additionnent} en dB et en phase.}
-\end{tcolorbox}
-
 \begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={\'El\'ements de base du Bode},unbreakable]
 {\fontsize{5.4}{6.2}\selectfont
 \colorlet{crv}{green!52!black}
@@ -233,6 +217,22 @@ Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
 }
 \end{tcolorbox}
 
+\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Principe fondamental}]
+Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
+\tightmath{
+\boxed{y_{rp}(t) = A\,|G(\jw)|\,\sin\!\big(\omega t + \angle G(\jw)\big)}
+}
+\vars{L'amplitude est $\times |G(\jw)|$ et la phase est d\'ecal\'ee de $\angle G(\jw)$.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={Diagramme de Bode : 2 graphiques vs $\log\omega$}]
+\begin{itemize}
+  \item \textbf{Module} : $|G(\jw)|_{\text{dB}} = 20\log_{10}|G(\jw)|$
+  \item \textbf{Phase} : $\angle G(\jw)$ en degr\'es
+\end{itemize}
+\astuce{\textbf{Propri\'et\'e cl\'e} : les contributions de chaque facteur s'\textbf{additionnent} en dB et en phase.}
+\end{tcolorbox}
+
 \begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={R\'esonance (2\textsuperscript{nd} ordre)}]
 \tightmath{
 \boxed{\omega_r = \omega_n\sqrt{1 - 2\zeta^2}} \quad \boxed{M_r = \frac{K}{2\zeta\sqrt{1{-}\zeta^2}}}
@@ -256,11 +256,13 @@ Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
 \begin{itemize}
   \item Pente BF ($\omega \to 0$) $= -20\alpha$ dB/d\'ec $\Rightarrow$ type $\alpha$
   \item Pente HF $= -20(n{-}m)$ dB/d\'ec $\Rightarrow$ degr\'e relatif
-  \item Prolonger asymptote BF \`a $\omega{=}1$ : ordonn\'ee $= 20\log K$. Ou \`a $\omega_0$ quelconque : $K = |G(\jw_0)| \cdot \omega_0^\alpha$ (lin.)
+  \item \textbf{Trouver $K$} : prolonger l'asymptote BF \`a $\omega{=}1$ $\Rightarrow$ ordonn\'ee $= 20\log K$
+  \item \textbf{Formule g\'en\'erale} : \boxed{K = |G(\jw_0)| \cdot \omega_0^\alpha} \; (avec $|G|$ en \textbf{lin\'eaire})
   \item Cassures = fr\'equences de coupure $\omega_c = 1/\tau$
   \item $-20 \to -40$ : p\^ole 2\textsuperscript{nd} ordre. $-40 \to -20$ : z\'ero
   \item Pic de r\'esonance : lire $M_r$ pour trouver $\zeta$
 \end{itemize}
+\vars{Si tu lis en dB : $|G| = 10^{G_{dB}/20}$. Donc type 0 : $K=|G|$. Type 1 : $K=|G|\,\omega$. Type 2 : $K=|G|\,\omega^2$.}
 \astuce{Cassure vers le BAS = p\^ole. Cassure vers le HAUT = z\'ero.}
 \end{tcolorbox}
 

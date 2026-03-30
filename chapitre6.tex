@@ -270,6 +270,18 @@ $20\log 3$ & $9.54$ dB & $20\log 10$ & $20$ dB \\
 \piege{Un r\'eglage qui satisfait seulement Bode sans contr\^ole de saturation peut \^etre inutilisable en pratique.}
 \end{tcolorbox}
 
+\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Sensibilit\'e \& robustesse}]
+\tightmath{
+\boxed{S(s) = \frac{1}{1{+}L},\quad T(s) = \frac{L}{1{+}L},\quad S + T = 1}
+}
+\begin{itemize}
+  \item $S$ : passe-haut $\Rightarrow$ att\'enue les perturbations BF ; $T$ : passe-bas
+  \item Robustesse : $\|S\|_\infty \leq 2$ ($6$~dB) recommand\'e $\Leftrightarrow$ MP $\geq 30°$
+  \item $\|S\|_\infty = 1/\text{dist}(G_{BO}(\jw),\,-1)_{\min}$
+\end{itemize}
+\piege{Minimiser $e_\infty$ et maximiser $MP$ sont des objectifs conflictuels : c'est le dilemme pr\'ecision-stabilit\'e.}
+\end{tcolorbox}
+
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Calcul de $G(j\omega)$ : module et phase}]
 Substituer $s = j\omega$ puis appliquer :
 \tightmath{
@@ -326,18 +338,6 @@ Augmenter $K_{BO}$ sans changer $\omega_c$ & Lag \\
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Sensibilit\'e \& robustesse}]
-\tightmath{
-\boxed{S(s) = \frac{1}{1{+}L},\quad T(s) = \frac{L}{1{+}L},\quad S + T = 1}
-}
-\begin{itemize}
-  \item $S$ : passe-haut $\Rightarrow$ att\'enue les perturbations BF ; $T$ : passe-bas
-  \item Robustesse : $\|S\|_\infty \leq 2$ ($6$~dB) recommand\'e $\Leftrightarrow$ MP $\geq 30°$
-  \item $\|S\|_\infty = 1/\text{dist}(G_{BO}(\jw),\,-1)_{\min}$
-\end{itemize}
-\piege{Minimiser $e_\infty$ et maximiser $MP$ sont des objectifs conflictuels : c'est le dilemme pr\'ecision-stabilit\'e.}
-\end{tcolorbox}
-
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Gain critique $K_u$ par Routh (m\'ethode BO)}]
 \begin{enumerate}
   \item Former $1 + K\,G_{BO}(s) = 0$, d\'evelopper en polyn\^ome en $K$
@@ -352,10 +352,10 @@ Augmenter $K_{BO}$ sans changer $\omega_c$ & Lag \\
 \textbf{Donn\'ee} : $G(s) = \frac{10}{s(1{+}0.1s)}$, objectif $MP = 50°$. $MP_0 \approx 18°$.
 \begin{enumerate}
   \item $\varphi_m = 50° - 18° + 8° = 40°$
-  \item $\alpha = \dfrac{1-\sin40°}{1+\sin40°} = \dfrac{1-0.643}{1+0.643} \approx 0.217$
+  \item $\alpha = \dfrac{1-\sin40°}{1+\sin40°} \approx 0.217$
   \item Gain \`a apporter : $+10\log(1/0.217) \approx +6.6$ dB
   \item Chercher $\omega'$ tel que $|G(\jw')| = -6.6$ dB $\Rightarrow \omega_c' \approx 15$ rad/s
-  \item $\tau = \dfrac{1}{\omega_c'\sqrt{\alpha}} = \dfrac{1}{15\cdot0.466} \approx 0.143$ s
+  \item $\tau = \dfrac{1}{\omega_c'\sqrt{\alpha}} \approx 0.143$ s
   \item $C(s) = \dfrac{1{+}0.143s}{1{+}0.031s}$ \quad(avec $\alpha\tau = 0.031$)
 \end{enumerate}
 \end{tcolorbox}

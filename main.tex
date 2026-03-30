@@ -47,9 +47,9 @@
   colback=white,
   boxrule=0.4pt,
   arc=0.6mm,
-  left=0.65mm, right=0.65mm, top=0.55mm, bottom=0.55mm,
-  before skip=1.0pt, after skip=1.0pt,
-  fonttitle=\bfseries\fontsize{6.8}{7.2}\selectfont,
+  left=0.55mm, right=0.55mm, top=0.45mm, bottom=0.45mm,
+  before skip=0.7pt, after skip=0.7pt,
+  fonttitle=\bfseries\fontsize{6.5}{6.9}\selectfont,
   breakable
 }
 
@@ -59,16 +59,16 @@
 
 % --- Bannière chapitre ---
 \newcommand{\chapterbanner}[2]{%
-  \vspace{1.2pt}%
-  \begin{tcolorbox}[colback=#2!8,colframe=#2!85!black,left=0.8mm,right=0.8mm,top=0.35mm,bottom=0.35mm,boxsep=0pt,arc=0.8mm]
-  {\fontsize{7.2}{7.6}\selectfont\bfseries\color{#2!50!black} #1}
+  \vspace{0.9pt}%
+  \begin{tcolorbox}[colback=#2!8,colframe=#2!85!black,left=0.7mm,right=0.7mm,top=0.28mm,bottom=0.28mm,boxsep=0pt,arc=0.8mm]
+  {\fontsize{6.9}{7.2}\selectfont\bfseries\color{#2!50!black} #1}
   \end{tcolorbox}
-  \vspace{0.5pt}%
+  \vspace{0.3pt}%
 }
 
 % --- Note/variable en petit ---
 \newcommand{\vars}[1]{%
-  {\vspace{1pt}\fontsize{6}{7}\selectfont\color{black!75}\textit{#1}\par}%
+  {\vspace{0.6pt}\fontsize{5.8}{6.5}\selectfont\color{black!75}\textit{#1}\par}%
 }
 
 % --- Math compact ---
@@ -98,11 +98,11 @@
 % \TEtrue  → version Te1 (chapitres 1–4 seulement)
 % \TEfalse → version complète (chapitres 1–6)
 \newif\ifTE
-\TEtrue
+\TEfalse
 
 % ============================================================
 \begin{document}
-\fontsize{7.4pt}{8.0pt}\selectfont
+\fontsize{7.2pt}{7.7pt}\selectfont
 
 \begin{multicols}{3}
 
