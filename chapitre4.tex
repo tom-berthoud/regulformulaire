@@ -53,7 +53,7 @@
 % ---- Row 2 : Pôle réel | Zéro réel ----
 \begin{minipage}[t]{0.47\linewidth}\centering
 \textbf{P\^ole r\'eel} $\tfrac{1}{1{+}\tau s}$\\
-{\fontsize{4.2}{4.8}\selectfont cassure $\omega_c=\frac{1}{\tau}$, pente HF $-20$ dB/d\'ec, phase $0^\circ\to-90^\circ$}\\[2pt]
+{\fontsize{4.2}{4.8}\selectfont cassure $\omega_p=\frac{1}{\tau}$, pente HF $-20$ dB/d\'ec, phase $0^\circ\to-90^\circ$}\\[2pt]
 \begin{tikzpicture}[scale=0.58,>=Stealth,every node/.style={font=\fontsize{4.5}{5.5}\selectfont}]
 % Magnitude
 \draw[->](-0.1,0.8)--(3.5,0.8);
@@ -69,9 +69,9 @@
 \draw[gray!45,dashed,thin](1.6,0.8)--(1.6,1.80);
 \node[above right,crv,font=\fontsize{4}{5}\selectfont] at (1.6,1.62){$-3$\,dB};
 \node[asy,rotate=-32,font=\fontsize{4}{5}\selectfont] at (2.55,1.35){$-20$\,dB/d\'ec};
-\node[below,font=\fontsize{4}{5}\selectfont] at (0.15,0.8){$\tfrac{\omega_c}{10}$};
-\node[below,font=\fontsize{4}{5}\selectfont] at (1.6,0.8){$\omega_c$};
-\node[below,font=\fontsize{4}{5}\selectfont] at (3.2,0.8){$10\omega_c$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (0.15,0.8){$\tfrac{\omega_p}{10}$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (1.6,0.8){$\omega_p$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (3.2,0.8){$10\omega_p$};
 % Phase
 \draw[->](-0.1,-0.3)--(3.5,-0.3);
 \draw[->](0,-1.55)--(0,-0.20) node[above left]{\tiny$\varphi$};
@@ -85,12 +85,12 @@
   (0,-0.33)..controls(0.5,-0.38)and(0.9,-0.58)..(1.6,-0.80)
             ..controls(2.3,-1.02)and(2.7,-1.22)..(3.2,-1.27);
 \fill[crv](1.6,-0.80)circle(1.5pt);
-\node[right,crv,font=\fontsize{4}{5}\selectfont] at (1.6,-0.82){$-45°$ \`a $\omega_c$};
+\node[right,crv,font=\fontsize{4}{5}\selectfont] at (1.6,-0.82){$-45°$ \`a $\omega_p$};
 \end{tikzpicture}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.47\linewidth}\centering
 \textbf{Z\'ero r\'eel} $(1{+}\tau s)$\\[-1pt]
-{\fontsize{4.2}{4.8}\selectfont cassure $\omega_c=\frac{1}{\tau}$, pente HF $+20$ dB/d\'ec, phase $0^\circ\to+90^\circ$}\\[2pt]
+{\fontsize{4.2}{4.8}\selectfont cassure $\omega_z=\frac{1}{\tau}$, pente HF $+20$ dB/d\'ec, phase $0^\circ\to+90^\circ$}\\[2pt]
 \begin{tikzpicture}[scale=0.58,>=Stealth,every node/.style={font=\fontsize{4.5}{5.5}\selectfont}]
 % Magnitude
 \draw[->](-0.1,0.8)--(3.5,0.8);
@@ -104,9 +104,9 @@
 \draw[gray!45,dashed,thin](1.6,0.8)--(1.6,1.30);
 \node[above,crv,font=\fontsize{4}{5}\selectfont] at (1.6,1.44){$+3$\,dB};
 \node[asy,rotate=32,font=\fontsize{4}{5}\selectfont] at (2.55,1.70){$+20$\,dB/d\'ec};
-\node[below,font=\fontsize{4}{5}\selectfont] at (0.15,0.8){$\tfrac{\omega_c}{10}$};
-\node[below,font=\fontsize{4}{5}\selectfont] at (1.6,0.8){$\omega_c$};
-\node[below,font=\fontsize{4}{5}\selectfont] at (3.2,0.8){$10\omega_c$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (0.15,0.8){$\tfrac{\omega_z}{10}$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (1.6,0.8){$\omega_z$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (3.2,0.8){$10\omega_z$};
 % Phase
 \draw[->](-0.1,-0.55)--(3.5,-0.55);
 \draw[->](0,-1.55)--(0,-0.20) node[above left]{\tiny$\varphi$};
@@ -118,7 +118,7 @@
   (0,-1.27)..controls(0.5,-1.22)and(0.9,-1.02)..(1.6,-0.80)
             ..controls(2.3,-0.58)and(2.7,-0.38)..(3.2,-0.33);
 \fill[crv](1.6,-0.80)circle(1.5pt);
-\node[right,crv,font=\fontsize{4}{5}\selectfont] at (1.6,-0.82){$+45°$ \`a $\omega_c$};
+\node[right,crv,font=\fontsize{4}{5}\selectfont] at (1.6,-0.82){$+45°$ \`a $\omega_z$};
 \end{tikzpicture}
 \end{minipage}
 \par\smallskip
@@ -159,7 +159,7 @@
 \node[above ,crv,font=\fontsize{4}{5}\selectfont] at (1.5,1.34){$+3$\,dB};
 \node[asy,rotate=32,font=\fontsize{4}{5}\selectfont] at (2.55,1.56){$+20$\,dB/d\'ec};
 \draw[gray!45,dashed,thin](1.6,0.8)--(1.6,1.20);
-\node[below,font=\fontsize{4}{5}\selectfont] at (1.6,0.8){$\omega_c$};
+\node[below,font=\fontsize{4}{5}\selectfont] at (1.6,0.8){$\omega_z$};
 % Phase
 \draw[->](-0.1,-0.55)--(3.5,-0.55);
 \draw[->](0,-1.55)--(0,-0.20) node[above left]{\tiny$\varphi$};
@@ -258,7 +258,7 @@ Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
   \item Pente HF $= -20(n{-}m)$ dB/d\'ec $\Rightarrow$ degr\'e relatif
   \item \textbf{Trouver $K$} : prolonger l'asymptote BF \`a $\omega{=}1$ $\Rightarrow$ ordonn\'ee $= 20\log K$
   \item \textbf{Formule g\'en\'erale} : \boxed{K = |G(\jw_0)| \cdot \omega_0^\alpha} \; (avec $|G|$ en \textbf{lin\'eaire})
-  \item Cassures = fr\'equences de coupure $\omega_c = 1/\tau$
+  \item Cassures = pulsations caract\'eristiques $\omega_p$ (p\^ole) / $\omega_z$ (z\'ero) $= 1/\tau$
   \item $-20 \to -40$ : p\^ole 2\textsuperscript{nd} ordre. $-40 \to -20$ : z\'ero
   \item Pic de r\'esonance : lire $M_r$ pour trouver $\zeta$
 \end{itemize}
@@ -279,25 +279,9 @@ Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={Exemples de Bode classiques}]
-\textbf{1\textsuperscript{er} o.} $\frac{10}{1{+}0.1s}$ : $K{=}10$ (20 dB), $\omega_c{=}10$, pente $0 \to -20$ dB/d\'ec.
+\textbf{1\textsuperscript{er} o.} $\frac{10}{1{+}0.1s}$ : $K{=}10$ (20 dB), $\omega_p{=}10$, pente $0 \to -20$ dB/d\'ec.
 
 \textbf{Intég. + 1\textsuperscript{er} o.} $\frac{5}{s(1{+}0.01s)}$ : pente init. $-20$, cassure \`a $\omega{=}100$ vers $-40$ dB/d\'ec. Phase $-90° \to -180°$.
 
 \textbf{Avec retard} $\frac{2e^{-0.5s}}{1{+}s}$ : m\^eme module que sans retard, phase suppl. $= -0.5\omega$ rad.
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Checklist express de trac\'e Bode}]
-\begin{itemize}
-  \item R\'e\'ecrire $G(s)$ avec facteurs unitaires $(1+s/\omega_i)$
-  \item Lister les fr\'equences de cassure tri\'ees : $\omega_1<\omega_2<\cdots$
-  \item D\'emarrer \`a basse fr\'equence avec pente $-20\alpha$ (type)
-  \item Modifier la pente \`a chaque cassure : p\^ole $-20$, z\'ero $+20$, 2\textsuperscript{nd} ordre $\pm40$ dB/d\'ec
-  \item Ajouter la correction locale ($\pm3$ dB au coin, pic si $\zeta<0.707$)
-  \item Tracer ensuite la phase par superposition des contributions
-\end{itemize}
-\tightmath{
-\omega_c: |G(\jw_c)|=1,\quad MP = 180^\circ + \angle G(\jw_c),\\
-MG_{dB} = -|G(\jw_\pi)|_{dB}
-}
-\piege{Si un retard pur est pr\'esent, recalculer MP avec la phase suppl\'ementaire $-\omega T_r$ (rad).}
 \end{tcolorbox}

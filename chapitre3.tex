@@ -60,7 +60,7 @@ $5\tau$ & $0.993$ & 99\% & \\
 \boxed{s^2 + 2\zeta\omega_n s + \omega_n^2 = (s+\zeta\omega_n)^2 + \omega_n^2(1-\zeta^2)}
 }
 \tightmath{
-\boxed{\omega_n = \sqrt{\sigma^2+\omega_0^2}} \quad \boxed{\zeta = \frac{\sigma}{\omega_n} = \frac{-\Re(s)}{\omega_n}}
+\boxed{\omega_n = \sqrt{\delta^2+\omega_0^2}} \quad \boxed{\zeta = \frac{\delta}{\omega_n} = \frac{-\Re(s)}{\omega_n}}
 }
 \tightmath{
 \boxed{G(s)=\frac{b_0}{s^2+as+b}\ \Rightarrow\ \omega_n=\sqrt{b},\ \zeta=\frac{a}{2\sqrt{b}},\ K=\frac{b_0}{b}}
@@ -78,7 +78,7 @@ $5\tau$ & $0.993$ & 99\% & \\
 $\zeta$ & R\'egime & P\^oles & Comportement \\
 \midrule
 $0$ & Oscillant pur & $\pm j\omega_n$ & Oscil. perp\'etuelle \\
-$0{<}\zeta{<}1$ & \textbf{Sous-amorti} & $-\sigma \pm j\omega_0$ & Oscil. amorties \\
+$0{<}\zeta{<}1$ & \textbf{Sous-amorti} & $-\delta \pm j\omega_0$ & Oscil. amorties \\
 $1$ & Critique & $-\omega_n$ (dble) & + rapide sans $D_\%$ \\
 $>1$ & Sur-amorti & 2 r\'eels n\'eg. & Lent, pas de $D_\%$ \\
 \bottomrule
@@ -88,11 +88,11 @@ $>1$ & Sur-amorti & 2 r\'eels n\'eg. & Lent, pas de $D_\%$ \\
 
 \begin{tcolorbox}[colback=ch3green!2,colframe=ch3green!80!black,title={Cas sous-amorti ($0 < \zeta < 1$) : formules cl\'es}]
 \tightmath{
-\boxed{\omega_0 = \omega_n\sqrt{1{-}\zeta^2}} \quad \sigma = \zeta\omega_n \quad \varphi = \arccos(\zeta)
+\boxed{\omega_0 = \omega_n\sqrt{1{-}\zeta^2}} \quad \delta = \zeta\omega_n \quad \varphi = \arccos(\zeta)
 }
 R\'eponse indicielle :
 \tightmath{
-y(t) = K\!\left[1 - \frac{e^{-\sigma t}}{\sqrt{1{-}\zeta^2}}\sin(\omega_0 t + \varphi)\right]
+y(t) = K\!\left[1 - \frac{e^{-\delta t}}{\sqrt{1{-}\zeta^2}}\sin(\omega_0 t + \varphi)\right]
 }
 \tightmath{
 \boxed{D_\% = e^{-\pi\zeta/\sqrt{1-\zeta^2}} \times 100\%} \quad \boxed{\zeta = \frac{-\ln(D_\%/100)}{\sqrt{\pi^2 + \ln^2(D_\%/100)}}}
@@ -123,14 +123,14 @@ $D_\%$ & 73 & 53 & 37 & 25 & 16 & 9.5 & 4.6 & 1.5 \\
   \filldraw[ch3green!80!black] (-1.2,-1.5) circle (2pt) node[right]{$\bar{s}_1$};
   \draw[dashed, gray, thin] (0,0) -- (-1.2,1.5);
   \draw[<->, thin, red!70] (-1.2,0) -- (-1.2,1.5) node[midway, right]{$\omega_0$};
-  \draw[<->, thin, red!70] (0,0) -- (-1.2,0) node[midway, below]{$\sigma$};
+  \draw[<->, thin, red!70] (0,0) -- (-1.2,0) node[midway, below]{$\delta$};
   \node at (-0.3,1.0) {$\omega_n$};
   \draw[thin] (-0.35,0) arc (180:128:0.35); \node at (-0.55,0.28) {$\theta$};
   \draw[dotted, gray] (0,0) -- (-2.5,2.1) node[above]{$\zeta$ cst};
-  \draw[dotted, gray] (-1.2,-2) -- (-1.2,2) node[above]{$\sigma$ cst};
+  \draw[dotted, gray] (-1.2,-2) -- (-1.2,2) node[above]{$\delta$ cst};
 \end{tikzpicture}
 \end{center}
-\vars{$\cos\theta = \zeta$, $|s| = \omega_n$, Re$(s) = -\sigma = -\zeta\omega_n$, Im$(s) = \pm\omega_0$. Iso-$\zeta$ = droites. Iso-$\sigma$ = verticales. Iso-$\omega_n$ = cercles.}
+\vars{$\cos\theta = \zeta$, $|s| = \omega_n$, Re$(s) = -\delta = -\zeta\omega_n$, Im$(s) = \pm\omega_0$. Iso-$\zeta$ = droites. Iso-$\delta$ = verticales. Iso-$\omega_n$ = cercles.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch3green!2,colframe=ch3green!80!black,title={Cas critique, sur-amorti \& identification}]
@@ -187,7 +187,7 @@ G(s) \approx \frac{K_{\text{dom}}}{1 + 0.5\,s}
 \scriptsize
 \begin{tabular}{@{}cccccc@{}}
 \toprule
-$\zeta$ & $D_\%$ & $MP$ approx. & $Q=1/(2\zeta)$ & $t_{s5}\omega_n$ & Commentaire \\
+$\zeta$ & $D_\%$ & $\varphi_m$ approx. & $Q=1/(2\zeta)$ & $t_{s5}\omega_n$ & Commentaire \\
 \midrule
 0.2 & 53\% & $\sim 20°$ & 2.5 & 15 & Tr\`es oscillant \\
 0.4 & 25\% & $\sim 40°$ & 1.25 & 7.5 & Oscillant \\

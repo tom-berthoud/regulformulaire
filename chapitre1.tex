@@ -108,9 +108,9 @@ On travaille avec les variations $\Delta x = x - x_0$, $\Delta y = y - y_0$.
 
 \textbf{Moteur CC} simplifi\'e ($L_a \approx 0$) :
 \tightmath{
-\boxed{G_m(s) = \frac{K}{(1{+}\tau_m s)(1{+}\tau_e s)} \approx \frac{K}{1 + \tau_m s}}
+\boxed{G_{mot}(s) = \frac{K}{(1{+}\tau_m s)(1{+}\tau_e s)} \approx \frac{K}{1 + \tau_m s}}
 }
-\vars{$K = 1/K_e$, $\tau_m = JR_a/(fR_a + K_m K_e)$, $\tau_e = L_a/R_a$.}
+\vars{$K = \dfrac{K_T}{fR_a + K_T K_E} \approx \dfrac{1}{K_E}$ (si $f\to0$), $\tau_m = \dfrac{JR_a}{fR_a + K_T K_E}$, $\tau_e = \dfrac{L_a}{R_a}$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch1blue!2,colframe=ch1blue!75!black,title={M\'ethode de mod\'elisation (pas \`a pas)}]
@@ -175,7 +175,7 @@ Pour $\ddot y + a_1 \dot y + a_0 y = b_0\,u$ (ordre 2) :
 \textbf{P\^oles} $p_i$ = racines du d\'enominateur de $G(s)$ :
 \begin{itemize}
   \item R\'eels $p_i < 0$ : mode ap\'eriodique, $e^{p_i t}$
-  \item Complexes $p_{1,2} = -\sigma \pm j\omega_0$ : oscillatoire, $e^{-\sigma t}\sin(\omega_0 t)$
+  \item Complexes $p_{1,2} = -\delta \pm j\omega_0$ : oscillatoire, $e^{-\delta t}\sin(\omega_0 t)$
   \item $\text{Re}(p_i) \geq 0$ : syst\`eme instable !
 \end{itemize}
 \textbf{P\^ole dominant} = p\^ole avec $|\text{Re}(p_i)|$ le plus petit (le plus lent) :

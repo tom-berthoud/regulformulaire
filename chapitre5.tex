@@ -46,31 +46,31 @@ c_1 = \frac{b_1 a_{n-3} - a_{n-1} b_2}{b_1}
 }
 
 \textbf{Ordre 4} : $s^4 + a_3 s^3 + a_2 s^2 + a_1 s + a_0 = 0$ :\\
-$a_3 > 0$, $b_1 = a_3 a_2 - a_1 > 0$, et $b_1 a_1 - a_3 a_0 > 0$.
+$a_3 > 0$, $a_0 > 0$, $b_1 = a_3 a_2 - a_1 > 0$, et $\boxed{a_1(a_3 a_2 - a_1) > a_3^{2}\, a_0}$ (i.e. $b_1 a_1 > a_3^{2} a_0$).
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch5red!2,colframe=ch5red!80!black,title={Stabilit\'e en boucle ferm\'ee}]
 \'Equation caract\'eristique :
 \tightmath{
-\boxed{1 + G_{BO}(s) = 0} \quad G_{BO} = G_r G_a G_p G_m
+\boxed{1 + G_o(s) = 0} \quad G_o = G_c\,G_a
 }
-BF stable $\Leftrightarrow$ toutes les racines de $1 + G_{BO}(s) = 0$ ont Re $< 0$.
+BF stable $\Leftrightarrow$ toutes les racines de $1 + G_o(s) = 0$ ont Re $< 0$.
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Marge de gain (MG)}]
-$\omega_\pi$ = \textbf{croisement de phase} : $\angle G_{BO}(\jw_\pi) = -180°$.
+\begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Marge de gain ($A_m$)}]
+$\omega_\pi$ = \textbf{croisement de phase} : $\angle G_o(\jw_\pi) = -180°$.
 \tightmath{
-\boxed{MG = \frac{1}{|G_{BO}(\jw_\pi)|}} \quad \boxed{MG_{\text{dB}} = -|G_{BO}(\jw_\pi)|_{\text{dB}}}
+\boxed{A_m = \frac{1}{|G_o(\jw_\pi)|}} \quad \boxed{A_{m,\text{dB}} = -|G_o(\jw_\pi)|_{\text{dB}}}
 }
-\vars{Sur Bode : $MG_{\text{dB}}$ = distance module $\leftrightarrow$ 0~dB, \textbf{lue \`a $\omega_\pi$}. Stable si courbe \textbf{en dessous} de 0~dB. Typ. : $MG \geq 6$--$10$ dB.}
+\vars{Sur Bode : $A_{m,\text{dB}}$ = distance module $\leftrightarrow$ 0~dB, \textbf{lue \`a $\omega_\pi$}. Stable si courbe \textbf{en dessous} de 0~dB. Typ. : $A_m \geq 6$--$10$ dB.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch5red!2,colframe=ch5red!80!black,title={Marge de phase (MP)}]
-$\omega_c$ = \textbf{croisement de gain} : $|G_{BO}(\jw_c)| = 1$ (0~dB).
+\begin{tcolorbox}[colback=ch5red!2,colframe=ch5red!80!black,title={Marge de phase ($\varphi_m$)}]
+$\omega_{co}$ = \textbf{croisement de gain} : $|G_o(\jw_{co})| = 1$ (0~dB).
 \tightmath{
-\boxed{MP = 180° + \angle G_{BO}(\jw_c)}
+\boxed{\varphi_m = 180° + \angle G_o(\jw_{co})}
 }
-\vars{Sur Bode : $MP$ = distance phase $\leftrightarrow$ $-180°$, \textbf{lue \`a $\omega_c$}. Stable si phase \textbf{au-dessus} de $-180°$. Objectif : $30° < MP < 60°$.}
+\vars{Sur Bode : $\varphi_m$ = distance phase $\leftrightarrow$ $-180°$, \textbf{lue \`a $\omega_{co}$}. Stable si phase \textbf{au-dessus} de $-180°$. Objectif : $30° < \varphi_m < 60°$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Lecture sur le diagramme de Bode},top=0.4mm,bottom=0.4mm,before skip=1pt,after skip=1pt]
@@ -81,9 +81,9 @@ $\omega_c$ = \textbf{croisement de gain} : $|G_{BO}(\jw_c)| = 1$ (0~dB).
     \draw[->] (0,-2) -- (0,2.2) node[above]{dB};
     \draw[dashed, gray] (0,0) -- (5.5,0); \node[left] at (0,0) {0};
     \draw[thick, ch5red!80!black] (0,1.8) -- (1.5,1.2) -- (2.5,0) -- (4,-1.5) -- (5.5,-2.5);
-    \draw[red, thick, dashed] (2.5,-2) -- (2.5,0.3); \node[red, above] at (2.5,0.4) {$\omega_c$};
+    \draw[red, thick, dashed] (2.5,-2) -- (2.5,0.3); \node[red, above] at (2.5,0.4) {$\omega_{co}$};
     \draw[orange, thick, dashed] (4,-2) -- (4,0.2); \node[orange, above] at (4,0.3) {$\omega_\pi$};
-    \draw[<->, green!60!black] (4,-1.5) -- (4,0); \node[right, green!60!black] at (4.1,-0.7) {$MG$};
+    \draw[<->, green!60!black] (4,-1.5) -- (4,0); \node[right, green!60!black] at (4.1,-0.7) {$A_m$};
     \node[align=left] at (1.35,2) {$\alpha$ : pente BF\\[-1pt]$/(-20)$};
     \node[align=left] at (4.25,-2.62) {$d$ : pente HF\\[-1pt]$/(-20)$};
   \end{scope}
@@ -92,37 +92,37 @@ $\omega_c$ = \textbf{croisement de gain} : $|G_{BO}(\jw_c)| = 1$ (0~dB).
     \draw[->] (0,-2.2) -- (0,0.5) node[above]{$\angle$};
     \draw[dashed, gray] (0,-1.57) -- (5.5,-1.57); \node[left] at (0,-1.57) {$-180°$};
     \draw[thick, ch5red!80!black] (0,-0.3) -- (1.5,-0.7) -- (2.5,-1.1) -- (4,-1.57) -- (5.5,-2.1);
-    \draw[red, thick, dashed] (2.5,-2.2) -- (2.5,-0.8); \node[red, above] at (2.5,-0.75) {$\omega_c$};
+    \draw[red, thick, dashed] (2.5,-2.2) -- (2.5,-0.8); \node[red, above] at (2.5,-0.75) {$\omega_{co}$};
     \draw[orange, thick, dashed] (4,-2.2) -- (4,-1.35); \node[orange, above] at (4,-1.3) {$\omega_\pi$};
-    \draw[<->, green!60!black] (2.5,-1.57) -- (2.5,-1.1); \node[left, green!60!black] at (2.3,-1.3) {$MP$};
+    \draw[<->, green!60!black] (2.5,-1.57) -- (2.5,-1.1); \node[left, green!60!black] at (2.3,-1.3) {$\varphi_m$};
   \end{scope}
 \end{tikzpicture}
 \end{center}
-\vars{$\alpha$ : pente BF du module ; $d$ : pente HF. $\omega_c \Rightarrow MP$, $\omega_\pi \Rightarrow MG$.}
+\vars{$\alpha$ : pente BF du module ; $d$ : pente HF. $\omega_{co} \Rightarrow \varphi_m$, $\omega_\pi \Rightarrow A_m$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch5red!2,colframe=ch5red!80!black,title={Relations approx. MP -- $\zeta$ -- $D_\%$}]
+\begin{tcolorbox}[colback=ch5red!2,colframe=ch5red!80!black,title={Relations approx. $\varphi_m$ -- $\zeta$ -- $D_\%$}]
 \tightmath{
-\boxed{\zeta \approx \frac{MP}{100°}} \quad (\text{pour } 20° < MP < 70°)
+\boxed{\zeta \approx \frac{\varphi_m}{100°}} \quad (\text{pour } 20° < \varphi_m < 70°)
 }
-\vars{MP $= 45° \Rightarrow \zeta \approx 0.45 \Rightarrow D_\% \approx 20\%$. MP $= 65° \Rightarrow \zeta \approx 0.65 \Rightarrow D_\% \approx 7\%$.}
+\vars{$\varphi_m = 45° \Rightarrow \zeta \approx 0.45 \Rightarrow D_\% \approx 20\%$. $\varphi_m = 65° \Rightarrow \zeta \approx 0.65 \Rightarrow D_\% \approx 7\%$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Approximations BF depuis Bode}]
-\textbf{$T_{\text{r\'eg}}$ en BF} (approx. demi-p\'eriode \`a $\omega_c$) :
+\textbf{$T_{\text{r\'eg}}$ en BF} (approx. demi-p\'eriode \`a $\omega_{co}$) :
 \tightmath{
-\boxed{T_{\text{r\'eg}} \approx \frac{\pi}{\omega_c}}
+\boxed{T_{\text{r\'eg}} \approx \frac{\pi}{\omega_{co}}}
 }
-\textbf{Retard pur marginalisant la BF} (consume $MP$ : $\omega_c T_r = MP_{\text{rad}}$) :
+\textbf{Retard pur marginalisant la BF} (consume $\varphi_m$ : $\omega_{co} T_r = \varphi_{m,\text{rad}}$) :
 \tightmath{
-\boxed{T_r^{\max} = \frac{MP_{\text{rad}}}{\omega_c} = \frac{MP° \cdot \pi}{180° \cdot \omega_c}}
+\boxed{T_r^{\max} = \frac{\varphi_{m,\text{rad}}}{\omega_{co}} = \frac{\varphi_m° \cdot \pi}{180° \cdot \omega_{co}}}
 }
-\piege{$MP$ en \textbf{radians} : $MP_{\text{rad}} = MP° / 57.3$. Ex. : $MP{=}40°$, $\omega_c{=}600$ $\Rightarrow$ $T_r^{\max} = \frac{40\pi}{180\cdot600} \approx 1.2\,\text{ms}$.}
+\piege{$\varphi_m$ en \textbf{radians} : $\varphi_{m,\text{rad}} = \varphi_m° / 57.3$. Ex. : $\varphi_m{=}40°$, $\omega_{co}{=}600$ $\Rightarrow$ $T_r^{\max} = \frac{40\pi}{180\cdot600} \approx 1.2\,\text{ms}$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Crit\`ere de Nyquist}]
 \textbf{Cas simplifi\'e (BO stable, $P{=}0$)} :
-BF stable $\Leftrightarrow$ Nyquist $G_{BO}(\jw)$ \textbf{n'entoure pas} $(-1, 0)$.
+BF stable $\Leftrightarrow$ Nyquist $G_o(\jw)$ \textbf{n'entoure pas} $(-1, 0)$.
 
 \textbf{Cas g\'en\'eral :}
 \tightmath{
@@ -150,14 +150,14 @@ Lieu des p\^oles BF quand $K$ varie ($0 \to \infty$) :
 
 \begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Proc\'edure stabilit\'e param\'etrique en 5 \`etapes}]
 \begin{enumerate}
-  \item Former l'\'equation caract\'eristique : $1 + K\,G_{BO}(s) = 0$
+  \item Former l'\'equation caract\'eristique : $1 + K\,G_o(s) = 0$
   \item Mettre sous forme polynomiale : $a_n(K)s^n + \cdots + a_0(K)=0$
   \item Construire Routh avec coefficients d\'ependant de $K$
   \item Imposer 1\textsuperscript{\`ere} colonne $>0$ et r\'esoudre les in\'egalit\'es
   \item Croiser avec les marges Bode/Nyquist pour garder une zone robuste
 \end{enumerate}
 \tightmath{
-\text{Zone utile en pratique : } MP\in[35^\circ,60^\circ],\quad MG\ge 6\text{ dB}
+\text{Zone utile en pratique : } \varphi_m\in[35^\circ,60^\circ],\quad A_m\ge 6\text{ dB}
 }
 \astuce{Si plusieurs intervalles de $K$ sont math\'ematiquement stables, choisir celui qui respecte aussi la rapidit\'e et le d\'epassement demand\'es.}
 \end{tcolorbox}

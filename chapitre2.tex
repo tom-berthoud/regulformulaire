@@ -83,15 +83,15 @@ G(s) = \frac{b_m}{a_n}\cdot\frac{(s{-}z_1)(s{-}z_2)\cdots}{(s{-}p_1)(s{-}p_2)\cd
 \textbf{Laplace $\rightarrow$ Bode}
 
 \tightmath{
-\frac{K}{s^2 + 2\sigma s + \omega_n^2}
+\frac{K}{s^2 + 2\delta s + \omega_n^2}
 = \frac{K/\omega_n^2}{1 + \frac{2\zeta}{\omega_n}s + \frac{s^2}{\omega_n^2}}
 }
 \tightmath{
-\omega_n = \sqrt{\sigma^2 + \omega_0^2}
+\omega_n = \sqrt{\delta^2 + \omega_0^2}
 \qquad
-\zeta = \frac{\sigma}{\omega_n}
+\zeta = \frac{\delta}{\omega_n}
 }
-\vars{Aussi : $(s+a)=a\!\left(1+\frac{s}{a}\right)$, donc $\tau=\frac{1}{a}$ et $\omega_c=a$.}
+\vars{Aussi : $(s+a)=a\!\left(1+\frac{s}{a}\right)$, donc $\tau=\frac{1}{a}$ et $\omega_p=a$ (cassure).}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\linewidth}
 \textbf{Bode $\rightarrow$ Laplace}
@@ -103,7 +103,7 @@ G(s) = \frac{b_m}{a_n}\cdot\frac{(s{-}z_1)(s{-}z_2)\cdots}{(s{-}p_1)(s{-}p_2)\cd
 $}
 \end{center}
 \tightmath{
-\sigma = \zeta\omega_n
+\delta = \zeta\omega_n
 \qquad
 \omega_0 = \omega_n\sqrt{1-\zeta^2}
 }
@@ -161,7 +161,7 @@ Pt pr\'el\`evement apr\`es $G$ & Ajouter $1/G$ dans branche \\
 
 \begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Cha\^ine d'action \& Mason}]
 \textbf{Cha\^ine d'action} : $G = G_1G_2\cdots G_n$. \quad
-\textbf{Boucle ouverte} : $L(s)=G_rG_aG_pG_m$.
+\textbf{Boucle ouverte} : $G_o(s)=G_c\,G_a$ ($G_a$=syst\`eme \`a r\'egler).
 
 \tightmath{
 \boxed{G_{BF}(s)=\frac{\text{cha\^ine directe}}{1 \pm \text{gain de boucle}}}
@@ -222,7 +222,7 @@ Pt pr\'el\`evement apr\`es $G$ & Ajouter $1/G$ dans branche \\
 \end{tikzpicture}
 }
 \end{center}
-\vars{En BF unitaire : $L(s)=G_{BO}(s)$. En cas de doute, repartir de $y=G(u\mp Hy)$.}
+\vars{Transfert de boucle (BF unitaire) : $G_o(s)=G_c\,G_a$. En cas de doute, repartir de $y=G(u\mp Hy)$.}
 \vars{Mason : $T=\dfrac{P_1}{\Delta}$ avec $\Delta = 1 - \sum(\text{gains de boucle}) + \cdots$ ; donc une boucle n\'egative de gain $-GH$ donne bien $1+GH$.}
 \end{tcolorbox}
 
@@ -237,7 +237,7 @@ Pt pr\'el\`evement apr\`es $G$ & Ajouter $1/G$ dans branche \\
 }
 $A = \lim_{s\to p}(s{-}p)^2 G(s)$, \; $B = \lim_{s\to p}\frac{d}{ds}[(s{-}p)^2 G(s)]$
 
-\textbf{P\^oles complexes} $-\sigma \pm j\omega$ : garder $\frac{As+B}{(s{+}\sigma)^2+\omega^2}$ et utiliser table.
+\textbf{P\^oles complexes} $-\delta \pm j\omega$ : garder $\frac{As+B}{(s{+}\delta)^2+\omega^2}$ et utiliser table.
 
 \vars{Conversions : Hz$\to$rad/s : $\omega{=}2\pi f$. dB$\to$lin : $|G|{=}10^{G_{\text{dB}}/20}$. lin$\to$dB : $20\log_{10}|G|$. $6$~dB $\approx \times 2$. $20$~dB $= \times 10$.}
 \end{tcolorbox}
@@ -246,7 +246,7 @@ $A = \lim_{s\to p}(s{-}p)^2 G(s)$, \; $B = \lim_{s\to p}\frac{d}{ds}[(s{-}p)^2 G
 \begin{enumerate}
   \item V\'erifier si la fraction est propre (sinon division polynomiale)
   \item Factoriser le d\'enominateur en p\^oles simples/r\'ep\'et\'es/complexes
-  \item Choisir la bonne forme : $\frac{A}{s-p}$, $\frac{A}{(s-p)^2}$, $\frac{As+B}{(s+\sigma)^2+\omega^2}$
+  \item Choisir la bonne forme : $\frac{A}{s-p}$, $\frac{A}{(s-p)^2}$, $\frac{As+B}{(s+\delta)^2+\omega^2}$
   \item Identifier les coefficients (m\'ethode des limites ou identification)
   \item Appliquer la table de Laplace, puis simplifier l'expression temporelle
 \end{enumerate}
@@ -261,17 +261,17 @@ $A = \lim_{s\to p}(s{-}p)^2 G(s)$, \; $B = \lim_{s\to p}\frac{d}{ds}[(s{-}p)^2 G
 \begin{itemize}
   \item Trouver $K$, $y_\infty$ et le retard $T_r$
   \item P\^oles r\'eels $\Rightarrow$ ap\'eriodique ; complexes $\Rightarrow$ oscillatoire
-  \item Calculer $T_{\text{r\'eg}} = 3/|\sigma|$ et $T_0 = 2\pi/\omega_0$
+  \item Calculer $T_{\text{r\'eg}} = 3/|\delta|$ et $T_0 = 2\pi/\omega_0$
   \item D\'ecaler de $T_r$ et sommer les r\'eponses aux \'echelons successifs
 \end{itemize}
-\vars{Exemple : $G(s)=\dfrac{10}{(s+2)^2+16}e^{-s}$, p\^oles $-2\pm j4$, $y_\infty=0.4$, $T_{\text{r\'eg}}=1.5$ s, $T_0\approx1.57$ s, $T_r=1$ s.}
+\vars{Exemple : $G(s)=\dfrac{10}{(s+2)^2+16}e^{-s}$, p\^oles $-2\pm j4$, $y_\infty=0.5$, $T_{\text{r\'eg}}=1.5$ s, $T_0\approx1.57$ s, $T_r=1$ s.}
 \begin{center}
 \begin{tikzpicture}[scale=0.47]
  
 % ---- Paramètres de la courbe ----
 % G(s) = 10/((s+2)^2+16) * e^{-s}
 % Réponse simulée manuellement avec retard Tr=1
-% pôles: -2 ± j4, omega_d=4, sigma=2, y_inf = 0.4
+% pôles: -2 ± j4, omega_d=4, sigma=2, y_inf = 0.5
  
 \def\Tr{1.0}     % retard
 \def\Treg{2.4}   % temps de réglage mesuré depuis Tr

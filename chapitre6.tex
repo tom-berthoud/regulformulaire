@@ -4,18 +4,18 @@
 \chapterbanner{Chapitre 6 --- R\'egulateurs \& Boucle ferm\'ee}{ch6teal}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Transferts en boucle ferm\'ee}]
-Avec $L(s) = G_r(s) \cdot G(s)$ (transfert de boucle), r\'etroaction unitaire :
+Avec $G_o(s) = G_c(s) \cdot G_a(s)$ (transfert de boucle ouverte ; $G_a$ = syst\`eme \`a r\'egler), r\'etroaction unitaire :
 \tightmath{
-\boxed{G_{yw} = \frac{L}{1{+}L}} \quad \boxed{G_{ew} = \frac{1}{1{+}L}} \quad \boxed{G_{yv} = \frac{G_p}{1{+}L}}
+\boxed{G_{yw} = \frac{G_o}{1{+}G_o}} \quad \boxed{G_{ew} = \frac{1}{1{+}G_o}} \quad \boxed{G_{yv} = \frac{G_p}{1{+}G_o}}
 }
 \tightmath{
 S(s) + T(s) = 1 \quad (S = G_{ew},\ T = G_{yw})
 }
-\piege{Le d\'enom. $1{+}L(s)$ est commun \`a \textbf{tous} les transferts BF. \'Eq. caract. : $1{+}L(s){=}0$.}
+\piege{Le d\'enom. $1{+}G_o(s)$ est commun \`a \textbf{tous} les transferts BF. \'Eq. caract. : $1{+}G_o(s){=}0$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Erreur permanente : constantes \& tableau}]
-$K_p = \lim_{s\to 0} L(s)$ (position), $K_v = \lim_{s\to 0} sL(s)$ (vitesse), $K_a = \lim_{s\to 0} s^2 L(s)$ (acc\'el.)
+$K_p = \lim_{s\to 0} G_o(s)$ (position), $K_v = \lim_{s\to 0} sG_o(s)$ (vitesse), $K_a = \lim_{s\to 0} s^2 G_o(s)$ (acc\'el.)
 \begin{center}
 \renewcommand{\arraystretch}{1.1}
 \scriptsize
@@ -29,18 +29,18 @@ Parabole $\frac{A}{2}t^2$ & $\infty$ & $\infty$ & $\frac{A}{K_a}$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-\textbf{Poursuite} ($v{=}0$) : $e_\infty = \lim_{s\to 0} \frac{1}{1{+}L(s)} \cdot \frac{A}{s} \cdot s = \frac{A}{1{+}K_{BO}}$
+\textbf{Poursuite} ($v{=}0$) : $e_\infty = \lim_{s\to 0} \frac{1}{1{+}G_o(s)} \cdot \frac{A}{s} \cdot s = \frac{A}{1{+}K_o}$
 
-\textbf{Maintien} ($w{=}0$) : $e_\infty = -\lim_{s\to 0} \frac{G_p(s)}{1{+}L(s)}$
+\textbf{Maintien} ($w{=}0$) : $e_\infty = -\lim_{s\to 0} \frac{G_p(s)}{1{+}G_o(s)}$
 \piege{Type $\alpha$ \'elev\'e $\Rightarrow$ meilleure pr\'ecision, mais plus difficile \`a stabiliser.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={R\'egulateur P (Proportionnel)}]
 \tightmath{
-\boxed{G_r(s) = K_p}
+\boxed{G_c(s) = K_p}
 }
 \begin{itemize}
-  \item R\'eduit $t_r$ (augmente $\omega_c$), augmente $D_\%$ ($MP \downarrow$)
+  \item R\'eduit $t_r$ (augmente $\omega_{co}$), augmente $D_\%$ ($\varphi_m \downarrow$)
   \item R\'eduit mais \textbf{ne supprime pas} $e_\infty$ (type 0)
   \item \textbf{Dilemme} : $K_p \uparrow \Rightarrow e_\infty \downarrow$ mais stabilit\'e $\downarrow$
 \end{itemize}
@@ -48,36 +48,36 @@ Parabole $\frac{A}{2}t^2$ & $\infty$ & $\infty$ & $\frac{A}{K_a}$ \\
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={R\'egulateur PI}]
 \tightmath{
-\boxed{G_r(s) = K_p\!\left(1 + \frac{1}{T_i s}\right) = K_p\,\frac{1 + T_i s}{T_i s}}
+\boxed{G_c(s) = K_p\!\left(1 + \frac{1}{T_i s}\right) = K_p\,\frac{1 + T_i s}{T_i s}}
 }
 \begin{itemize}
   \item Ajoute int\'egrateur $\Rightarrow$ type $+1$ $\Rightarrow$ \textbf{supprime $e_\infty$} (\'echelon)
   \item Z\'ero en $s = -1/T_i$ : compenser p\^ole dominant
-  \item Diminue $MP$ (attention stabilit\'e)
+  \item Diminue $\varphi_m$ (attention stabilit\'e)
 \end{itemize}
-\astuce{\textbf{R\'eglage PI} : 1. $T_i = \tau_{\text{proc}}$ (annule p\^ole dominant). 2. R\'egler $K_p$ pour $MP$ souhait\'ee. 3. V\'erifier $\omega_c$ et $MG$.}
+\astuce{\textbf{R\'eglage PI} : 1. $T_i = \tau_{\text{proc}}$ (annule p\^ole dominant). 2. R\'egler $K_p$ pour $\varphi_m$ souhait\'ee. 3. V\'erifier $\omega_{co}$ et $A_m$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={R\'egulateur PD \& PID}]
-\textbf{PD} : $\boxed{G_r(s) = K_p(1 + T_d s)}$ \quad \textbf{PD r\'ealisable} :
+\textbf{PD} : $\boxed{G_c(s) = K_p(1 + T_d s)}$ \quad \textbf{PD r\'ealisable} :
 \tightmath{
-\boxed{G_r = K_p\!\left(1 + \frac{sT_d}{1{+}\alpha s T_d}\right) = K_p\,\frac{1{+}(1{+}\alpha)T_d s}{1{+}\alpha T_d s}}
+\boxed{G_c = K_p\!\left(1 + \frac{sT_d}{1{+}\alpha s T_d}\right) = K_p\,\frac{1{+}(1{+}\alpha)T_d s}{1{+}\alpha T_d s}}
 }
 \begin{itemize}
   \item Z\'ero \`a $\omega_z = \frac{1}{(1{+}\alpha)T_d}$, p\^ole \`a $\omega_p = \frac{1}{\alpha T_d}$, gain BF $= K_p$
-  \item Am\'eliore amortissement, r\'eduit $D_\%$, augmente $MP$. Amplifie bruit HF.
+  \item Am\'eliore amortissement, r\'eduit $D_\%$, augmente $\varphi_m$. Amplifie bruit HF.
 \end{itemize}
 \vars{\textbf{Identification depuis Bode} : $K_p = 10^{G_{\text{BF}}/20}$, puis z\'ero $\omega_z$ et p\^ole $\omega_p$ $\Rightarrow$ $T_d = 1/\omega_z - 1/\omega_p$, $\alpha = \omega_z/(\omega_p - \omega_z)$.}
 \textbf{PID} :
 \tightmath{
-\boxed{G_r(s) = K_p\!\left(1 + \frac{1}{T_i s} + T_d s\right)}
+\boxed{G_c(s) = K_p\!\left(1 + \frac{1}{T_i s} + T_d s\right)}
 }
-Forme factoris\'ee : $G_r = K_p\frac{(1{+}T_1 s)(1{+}T_2 s)}{T_i s}$ avec $T_1{+}T_2 = T_i$, $T_1 T_2 = T_i T_d$.
-\astuce{\textbf{PID par compensation} : placer les 2 z\'eros sur les 2 p\^oles dominants. $T_1 = -1/p_1$, $T_2 = -1/p_2$. R\'egler $K_p$ pour $\omega_c$ et $MP$.}
+Forme factoris\'ee : $G_c = K_p\frac{(1{+}T_1 s)(1{+}T_2 s)}{T_i s}$ avec $T_1{+}T_2 = T_i$, $T_1 T_2 = T_i T_d$.
+\astuce{\textbf{PID par compensation} : placer les 2 z\'eros sur les 2 p\^oles dominants. $T_1 = -1/p_1$, $T_2 = -1/p_2$. R\'egler $K_p$ pour $\omega_{co}$ et $\varphi_m$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Ziegler-Nichols : 2 m\'ethodes}]
-\textbf{M\'ethode BO} (r\'ep. indic.) : retard $T_u$, pente max $R$.
+\textbf{M\'ethode BO} (r\'ep. indic.) : tangente au point d'inflexion $\Rightarrow$ retard $T_u$ et temps de mont\'ee de la tangente $T_g$ (pente $R{=}\Delta y/T_g$, donc $T_g/T_u{=}1/(RT_u)$).
 \begin{center}
 \renewcommand{\arraystretch}{1}
 \scriptsize
@@ -85,13 +85,13 @@ Forme factoris\'ee : $G_r = K_p\frac{(1{+}T_1 s)(1{+}T_2 s)}{T_i s}$ avec $T_1{+
 \toprule
 R\'eg. & $K_p$ & $T_i$ & $T_d$ \\
 \midrule
-P & $1/(RT_u)$ & -- & -- \\
-PI & $0.9/(RT_u)$ & $3.3\,T_u$ & -- \\
-PID & $1.2/(RT_u)$ & $2\,T_u$ & $0.5\,T_u$ \\
+P & $T_g/T_u$ & -- & -- \\
+PI & $0.9\,T_g/T_u$ & $3.3\,T_u$ & -- \\
+PID & $1.2\,T_g/T_u$ & $2\,T_u$ & $0.5\,T_u$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-\textbf{M\'ethode BF} (oscillation) : $K_u$ (gain critique), $T_u$ (p\'eriode osc.).
+\textbf{M\'ethode BF} (oscillation) : $K_{cr}$ (gain critique), $T_{cr}$ (p\'eriode osc.).
 \begin{center}
 \renewcommand{\arraystretch}{1}
 \scriptsize
@@ -99,9 +99,9 @@ PID & $1.2/(RT_u)$ & $2\,T_u$ & $0.5\,T_u$ \\
 \toprule
 R\'eg. & $K_p$ & $T_i$ & $T_d$ \\
 \midrule
-P & $0.5\,K_u$ & -- & -- \\
-PI & $0.45\,K_u$ & $T_u/1.2$ & -- \\
-PID & $0.6\,K_u$ & $T_u/2$ & $T_u/8$ \\
+P & $0.5\,K_{cr}$ & -- & -- \\
+PI & $0.45\,K_{cr}$ & $T_{cr}/1.2$ & -- \\
+PID & $0.6\,K_{cr}$ & $T_{cr}/2$ & $T_{cr}/8$ \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -113,16 +113,16 @@ PID & $0.6\,K_u$ & $T_u/2$ & $T_u/8$ \\
 \boxed{C(s) = K_c \cdot \frac{1 + \tau s}{1 + \alpha\tau s}, \quad 0 < \alpha < 1}
 }
 \begin{itemize}
-  \item Avance max : $\varphi_m = \arcsin\frac{1{-}\alpha}{1{+}\alpha}$ \;\`a\; $\omega_m = \frac{1}{\tau\sqrt{\alpha}}$
+  \item Avance max : $\varphi_{\max} = \arcsin\frac{1{-}\alpha}{1{+}\alpha}$ \;\`a\; $\omega_m = \frac{1}{\tau\sqrt{\alpha}}$
   \item Gain \`a $\omega_m$ : $+10\log(1/\alpha)$ dB
-  \item Effet : augmente $MP$, augmente $\omega_c$
+  \item Effet : augmente $\varphi_m$, augmente $\omega_{co}$
 \end{itemize}
 \textbf{Dimensionnement :}
 \begin{enumerate}
-  \item $\varphi_m = MP_{\text{souh}} - MP_0 + 5°$--$12°$
-  \item $\alpha = \frac{1 - \sin\varphi_m}{1 + \sin\varphi_m}$
-  \item Nouvelle $\omega_c$ : l\`a o\`u $|G_{BO}| = -10\log(1/\alpha)$ dB
-  \item $\tau = 1/(\omega_c\sqrt{\alpha})$
+  \item $\varphi_{\max} = \varphi_{m,\text{souh}} - \varphi_{m0} + 5°$--$12°$
+  \item $\alpha = \frac{1 - \sin\varphi_{\max}}{1 + \sin\varphi_{\max}}$
+  \item Nouvelle $\omega_{co}$ : l\`a o\`u $|G_o| = -10\log(1/\alpha)$ dB
+  \item $\tau = 1/(\omega_{co}\sqrt{\alpha})$
   \item $K_c$ ajuste le gain si n\'ecessaire
 \end{enumerate}
 \end{tcolorbox}
@@ -132,11 +132,11 @@ PID & $0.6\,K_u$ & $T_u/2$ & $T_u/8$ \\
 \boxed{C(s) = K_c \cdot \frac{1 + \tau s}{1 + \beta\tau s}, \quad \beta > 1}
 }
 \begin{itemize}
-  \item Multiplie $K_{BO}$ par $\beta$ $\Rightarrow$ meilleure pr\'ecision
-  \item $\tau$ grand : cassure $1/(\beta\tau)$ bien en dessous de $\omega_c$
-  \item Ne modifie pas (ou peu) $MP$
+  \item Multiplie $K_o$ par $\beta$ $\Rightarrow$ meilleure pr\'ecision
+  \item $\tau$ grand : cassure $1/(\beta\tau)$ bien en dessous de $\omega_{co}$
+  \item Ne modifie pas (ou peu) $\varphi_m$
 \end{itemize}
-\vars{$\beta =$ gain suppl. n\'ecessaire. Placer $1/\tau \approx \omega_c/10$.}
+\vars{$\beta =$ gain suppl. n\'ecessaire. Placer $1/\tau \approx \omega_{co}/10$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Tableau r\'ecapitulatif des effets}]
@@ -145,7 +145,7 @@ PID & $0.6\,K_u$ & $T_u/2$ & $T_u/8$ \\
 \scriptsize
 \begin{tabular}{@{}lccccc@{}}
 \toprule
- & $t_r$ & $D_\%$ & $e_\infty$ & $MP$ & $\omega_c$ \\
+ & $t_r$ & $D_\%$ & $e_\infty$ & $\varphi_m$ & $\omega_{co}$ \\
 \midrule
 $K_p \uparrow$ & $\downarrow$ & $\uparrow$ & $\downarrow$ & $\downarrow$ & $\uparrow$ \\
 $+$ I ($T_i$) & -- & $\uparrow$ & $\boldsymbol{= 0}$ & $\downarrow$ & -- \\
@@ -157,20 +157,25 @@ Lag & -- & -- & $\downarrow$ & $\approx$ & $\approx$ \\
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Proc\'edures types d'examen}]
-\textbf{Identifier $G(s)$ depuis Bode :} pente BF $\to$ type. Prolonger \`a $\omega{=}1 \to K$. Cassures $\to$ p\^oles/z\'eros. Pic $\to \zeta$.
-
-\textbf{Erreur permanente :} identifier transfert BF ($G_{ew}$ ou $G_{yv}$). Th. val. finale. Ou tableau type/entr\'ee.
-
-\textbf{Routh param\'etrique :} \'eq. caract. $1{+}KG_{BO}{=}0$. Tableau. 1\textsuperscript{\`ere} col. $> 0 \Rightarrow$ plage $K$.
-
-\textbf{R\'eglage PI :} $T_i = \tau_{\text{proc}}$. Bode de $L(s)$. $K_p$ pour $MP$ souhait\'ee.
-
-\textbf{Lead :} $\varphi_m \to \alpha \to \omega_c \to \tau$. Retracer Bode. V\'erifier $MP$, $MG$.
+\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Comparatif des r\'egulateurs P / I / PI / PD / PID}]
+\renewcommand{\arraystretch}{1.18}
+\scriptsize
+\begin{tabularx}{\linewidth}{@{}l l c >{\raggedright\arraybackslash}X@{}}
+\toprule
+R\'eg. & $G_c(s)$ & $e_\infty$ \'ech. & Effet principal \\
+\midrule
+P   & $K_p$ & $\frac{A}{1+K_p}{\neq}0$ & $t_r{\downarrow}$, $\omega_{co}{\uparrow}$, $D_\%{\uparrow}$, $\varphi_m{\downarrow}$ \\
+I   & $\frac{K_i}{s}$ & $0$ & type $+1$ ; $\varphi_m{\downarrow}$ ($-90°$), lent, windup \\
+PI  & $K_p\frac{1{+}T_i s}{T_i s}$ & $0$ & pr\'ecision + compense p\^ole dom. ; $\varphi_m{\downarrow}$ \\
+PD  & $K_p(1{+}T_d s)$ & inchang\'e & $D_\%{\downarrow}$, $\varphi_m{\uparrow}$, $t_r{\downarrow}$ ; amplifie bruit HF \\
+PID & $K_p(1{+}\tfrac{1}{T_i s}{+}T_d s)$ & $0$ & pr\'ecision \textbf{et} amortissement \\
+\bottomrule
+\end{tabularx}
+\vars{P : rapide mais erreur r\'esiduelle. I : annule $e_\infty$ mais d\'estabilise. D : anticipe/amortit, sensible au bruit. PI = pr\'ecision, PD = stabilit\'e/rapidit\'e, PID = les deux.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Placement des p\^oles : m\'ethode rapide}]
-\'Eq. caract. BF : $1 + G_{BO}(s) = 0$. Mettre sous forme polynomiale, choisir $p_1,p_2,\dots$, former $(s-p_1)(s-p_2)\cdots$, puis identifier les coefficients pour trouver $K_p,T_i,T_d,\dots$
+\'Eq. caract. BF : $1 + G_o(s) = 0$. Mettre sous forme polynomiale, choisir $p_1,p_2,\dots$, former $(s-p_1)(s-p_2)\cdots$, puis identifier les coefficients pour trouver $K_p,T_i,T_d,\dots$
 \tightmath{
 \text{Ordre 2 : } (s-p_1)(s-p_2) = s^2 - (p_1+p_2)s + p_1p_2
 }
@@ -179,8 +184,9 @@ Lag & -- & -- & $\downarrow$ & $\approx$ & $\approx$ \\
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Transferts BF avec capteur $G_m \neq 1$}]
 \tightmath{
-G_{yw} = \frac{G_r G_a G_p}{1 + G_r G_a G_p G_m} \quad L(s) = G_r G_a G_p G_m
+G_{yw} = \frac{G_c\,G_a}{1 + G_c\,G_a\,G_m} \quad G_o = G_c\,G_a\,G_m
 }
+\vars{$G_a$ = syst\`eme \`a r\'egler (cha\^ine directe), $G_m$ = capteur (retour). R\'etroaction unitaire $\Leftrightarrow G_m{=}1$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={R\'esum\'e des fonctions de transfert types}]
@@ -205,7 +211,7 @@ Lag & $K_c\frac{1{+}\tau s}{1{+}\beta\tau s}$ & $-1/(\beta\tau)$ ; z: $-1/\tau$ 
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Retard, Pad\'e \& p\^ole dominant}]
-\textbf{Retard} : $MP_{\text{avec}} = MP_{\text{sans}} - \omega_c T_r \cdot 180/\pi$.\\
+\textbf{Retard} : $\varphi_{m,\text{avec}} = \varphi_{m,\text{sans}} - \omega_{co} T_r \cdot 180/\pi$.\\
 \textbf{Pad\'e / d\'ephaseur} : $e^{-sT_r} \approx \frac{1 - T_r s/2}{1 + T_r s/2}$,\; $|G_d(j\omega)| \approx 1$.\\
 \textbf{P\^ole dominant} : $t_{s5} \approx 3/|\text{Re}(s_{\text{dom}})|$, $t_{s2} \approx 4/|\text{Re}(s_{\text{dom}})|$.
 \vars{Dominant si les autres p\^oles ont $|\text{Re}| \geq 5\times$ plus grande.}
@@ -228,58 +234,16 @@ $20\log 3$ & $9.54$ dB & $20\log 10$ & $20$ dB \\
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Pi\`eges fr\'equents aux examens}]
-\begin{itemize}
-  \item Confondre $K$ et $20\log K$ (dB)
-  \item BF : d\'enom. $1{+}L$, pas $1{-}L$
-  \item $MG$ = distance \`a 0~dB lue \textbf{\`a $\omega_\pi$} (pas $\omega_c$)
-  \item $MP$ = distance \`a $-180°$ lue \textbf{\`a $\omega_c$} (pas $\omega_\pi$)
-  \item Confondre $\omega$ (rad/s) et $f$ (Hz) : $\omega = 2\pi f$
-  \item PI : $T_i = \tau_{\text{proc}}$ pour annuler p\^ole dominant
-  \item $e_\infty$ : toujours utiliser transfert \textbf{BF}, jamais BO
-  \item Val. finale : ne pas appliquer si syst\`eme instable
-  \item Type du syst\`eme = nb int\'egrateurs en \textbf{boucle ouverte}
-  \item Bode retard : module inchang\'e, seule la phase chute
-\end{itemize}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Check-list avant l'examen}]
-\begin{enumerate}
-  \item Passer entre les 3 formes de $G(s)$
-  \item Tracer un Bode asymptotique rapidement
-  \item Lire $K$, type, $\omega_c$, p\^oles/z\'eros sur Bode
-  \item Calculer $MG$ et $MP$ sur Bode donn\'e
-  \item Appliquer Routh-Hurwitz (+ param\'etrique)
-  \item D\'ecomposer en fractions partielles
-  \item Calculer $e_\infty$ pour \'echelon/rampe
-  \item Dimensionner PI, PID, Lead ou Lag
-  \item Appliquer Ziegler-Nichols (2 m\'ethodes)
-  \item Th. valeur finale correctement
-\end{enumerate}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={M\'ethode de conception BF (workflow complet)}]
-\begin{enumerate}
-  \item Fixer le cahier des charges : $e_\infty$, $D_\%$, $t_s$, robustesse (MP/MG)
-  \item Choisir une structure : P, PI, PD, PID, Lead, Lag selon l'objectif principal
-  \item Faire un premier dimensionnement analytique ($T_i$, $T_d$, $\alpha$, $\tau$, ...)
-  \item Ajuster $K_p$ pour positionner $\omega_c$ et obtenir MP vis\'ee
-  \item V\'erifier : BF stable, $e_\infty$ conforme, saturation actionneur acceptable
-\end{enumerate}
-\vars{Priorit\'e classique : pr\'ecision statique (I/Lag), puis dynamique (D/Lead), puis robustesse (MP, MG).}
-\piege{Un r\'eglage qui satisfait seulement Bode sans contr\^ole de saturation peut \^etre inutilisable en pratique.}
-\end{tcolorbox}
-
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Sensibilit\'e \& robustesse}]
 \tightmath{
-\boxed{S(s) = \frac{1}{1{+}L},\quad T(s) = \frac{L}{1{+}L},\quad S + T = 1}
+\boxed{S(s) = \frac{1}{1{+}G_o},\quad T(s) = \frac{G_o}{1{+}G_o},\quad S + T = 1}
 }
 \begin{itemize}
   \item $S$ : passe-haut $\Rightarrow$ att\'enue les perturbations BF ; $T$ : passe-bas
-  \item Robustesse : $\|S\|_\infty \leq 2$ ($6$~dB) recommand\'e $\Leftrightarrow$ MP $\geq 30°$
-  \item $\|S\|_\infty = 1/\text{dist}(G_{BO}(\jw),\,-1)_{\min}$
+  \item Robustesse : $\|S\|_\infty \leq 2$ ($6$~dB) recommand\'e $\Leftrightarrow \varphi_m \geq 30°$
+  \item $\|S\|_\infty = 1/\text{dist}(G_o(\jw),\,-1)_{\min}$
 \end{itemize}
-\piege{Minimiser $e_\infty$ et maximiser $MP$ sont des objectifs conflictuels : c'est le dilemme pr\'ecision-stabilit\'e.}
+\piege{Minimiser $e_\infty$ et maximiser $\varphi_m$ sont des objectifs conflictuels : c'est le dilemme pr\'ecision-stabilit\'e.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Calcul de $G(j\omega)$ : module et phase}]
@@ -313,8 +277,8 @@ Superposition pour $W{=}A/s$ et $V{=}B/s$ simultan\'es :
 \tightmath{
 y_\infty = \underbrace{G_{yw}(0)\cdot A}_{\text{d\^u \`a }w} + \underbrace{G_{yv}(0)\cdot B}_{\text{d\^u \`a }v} \qquad e_\infty = A - y_\infty
 }
-\textbf{Type 0} : $G_{yw}(0){=}\frac{K_{BO}}{1{+}K_{BO}}$, $G_{yv}(0){=}\frac{G_p(0)}{1{+}K_{BO}}$ \\[1pt]
-\textbf{Type 1} : $G_{yw}(0){=}1$, $G_{yv}(0){=}\lim_{s\to 0}\frac{G_p(s)}{1{+}L(s)}$ (fini)
+\textbf{Type 0} : $G_{yw}(0){=}\frac{K_o}{1{+}K_o}$, $G_{yv}(0){=}\frac{G_p(0)}{1{+}K_o}$ \\[1pt]
+\textbf{Type 1} : $G_{yw}(0){=}1$, $G_{yv}(0){=}\lim_{s\to 0}\frac{G_p(s)}{1{+}G_o(s)}$ (fini)
 \vars{Exemple type 1 : $L = 2K_p/[s(1{+}s)]$, $G_{yv}(0) = 1/(2K_p)$. Pour $V{=}0.5$ : $y_{v,\infty} = 0.5/(2K_p)$.}
 \end{tcolorbox}
 
@@ -326,36 +290,36 @@ y_\infty = \underbrace{G_{yw}(0)\cdot A}_{\text{d\^u \`a }w} + \underbrace{G_{yv
 \toprule
 Objectif principal & Structure \\
 \midrule
-R\'eduire $e_\infty$, garder $MP$ & $K_p\uparrow$ ou Lag \\
+R\'eduire $e_\infty$, garder $\varphi_m$ & $K_p\uparrow$ ou Lag \\
 Supprimer $e_\infty$ (\'echelon) & PI (int\'egrateur) \\
 Supprimer $e_\infty$ (rampe) & PI avec proc. type\,1 \\
-R\'eduire $D_\%$, augm. $MP$ & PD ou Lead \\
+R\'eduire $D_\%$, augm. $\varphi_m$ & PD ou Lead \\
 Supprimer $e_\infty$ \textbf{et} r\'eduire $D_\%$ & PID \\
-Augmenter $\omega_c$ (rapidit\'e) & Lead \\
-Augmenter $K_{BO}$ sans changer $\omega_c$ & Lag \\
+Augmenter $\omega_{co}$ (rapidit\'e) & Lead \\
+Augmenter $K_o$ sans changer $\omega_{co}$ & Lag \\
 \bottomrule
 \end{tabular}
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Gain critique $K_u$ par Routh (m\'ethode BO)}]
+\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Gain critique $K_{cr}$ par Routh (m\'ethode BO)}]
 \begin{enumerate}
-  \item Former $1 + K\,G_{BO}(s) = 0$, d\'evelopper en polyn\^ome en $K$
+  \item Former $1 + K\,G_o(s) = 0$, d\'evelopper en polyn\^ome en $K$
   \item Construire tableau de Routh avec coefficients d\'ependant de $K$
-  \item $K_u$ = valeur qui annule un \'el\'ement de la 1\textsuperscript{\`ere} colonne
-  \item Ligne nulle $\Rightarrow$ poly. auxiliaire $P(s)$ $\Rightarrow$ $s^2 + \omega_u^2 = 0$ $\Rightarrow$ $T_u = 2\pi/\omega_u$
+  \item $K_{cr}$ = valeur qui annule un \'el\'ement de la 1\textsuperscript{\`ere} colonne
+  \item Ligne nulle $\Rightarrow$ poly. auxiliaire $P(s)$ $\Rightarrow$ $s^2 + \omega_{cr}^2 = 0$ $\Rightarrow$ $T_{cr} = 2\pi/\omega_{cr}$
 \end{enumerate}
-\astuce{Ziegler-Nichols BF utilise directement $K_u$ et $T_u$ (voir tableau ZN).}
+\astuce{Ziegler-Nichols BF utilise directement $K_{cr}$ et $T_{cr}$ (voir tableau ZN).}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Lead : exemple de dimensionnement complet}]
-\textbf{Donn\'ee} : $G(s) = \frac{10}{s(1{+}0.1s)}$, objectif $MP = 50°$. $MP_0 \approx 18°$.
+\textbf{Donn\'ee} : $G(s) = \frac{10}{s(1{+}0.1s)}$, objectif $\varphi_m = 50°$. $\varphi_{m0} \approx 18°$.
 \begin{enumerate}
-  \item $\varphi_m = 50° - 18° + 8° = 40°$
+  \item $\varphi_{\max} = 50° - 18° + 8° = 40°$ \quad(avance \`a apporter)
   \item $\alpha = \dfrac{1-\sin40°}{1+\sin40°} \approx 0.217$
   \item Gain \`a apporter : $+10\log(1/0.217) \approx +6.6$ dB
-  \item Chercher $\omega'$ tel que $|G(\jw')| = -6.6$ dB $\Rightarrow \omega_c' \approx 15$ rad/s
-  \item $\tau = \dfrac{1}{\omega_c'\sqrt{\alpha}} \approx 0.143$ s
+  \item Chercher $\omega'$ tel que $|G(\jw')| = -6.6$ dB $\Rightarrow \omega_{co}' \approx 15$ rad/s
+  \item $\tau = \dfrac{1}{\omega_{co}'\sqrt{\alpha}} \approx 0.143$ s
   \item $C(s) = \dfrac{1{+}0.143s}{1{+}0.031s}$ \quad(avec $\alpha\tau = 0.031$)
 \end{enumerate}
 \end{tcolorbox}
@@ -366,41 +330,30 @@ Augmenter $K_{BO}$ sans changer $\omega_c$ & Lag \\
 \scriptsize
 \begin{tabular}{@{}lllll@{}}
 \toprule
-Type & $G_{BO}$ (BF) & $e_\infty$ \'ech. & $e_\infty$ rampe & Remarque \\
+Type & $G_o$ (BF) & $e_\infty$ \'ech. & $e_\infty$ rampe & Remarque \\
 \midrule
-0 & $\frac{K_{BO}}{1{+}K_{BO}}$ & $\frac{A}{1{+}K_{BO}}$ & $\infty$ & Erreur stat. \\
+0 & $\frac{K_o}{1{+}K_o}$ & $\frac{A}{1{+}K_o}$ & $\infty$ & Erreur stat. \\
 1 & $1$ & $0$ & $\frac{A}{K_v}$ & $K_v = \lim_{s\to0} sL$ \\
 2 & $1$ & $0$ & $0$ & $e_\infty$ parabolique \\
 \bottomrule
 \end{tabular}
 \end{center}
-\vars{$K_v = K_{BO}/\tau_{\text{lent}}$ pour syst. type\,1 d'ordre\,2. Stabilit\'e : type \'elev\'e = plus difficile.}
+\vars{$K_v = K_o/\tau_{\text{lent}}$ pour syst. type\,1 d'ordre\,2. Stabilit\'e : type \'elev\'e = plus difficile.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Correspondance BO $\to$ BF : r\`egles de pouce}]
 \begin{itemize}
-  \item $\omega_{-3\text{dB}}^{BF} \approx \omega_c^{BO}$ pour $30° < MP < 70°$
-  \item $K_p \times N$ : $|G_{BO}|_{\text{dB}} \uparrow 20\log N$, phase \textbf{inchang\'ee}, $\omega_c$ se d\'eplace
-  \item Bode de $G_{BF}$ : pic de r\'esonance \`a $\omega_r \approx \omega_c$ si MP petit
-  \item $D_\% \approx 100\,e^{-\pi MP_{\text{rad}}}$ (approximation r\'egime sous-amorti)
-  \item $T_{\text{r\'eg}} \approx \pi/\omega_c$, \quad $T_0^{BF} \approx 2\pi/\omega_c$
-\end{itemize}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Points cl\'es du dimensionnement en pratique}]
-\begin{itemize}
-  \item Apr\`es ajout d'un correcteur, \textbf{retracer Bode complet} et reverifier $MP$, $MG$
-  \item Retard non mod\'elis\'e $\Rightarrow$ prendre $10°$--$15°$ de marge suppl\'ementaire sur $MP$
-  \item PD/Lead : gain HF $\uparrow$ $\Rightarrow$ amplifie bruit capteur, \`a limiter ($N$ ou $\alpha$ pas trop grand)
-  \item PI : p\^ole en $s{=}0$ $\Rightarrow$ risque d'int\'egral windup si saturation actionneur
-  \item Routh donne la plage de $K$ stable, pas la \textbf{marge de robustesse} : croiser avec Bode
-  \item Crit\`eres pratiques : $MP \in [35°, 60°]$, $MG \geq 6$ dB, $T_r$ compatible avec $\omega_c$
+  \item $\omega_{-3\text{dB}}^{BF} \approx \omega_{co}$ pour $30° < \varphi_m < 70°$
+  \item $K_p \times N$ : $|G_o|_{\text{dB}} \uparrow 20\log N$, phase \textbf{inchang\'ee}, $\omega_{co}$ se d\'eplace
+  \item Bode de $G_{BF}$ : pic de r\'esonance \`a $\omega_r \approx \omega_{co}$ si $\varphi_m$ petit
+  \item $\zeta \approx \varphi_m\!{}^\circ/100$ puis $D_\% = 100\,e^{-\pi\zeta/\sqrt{1-\zeta^2}}$ (r\'egime sous-amorti)
+  \item $T_{\text{r\'eg}} \approx \pi/\omega_{co}$, \quad $T_0^{BF} \approx 2\pi/\omega_{co}$
 \end{itemize}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={R\'egulateur I pur \& double int\'egrateur en BO}]
-\textbf{I pur} : $G_r(s) = K_i/s$ \\
-$\Rightarrow$ ajoute un p\^ole en 0 (type $+1$), phase BO $-90°$ suppl. $\Rightarrow$ \textbf{r\'eduit $MP$}.\\[2pt]
+\textbf{I pur} : $G_c(s) = K_i/s$ \\
+$\Rightarrow$ ajoute un p\^ole en 0 (type $+1$), phase BO $-90°$ suppl. $\Rightarrow$ \textbf{r\'eduit $\varphi_m$}.\\[2pt]
 \textbf{Type 2} ($1/s^2$ en BO) : \'elimine $e_\infty$ pour rampe, mais tr\`es difficile \`a stabiliser.\\[2pt]
 \textbf{Bode de $1/s^2$} : pente $-40$ dB/d\'ec, phase $= -180°$ (constant). \\[2pt]
 \piege{Pour type\,$\geq 2$ : la condition de Hurwitz seule ne suffit plus (ordre\,$\geq 3$). Appliquer Routh ou simuler.}
@@ -417,18 +370,18 @@ $\Rightarrow$ ajoute un p\^ole en 0 (type $+1$), phase BO $-90°$ suppl. $\Right
   \draw[thick, ch6teal!80!black, dashed] (1.8,-0.1) to[out=80,in=0] (0.5,1.3) to[out=180,in=40] (-1.6,0.5) to[out=-140,in=160] (-1.3,0);
   \filldraw[blue!70] (-1.3,0) circle (2pt); \node[blue!70, below] at (-1.3,-0.12) {$\omega_\pi$};
   \filldraw[orange!80!black] ({cos(-105)},{sin(-105)}) circle (2pt);
-  \node[orange!80!black, right] at ({cos(-105)+0.05},{sin(-105)-0.05}) {$\omega_c$};
-  \draw[<->, green!60!black, thick] (-1,0) -- (-1.3,0); \node[green!60!black, above] at (-1.15,0.06) {\tiny$\frac{1}{MG}$};
+  \node[orange!80!black, right] at ({cos(-105)+0.05},{sin(-105)-0.05}) {$\omega_{co}$};
+  \draw[<->, green!60!black, thick] (-1,0) -- (-1.3,0); \node[green!60!black, above] at (-1.15,0.06) {\tiny$\frac{1}{A_m}$};
   \draw[<->, red!70!black, thick] ({cos(180)},{sin(180)}) -- ({cos(-105)},{sin(-105)});
-  \node[red!70!black, right] at (-0.4,-0.5) {$MP\approx$arc};
+  \node[red!70!black, right] at (-0.4,-0.5) {$\varphi_m\approx$arc};
   \node[above] at (1.8, 0.1) {$\omega{\to}0$};
 \end{tikzpicture}
 \end{center}
-\vars{Courbe pleine : $\omega>0$. Tiret : $\omega<0$ (sym. conj.). $MG{=}1/|G(\jw_\pi)|$. MP = angle \`a $(-1,0)$ depuis $\omega_c$ sur le cercle unit\'e.}
+\vars{Courbe pleine : $\omega>0$. Tiret : $\omega<0$ (sym. conj.). $A_m{=}1/|G(\jw_\pi)|$. $\varphi_m$ = angle \`a $(-1,0)$ depuis $\omega_{co}$ sur le cercle unit\'e.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Formes des p\^oles BF complexes connus}]
-Polyn\^ome caract\'eristique $1{+}L(s)=0$ de type fr\'equent :
+Polyn\^ome caract\'eristique $1{+}G_o(s)=0$ de type fr\'equent :
 \tightmath{
 s^2 + 2\zeta\omega_n s + \omega_n^2 = 0 \;\Rightarrow\; s = -\zeta\omega_n \pm j\omega_n\sqrt{1-\zeta^2}
 }
@@ -436,4 +389,11 @@ s^2 + 2\zeta\omega_n s + \omega_n^2 = 0 \;\Rightarrow\; s = -\zeta\omega_n \pm j
 s^2 + bs + c = 0 \;\Rightarrow\; \omega_n = \sqrt{c},\quad \zeta = \frac{b}{2\sqrt{c}}
 }
 \vars{Identification rapide : $\omega_n$ = fr\'eq. naturelle (racine carr\'ee du terme constant), $\zeta$ = coeff. amor. (demi-coeff. lin. / $\omega_n$). Ex. : $s^2+s+10$ $\Rightarrow$ $\omega_n=\sqrt{10}{\approx}3.16$, $\zeta = 1/(2\sqrt{10}) \approx 0.158$.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Synth\`ese fr\'equentielle (ch.8)}]
+\textbf{Compensation p\^ole-z\'ero} : placer un z\'ero de $G_c$ sur un p\^ole (dominant) de $G_a$ $\Rightarrow$ il dispara\^it de $G_o{=}G_cG_a$. PI : $T_i{=}\tau_{a,\max}$ ; PID : 2 z\'eros $\to$ 2 p\^oles dom.
+\piege{Valable si $G_a$ \textbf{stable en BO}. Le p\^ole compens\'e reste dans $G_{yv}$ (maintien).}\\[1pt]
+\textbf{Dimensionnement sous contrainte} : PID factoris\'e $G_c=k_c\frac{(s-z_{c1})(s-z_{c2})}{s}$. \`A $\omega_{co,d}$ : (1) avance $\varphi_c=\angle(j\omega_{co,d}{-}z_{c1}){+}\angle(j\omega_{co,d}{-}z_{c2})$ pour imposer $\varphi_{m,d}$ ; (2) \textbf{affaiblir le gain dynamique} $|G_c(j\omega_{co,d})|$ (pas le permanent) $\Rightarrow$ maximiser le gain permanent $\Rightarrow$ pr\'ecision ; (3) $K_p$ pour $|G_o(j\omega_{co,d})|{=}1$.
+\astuce{Z\'eros \textbf{complexes} ($\zeta_c$ faible) $\Rightarrow$ anti-r\'esonance abaissant le gain dynamique.}
 \end{tcolorbox}
