@@ -3,6 +3,20 @@
 % ============================================================
 \chapterbanner{Chapitre 6 --- R\'egulateurs \& Boucle ferm\'ee}{ch6teal}
 
+\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Notations (rappel cours)}]
+\begin{itemize}
+  \item $G_c(s)$ : \textbf{r\'egulateur} (correcteur)
+  \item $G_a(s)$ : \textbf{syst\`eme \`a r\'egler} (ampli + actionneur + processus + capteur)
+  \item $G_o(s)=G_c\,G_a$ : \textbf{boucle ouverte}
+  \item $G_{yw}=\frac{Y}{W}=\frac{G_o}{1+G_o}$ : BF \textbf{correspondance} (poursuite)
+  \item $G_{ew}=\frac{E}{W}=\frac{1}{1+G_o}$ : transfert de l'\textbf{erreur} $=S$
+  \item $G_{yv}=\frac{Y}{V}=\frac{G_p}{1+G_o}$ : BF \textbf{maintien} (rejet de $v$ ; $G_p$ = partie en aval de $v$)
+  \item $S=G_{ew}$ (sensibilit\'e), $T=G_{yw}$ (compl\'em.) : $S+T=1$
+  \item $\varphi_m, A_m$ : marges de phase / gain ; $\omega_{co}$ : coupure 0~dB en BO ; $\omega_\pi$ : phase $-180°$
+  \item $K_{cr}, T_{cr}$ : gain et p\'eriode critiques (limite de stabilit\'e)
+\end{itemize}
+\end{tcolorbox}
+
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Transferts en boucle ferm\'ee}]
 Avec $G_o(s) = G_c(s) \cdot G_a(s)$ (transfert de boucle ouverte ; $G_a$ = syst\`eme \`a r\'egler), r\'etroaction unitaire :
 \tightmath{
@@ -29,6 +43,7 @@ Parabole $\frac{A}{2}t^2$ & $\infty$ & $\infty$ & $\frac{A}{K_a}$ \\
 \bottomrule
 \end{tabular}
 \end{center}
+\vars{$A$ = \textbf{amplitude de la consigne $w$} (hauteur du saut, pente de la rampe, ou accel.). En Laplace : \'echelon $W{=}A/s$, rampe $W{=}A/s^2$, parabole $W{=}A/s^3$. Pour une \textbf{perturbation} on note l'amplitude $B$ ($V{=}B/s$).}
 \textbf{Poursuite} ($v{=}0$) : $e_\infty = \lim_{s\to 0} \frac{1}{1{+}G_o(s)} \cdot \frac{A}{s} \cdot s = \frac{A}{1{+}K_o}$
 
 \textbf{Maintien} ($w{=}0$) : $e_\infty = -\lim_{s\to 0} \frac{G_p(s)}{1{+}G_o(s)}$
@@ -68,12 +83,12 @@ Parabole $\frac{A}{2}t^2$ & $\infty$ & $\infty$ & $\frac{A}{K_a}$ \\
   \item Am\'eliore amortissement, r\'eduit $D_\%$, augmente $\varphi_m$. Amplifie bruit HF.
 \end{itemize}
 \vars{\textbf{Identification depuis Bode} : $K_p = 10^{G_{\text{BF}}/20}$, puis z\'ero $\omega_z$ et p\^ole $\omega_p$ $\Rightarrow$ $T_d = 1/\omega_z - 1/\omega_p$, $\alpha = \omega_z/(\omega_p - \omega_z)$.}
-\textbf{PID} :
+\textbf{PID} (forme du cours) :
 \tightmath{
-\boxed{G_c(s) = K_p\!\left(1 + \frac{1}{T_i s} + T_d s\right)}
+\boxed{G_c(s) = K_p\!\left(1 + \frac{1}{T_i s} + T_d s\right) = K_p\,\frac{1 + s T_i + s^2 T_i T_d}{s T_i}}
 }
-Forme factoris\'ee : $G_c = K_p\frac{(1{+}T_1 s)(1{+}T_2 s)}{T_i s}$ avec $T_1{+}T_2 = T_i$, $T_1 T_2 = T_i T_d$.
-\astuce{\textbf{PID par compensation} : placer les 2 z\'eros sur les 2 p\^oles dominants. $T_1 = -1/p_1$, $T_2 = -1/p_2$. R\'egler $K_p$ pour $\omega_{co}$ et $\varphi_m$.}
+Num\'erateur factoris\'e : $1{+}sT_i{+}s^2 T_i T_d = (1{+}s\tau_1)(1{+}s\tau_2)$ avec $\tau_1{+}\tau_2 = T_i$, $\tau_1\tau_2 = T_i T_d$.
+\astuce{\textbf{PID par compensation p\^ole-z\'ero} : compenser les 2 constantes de temps dominantes $\tau_{a,\max1},\tau_{a,\max2}$ de $G_a$ en posant $(1{+}sT_i{+}s^2T_iT_d)=(1{+}s\tau_{a,\max1})(1{+}s\tau_{a,\max2})$ $\Rightarrow$ $T_i=\tau_{a,\max1}{+}\tau_{a,\max2}$, $T_d=\dfrac{\tau_{a,\max1}\,\tau_{a,\max2}}{T_i}$. Puis \textbf{m\'ethode de Bode} pour $K_p$ (r\'egler $\omega_{co}$ et $\varphi_m$).}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Ziegler-Nichols : 2 m\'ethodes}]
@@ -361,23 +376,50 @@ $\Rightarrow$ ajoute un p\^ole en 0 (type $+1$), phase BO $-90°$ suppl. $\Right
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Interpr\'etation plan de Nyquist}]
 \begin{center}
-\begin{tikzpicture}[scale=0.48, transform shape, >=Stealth, every node/.style={font=\tiny}]
-  \draw[->] (-2.8,0) -- (1.2,0) node[right]{Re};
-  \draw[->] (0,-1.8) -- (0,1.8) node[above]{Im};
-  \draw[gray!40, thin] (0,0) circle (1);
-  \filldraw[red!80!black] (-1,0) circle (2.5pt); \node[red!80!black, above] at (-0.8,0.12) {$(-1,0)$};
-  \draw[thick, ch6teal!80!black] (1.8,0.1) to[out=-80,in=0] (0.5,-1.3) to[out=180,in=-40] (-1.6,-0.5) to[out=140,in=-160] (-1.3,0) to[out=20,in=180] (0,0.05);
-  \draw[thick, ch6teal!80!black, dashed] (1.8,-0.1) to[out=80,in=0] (0.5,1.3) to[out=180,in=40] (-1.6,0.5) to[out=-140,in=160] (-1.3,0);
-  \filldraw[blue!70] (-1.3,0) circle (2pt); \node[blue!70, below] at (-1.3,-0.12) {$\omega_\pi$};
-  \filldraw[orange!80!black] ({cos(-105)},{sin(-105)}) circle (2pt);
-  \node[orange!80!black, right] at ({cos(-105)+0.05},{sin(-105)-0.05}) {$\omega_{co}$};
-  \draw[<->, green!60!black, thick] (-1,0) -- (-1.3,0); \node[green!60!black, above] at (-1.15,0.06) {\tiny$\frac{1}{A_m}$};
-  \draw[<->, red!70!black, thick] ({cos(180)},{sin(180)}) -- ({cos(-105)},{sin(-105)});
-  \node[red!70!black, right] at (-0.4,-0.5) {$\varphi_m\approx$arc};
-  \node[above] at (1.8, 0.1) {$\omega{\to}0$};
+\begin{tikzpicture}[scale=0.74, transform shape, >=Stealth,
+   every node/.style={font=\fontsize{5.4}{6}\selectfont}]
+  % --- axes ---
+  \draw[->] (-2.5,0) -- (1.05,0) node[right]{Re};
+  \draw[->] (0,-1.75) -- (0,1.55) node[above]{Im};
+  % --- cercle unité ---
+  \draw[gray!50, thin] (0,0) circle (1);
+  \node[gray!60] at (0.83,0.72) {\fontsize{4.4}{5}\selectfont $|G_o|{=}1$};
+  % --- point critique ---
+  \filldraw[red!80!black] (-1,0) circle (1.8pt);
+  \node[red!80!black, above left=-2pt and -3pt] at (-1,0.02) {$-1$};
+  % --- lieu omega>0 (trait plein) : depart omega->0 a droite, croise l'axe reel
+  %     negatif en omega_pi (entre -1 et 0 => marges OK), puis -> origine ---
+  \draw[very thick, ch6teal!80!black]
+     (2.0,-0.12) to[out=-105,in=20] (0.25,-1.2)
+     to[out=200,in=-55] (-0.62,0)
+     to[out=125,in=-150] (-0.30,0.5)
+     to[out=30,in=170] (0.02,0.05);
+  % --- conjugue omega<0 (tiret) ---
+  \draw[very thick, ch6teal!80!black, dashed]
+     (2.0,0.12) to[out=105,in=-20] (0.25,1.2)
+     to[out=160,in=55] (-0.62,0);
+  \node[ch6teal!75!black] at (1.55,-0.4) {$\omega{\to}0$};
+  % --- omega_pi : croisement axe reel negatif ---
+  \filldraw[blue!75] (-0.62,0) circle (1.5pt);
+  \draw[blue!75, thin] (-0.62,0) -- (-0.62,-0.95);
+  \node[blue!75, below] at (-0.62,-0.95) {$\omega_\pi$};
+  % --- marge de gain : segment crossing -> (-1,0) ---
+  \draw[<->, green!55!black, thick] (-1,0) -- (-0.62,0);
+  \draw[green!55!black, thin] (-0.81,0) -- (-1.05,0.62);
+  \node[green!55!black, left] at (-1.05,0.66) {$1/A_m$};
+  % --- omega_co : croisement du cercle unite (3e quadrant) ---
+  \coordinate (co) at ({cos(213)},{sin(213)});
+  \filldraw[orange!85!black] (co) circle (1.5pt);
+  \draw[orange!85!black, thin] (co) -- ({1.55*cos(213)},{1.5*sin(213)});
+  \node[orange!85!black, left] at ({1.7*cos(213)},{1.5*sin(213)}) {$\omega_{co}$};
+  % --- marge de phase : rayon vers omega_co + petit arc 180deg -> angle de omega_co ---
+  \draw[gray!55, thin] (0,0) -- (co);
+  \draw[red!70!black, very thick] (180:0.55) arc (180:213:0.55);
+  \draw[red!70!black, thin] ({0.55*cos(197)},{0.55*sin(197)}) -- (0.32,-0.6);
+  \node[red!70!black, right] at (0.30,-0.64) {$\varphi_m$};
 \end{tikzpicture}
 \end{center}
-\vars{Courbe pleine : $\omega>0$. Tiret : $\omega<0$ (sym. conj.). $A_m{=}1/|G(\jw_\pi)|$. $\varphi_m$ = angle \`a $(-1,0)$ depuis $\omega_{co}$ sur le cercle unit\'e.}
+\vars{Lieu de $G_o(\jw)$. Trait plein : $\omega>0$ ; tiret : $\omega<0$ (sym. conj.). $A_m{=}1/|G_o(\jw_\pi)|$ (croisement axe r\'eel n\'eg.). $\varphi_m$ = angle entre $-$axe r\'eel et $G_o(\jw_{co})$ sur le cercle unit\'e. Stable (revers) : $(-1,0)$ \`a gauche du lieu.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Formes des p\^oles BF complexes connus}]
