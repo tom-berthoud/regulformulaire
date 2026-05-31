@@ -74,7 +74,7 @@ Parabole $\frac{A}{2}t^2$ & $\infty$ & $\infty$ & $\frac{A}{K_a}$ \\
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={R\'egulateur PD \& PID}]
-\textbf{PD} : $\boxed{G_c(s) = K_p(1 + T_d s)}$ \quad \textbf{PD r\'ealisable} :
+\textbf{PD} : $\boxed{G_c(s) = K_p(1 + T_d s)}$ \quad \textbf{PD r\'ealisable} (\og r\'egulateur \`a avance de phase\fg{}, facteur $\alpha\approx0.1$--$0.2$) :
 \tightmath{
 \boxed{G_c = K_p\!\left(1 + \frac{sT_d}{1{+}\alpha s T_d}\right) = K_p\,\frac{1{+}(1{+}\alpha)T_d s}{1{+}\alpha T_d s}}
 }
@@ -123,37 +123,6 @@ PID & $0.6\,K_{cr}$ & $T_{cr}/2$ & $T_{cr}/8$ \\
 \piege{Ziegler-Nichols donne $D_\% \approx 25\%$. Souvent il faut ajuster ensuite.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Correcteur \`a avance de phase (Lead)}]
-\tightmath{
-\boxed{C(s) = K_c \cdot \frac{1 + \tau s}{1 + \alpha\tau s}, \quad 0 < \alpha < 1}
-}
-\begin{itemize}
-  \item Avance max : $\varphi_{\max} = \arcsin\frac{1{-}\alpha}{1{+}\alpha}$ \;\`a\; $\omega_m = \frac{1}{\tau\sqrt{\alpha}}$
-  \item Gain \`a $\omega_m$ : $+10\log(1/\alpha)$ dB
-  \item Effet : augmente $\varphi_m$, augmente $\omega_{co}$
-\end{itemize}
-\textbf{Dimensionnement :}
-\begin{enumerate}
-  \item $\varphi_{\max} = \varphi_{m,\text{souh}} - \varphi_{m0} + 5°$--$12°$
-  \item $\alpha = \frac{1 - \sin\varphi_{\max}}{1 + \sin\varphi_{\max}}$
-  \item Nouvelle $\omega_{co}$ : l\`a o\`u $|G_o| = -10\log(1/\alpha)$ dB
-  \item $\tau = 1/(\omega_{co}\sqrt{\alpha})$
-  \item $K_c$ ajuste le gain si n\'ecessaire
-\end{enumerate}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Correcteur \`a retard de phase (Lag)}]
-\tightmath{
-\boxed{C(s) = K_c \cdot \frac{1 + \tau s}{1 + \beta\tau s}, \quad \beta > 1}
-}
-\begin{itemize}
-  \item Multiplie $K_o$ par $\beta$ $\Rightarrow$ meilleure pr\'ecision
-  \item $\tau$ grand : cassure $1/(\beta\tau)$ bien en dessous de $\omega_{co}$
-  \item Ne modifie pas (ou peu) $\varphi_m$
-\end{itemize}
-\vars{$\beta =$ gain suppl. n\'ecessaire. Placer $1/\tau \approx \omega_{co}/10$.}
-\end{tcolorbox}
-
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Tableau r\'ecapitulatif des effets}]
 \begin{center}
 \renewcommand{\arraystretch}{1.1}
@@ -165,8 +134,6 @@ PID & $0.6\,K_{cr}$ & $T_{cr}/2$ & $T_{cr}/8$ \\
 $K_p \uparrow$ & $\downarrow$ & $\uparrow$ & $\downarrow$ & $\downarrow$ & $\uparrow$ \\
 $+$ I ($T_i$) & -- & $\uparrow$ & $\boldsymbol{= 0}$ & $\downarrow$ & -- \\
 $+$ D ($T_d$) & -- & $\downarrow$ & -- & $\uparrow$ & -- \\
-Lead & $\downarrow$ & $\downarrow$ & -- & $\uparrow$ & $\uparrow$ \\
-Lag & -- & -- & $\downarrow$ & $\approx$ & $\approx$ \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -187,14 +154,6 @@ PID & $K_p(1{+}\tfrac{1}{T_i s}{+}T_d s)$ & $0$ & pr\'ecision \textbf{et} amorti
 \bottomrule
 \end{tabularx}
 \vars{P : rapide mais erreur r\'esiduelle. I : annule $e_\infty$ mais d\'estabilise. D : anticipe/amortit, sensible au bruit. PI = pr\'ecision, PD = stabilit\'e/rapidit\'e, PID = les deux.}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Placement des p\^oles : m\'ethode rapide}]
-\'Eq. caract. BF : $1 + G_o(s) = 0$. Mettre sous forme polynomiale, choisir $p_1,p_2,\dots$, former $(s-p_1)(s-p_2)\cdots$, puis identifier les coefficients pour trouver $K_p,T_i,T_d,\dots$
-\tightmath{
-\text{Ordre 2 : } (s-p_1)(s-p_2) = s^2 - (p_1+p_2)s + p_1p_2
-}
-\vars{Il faut assez de param\`etres r\'eglables pour imposer les coefficients voulus.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Transferts BF avec capteur $G_m \neq 1$}]
@@ -218,17 +177,16 @@ Int\'egrateur & $K/s$ & $0$ \\[2pt]
 Int. + 1\textsuperscript{er} o. & $K/[s(1{+}\tau s)]$ & $0,\;-1/\tau$ \\[2pt]
 Retard & $Ke^{-sT_r}$ & aucun \\[2pt]
 PI & $K_p\frac{1{+}T_i s}{T_i s}$ & $0$ ; z: $-1/T_i$ \\[2pt]
-Lead & $K_c\frac{1{+}\tau s}{1{+}\alpha\tau s}$ & $-1/(\alpha\tau)$ ; z: $-1/\tau$ \\[2pt]
-Lag & $K_c\frac{1{+}\tau s}{1{+}\beta\tau s}$ & $-1/(\beta\tau)$ ; z: $-1/\tau$ \\
+PD r\'eal. & $K_p\frac{1{+}(1{+}\alpha)T_d s}{1{+}\alpha T_d s}$ & $-\frac{1}{\alpha T_d}$ ; z: $-\frac{1}{(1{+}\alpha)T_d}$ \\
 \bottomrule
 \end{tabular}
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Retard, Pad\'e \& p\^ole dominant}]
-\textbf{Retard} : $\varphi_{m,\text{avec}} = \varphi_{m,\text{sans}} - \omega_{co} T_r \cdot 180/\pi$.\\
-\textbf{Pad\'e / d\'ephaseur} : $e^{-sT_r} \approx \frac{1 - T_r s/2}{1 + T_r s/2}$,\; $|G_d(j\omega)| \approx 1$.\\
-\textbf{P\^ole dominant} : $t_{s5} \approx 3/|\text{Re}(s_{\text{dom}})|$, $t_{s2} \approx 4/|\text{Re}(s_{\text{dom}})|$.
+\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Retard pur \& p\^ole dominant}]
+\textbf{Retard sur la marge} : $\varphi_{m,\text{avec}} = \varphi_{m,\text{sans}} - \omega_{co} T_r \cdot 180/\pi$.\\
+\vars{Le retard pur ne change pas le module ($|e^{-\jw T_r}|{=}1$) mais retranche $\omega T_r$ (rad) \`a la phase $\Rightarrow$ r\'eduit $\varphi_m$, d\'estabilisant.}
+\textbf{P\^ole dominant} (asservi) : $t_{s5} \approx 3/|\text{Re}(s_{\text{dom}})|$, $t_{s2} \approx 4/|\text{Re}(s_{\text{dom}})|$.
 \vars{Dominant si les autres p\^oles ont $|\text{Re}| \geq 5\times$ plus grande.}
 \end{tcolorbox}
 
@@ -256,7 +214,7 @@ $20\log 3$ & $9.54$ dB & $20\log 10$ & $20$ dB \\
 \begin{itemize}
   \item $S$ : passe-haut $\Rightarrow$ att\'enue les perturbations BF ; $T$ : passe-bas
   \item Robustesse : $\|S\|_\infty \leq 2$ ($6$~dB) recommand\'e $\Leftrightarrow \varphi_m \geq 30°$
-  \item $\|S\|_\infty = 1/\text{dist}(G_o(\jw),\,-1)_{\min}$
+  \item $\|S\|_\infty = 1/d_{\min}$, \; $d_{\min} = \min_\omega|1{+}G_o(\jw)|$ (distance critique, \S5.4.3)
 \end{itemize}
 \piege{Minimiser $e_\infty$ et maximiser $\varphi_m$ sont des objectifs conflictuels : c'est le dilemme pr\'ecision-stabilit\'e.}
 \end{tcolorbox}
@@ -305,38 +263,24 @@ y_\infty = \underbrace{G_{yw}(0)\cdot A}_{\text{d\^u \`a }w} + \underbrace{G_{yv
 \toprule
 Objectif principal & Structure \\
 \midrule
-R\'eduire $e_\infty$, garder $\varphi_m$ & $K_p\uparrow$ ou Lag \\
+R\'eduire $e_\infty$, garder $\varphi_m$ & $K_p\uparrow$ \\
 Supprimer $e_\infty$ (\'echelon) & PI (int\'egrateur) \\
 Supprimer $e_\infty$ (rampe) & PI avec proc. type\,1 \\
-R\'eduire $D_\%$, augm. $\varphi_m$ & PD ou Lead \\
+R\'eduire $D_\%$, augm. $\varphi_m$, $t_r{\downarrow}$ & PD (avance de phase) \\
 Supprimer $e_\infty$ \textbf{et} r\'eduire $D_\%$ & PID \\
-Augmenter $\omega_{co}$ (rapidit\'e) & Lead \\
-Augmenter $K_o$ sans changer $\omega_{co}$ & Lag \\
 \bottomrule
 \end{tabular}
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Gain critique $K_{cr}$ par Routh (m\'ethode BO)}]
-\begin{enumerate}
-  \item Former $1 + K\,G_o(s) = 0$, d\'evelopper en polyn\^ome en $K$
-  \item Construire tableau de Routh avec coefficients d\'ependant de $K$
-  \item $K_{cr}$ = valeur qui annule un \'el\'ement de la 1\textsuperscript{\`ere} colonne
-  \item Ligne nulle $\Rightarrow$ poly. auxiliaire $P(s)$ $\Rightarrow$ $s^2 + \omega_{cr}^2 = 0$ $\Rightarrow$ $T_{cr} = 2\pi/\omega_{cr}$
-\end{enumerate}
+\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Gain critique $K_{cr}$ \& p\'eriode $T_{cr}$}]
+$K_{cr}$ = gain du r\'egulateur P amenant la BF \`a la \textbf{limite de stabilit\'e} (oscillation entretenue) ; $T_{cr}$ = p\'eriode de cette oscillation.
+\textbf{Lecture sur le Bode de $G_o$} (m\'ethode de Bode) :
+\tightmath{
+\boxed{K_{cr} = \frac{1}{|G_o(\jw_\pi)|}} \qquad \boxed{T_{cr} = \frac{2\pi}{\omega_\pi}}
+}
+\vars{$\omega_\pi$ = pulsation o\`u $\angle G_o = -180°$. \`A $K{=}K_{cr}$ le lieu passe exactement par $-1$.}
 \astuce{Ziegler-Nichols BF utilise directement $K_{cr}$ et $T_{cr}$ (voir tableau ZN).}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Lead : exemple de dimensionnement complet}]
-\textbf{Donn\'ee} : $G(s) = \frac{10}{s(1{+}0.1s)}$, objectif $\varphi_m = 50°$. $\varphi_{m0} \approx 18°$.
-\begin{enumerate}
-  \item $\varphi_{\max} = 50° - 18° + 8° = 40°$ \quad(avance \`a apporter)
-  \item $\alpha = \dfrac{1-\sin40°}{1+\sin40°} \approx 0.217$
-  \item Gain \`a apporter : $+10\log(1/0.217) \approx +6.6$ dB
-  \item Chercher $\omega'$ tel que $|G(\jw')| = -6.6$ dB $\Rightarrow \omega_{co}' \approx 15$ rad/s
-  \item $\tau = \dfrac{1}{\omega_{co}'\sqrt{\alpha}} \approx 0.143$ s
-  \item $C(s) = \dfrac{1{+}0.143s}{1{+}0.031s}$ \quad(avec $\alpha\tau = 0.031$)
-\end{enumerate}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Tableau type BO $\to$ erreur et comportement BF}]
@@ -371,7 +315,7 @@ Type & $G_o$ (BF) & $e_\infty$ \'ech. & $e_\infty$ rampe & Remarque \\
 $\Rightarrow$ ajoute un p\^ole en 0 (type $+1$), phase BO $-90°$ suppl. $\Rightarrow$ \textbf{r\'eduit $\varphi_m$}.\\[2pt]
 \textbf{Type 2} ($1/s^2$ en BO) : \'elimine $e_\infty$ pour rampe, mais tr\`es difficile \`a stabiliser.\\[2pt]
 \textbf{Bode de $1/s^2$} : pente $-40$ dB/d\'ec, phase $= -180°$ (constant). \\[2pt]
-\piege{Pour type\,$\geq 2$ : la condition de Hurwitz seule ne suffit plus (ordre\,$\geq 3$). Appliquer Routh ou simuler.}
+\piege{Type\,$\geq 2$ : la BO part \`a $-180°$ d\`es les BF $\Rightarrow$ $\varphi_m$ tr\`es difficile \`a obtenir. V\'erifier la stabilit\'e par le crit\`ere du revers / les marges.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Interpr\'etation plan de Nyquist}]

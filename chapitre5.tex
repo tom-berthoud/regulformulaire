@@ -1,5 +1,5 @@
 % ============================================================
-% CHAPITRE 5 : Stabilité, Marges, Routh, Nyquist
+% CHAPITRE 5 : Stabilité, Marges, Critère du revers (Nyquist), Méthode de Bode
 % ============================================================
 \chapterbanner{Chapitre 5 --- Stabilit\'e \& Marges}{ch5red}
 
@@ -11,42 +11,8 @@
   \item Marginalement stable : p\^ole(s) simple(s) sur axe $j\omega$
   \item Instable : au moins un p\^ole avec Re$(s_i) > 0$
 \end{itemize}
-\textbf{Condition n\'ecessaire (Hurwitz)} : tous les $a_i$ du polyn\^ome caract\'eristique de \textbf{m\^eme signe} et \textbf{non nuls}.
-\piege{N\'ecessaire mais PAS suffisante pour $n \geq 3$. Pour $n \leq 2$, elle est aussi suffisante.}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch5red!2,colframe=ch5red!80!black,title={Crit\`ere de Routh-Hurwitz}]
-Pour $D(s) = a_n s^n + a_{n-1}s^{n-1} + \cdots + a_0$ :
-\tightmath{
-\begin{array}{c|cccc}
-s^n & a_n & a_{n-2} & a_{n-4} & \cdots \\
-s^{n-1} & a_{n-1} & a_{n-3} & a_{n-5} & \cdots \\
-s^{n-2} & b_1 & b_2 & b_3 & \cdots \\
-s^{n-3} & c_1 & c_2 & \cdots &
-\end{array}
-}
-\tightmath{
-b_1 = \frac{a_{n-1} a_{n-2} - a_n a_{n-3}}{a_{n-1}} \quad b_2 = \frac{a_{n-1} a_{n-4} - a_n a_{n-5}}{a_{n-1}}
-}
-\tightmath{
-c_1 = \frac{b_1 a_{n-3} - a_{n-1} b_2}{b_1}
-}
-\tightmath{
-\boxed{\text{Nb p\^oles instables} = \text{nb changements de signe, 1\textsuperscript{\`ere} colonne}}
-}
-\vars{Stable $\Leftrightarrow$ tous les \'el\'ements 1\textsuperscript{\`ere} col. $> 0$. Z\'ero en 1\textsuperscript{\`ere} col. $\to$ remplacer par $\varepsilon > 0$. Ligne nulle $\to$ polyn\^ome auxiliaire $dP/ds$.}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Exemples Routh rapides}]
-\textbf{Ordre 2} : $s^2 + a_1 s + a_0 = 0$. Stable $\Leftrightarrow a_1 > 0$ et $a_0 > 0$.
-
-\textbf{Ordre 3} : $s^3 + a_2 s^2 + a_1 s + a_0 = 0$ :
-\tightmath{
-\boxed{\text{Stable} \Leftrightarrow a_2 > 0,\ a_0 > 0,\ a_2 a_1 > a_0}
-}
-
-\textbf{Ordre 4} : $s^4 + a_3 s^3 + a_2 s^2 + a_1 s + a_0 = 0$ :\\
-$a_3 > 0$, $a_0 > 0$, $b_1 = a_3 a_2 - a_1 > 0$, et $\boxed{a_1(a_3 a_2 - a_1) > a_3^{2}\, a_0}$ (i.e. $b_1 a_1 > a_3^{2} a_0$).
+\vars{\'Etude par la r\'eponse impulsionnelle (\S5.2, p.165) : mode ap\'eriodique $e^{p_i t}$ born\'e ssi $p_i<0$ ; mode oscillatoire $e^{-\delta t}\sin(\omega_0 t)$ born\'e ssi $\delta>0$.}
+\piege{En pratique on ne calcule pas les p\^oles : on juge la stabilit\'e \textbf{BF} sur le lieu de $G_o(\jw)$ (crit\`ere du revers) ou sur le Bode de $G_o$ (marges).}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch5red!2,colframe=ch5red!80!black,title={Stabilit\'e en boucle ferm\'ee}]
@@ -55,6 +21,18 @@ $a_3 > 0$, $a_0 > 0$, $b_1 = a_3 a_2 - a_1 > 0$, et $\boxed{a_1(a_3 a_2 - a_1) >
 \boxed{1 + G_o(s) = 0} \quad G_o = G_c\,G_a
 }
 BF stable $\Leftrightarrow$ toutes les racines de $1 + G_o(s) = 0$ ont Re $< 0$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Distance critique $d_{\min}$}]
+Distance minimale entre le lieu de Nyquist de $G_o(\jw)$ et le point critique $-1$ :
+\tightmath{
+\boxed{d_{\min} = \min_{\omega} |1 + G_o(\jw)|}
+}
+\vars{Chiffre le \textbf{degr\'e de stabilit\'e}. Plus $d_{\min}$ est grand, plus la BF est robuste. En pratique on l'\'evalue indirectement par les marges $\varphi_m$ et $A_m$.}
+\tightmath{
+\|S\|_\infty = \frac{1}{d_{\min}} = \max_\omega\Big|\frac{1}{1+G_o(\jw)}\Big|
+}
+\piege{$d_{\min}$ \textbf{petit} $\Rightarrow$ pic de r\'esonance \'elev\'e en BF $\Rightarrow$ fort d\'epassement.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Marge de gain ($A_m$)}]
@@ -120,44 +98,25 @@ $\omega_{co}$ = \textbf{croisement de gain} : $|G_o(\jw_{co})| = 1$ (0~dB).
 \piege{$\varphi_m$ en \textbf{radians} : $\varphi_{m,\text{rad}} = \varphi_m° / 57.3$. Ex. : $\varphi_m{=}40°$, $\omega_{co}{=}600$ $\Rightarrow$ $T_r^{\max} = \frac{40\pi}{180\cdot600} \approx 1.2\,\text{ms}$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Crit\`ere de Nyquist}]
-\textbf{Cas simplifi\'e (BO stable, $P{=}0$)} :
-BF stable $\Leftrightarrow$ Nyquist $G_o(\jw)$ \textbf{n'entoure pas} $(-1, 0)$.
-
-\textbf{Cas g\'en\'eral :}
-\tightmath{
-\boxed{Z = N + P}
-}
+\begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Crit\`ere du revers (Nyquist simplifi\'e)}]
+\textbf{\'Enonc\'e (si $G_o$ stable en BO)} : le syst\`eme en BF est stable $\Leftrightarrow$ en parcourant le lieu de $G_o(\jw)$ dans le sens des $\omega$ croissants, le point critique $-1$ reste \textbf{\`a gauche} du lieu.
 \begin{itemize}
-  \item $Z$ = nb p\^oles BF instables (on veut $Z{=}0$)
-  \item $N$ = nb encerclements \textbf{horaires} de $(-1,0)$
-  \item $P$ = nb p\^oles BO instables (connu)
+  \item \'Equivalent : le lieu \textbf{n'entoure pas} $(-1,0)$
+  \item Le croisement de l'axe r\'eel n\'egatif se fait \textbf{entre} $-1$ et $0$
 \end{itemize}
-Stable $\Leftrightarrow$ $N = -P$ (encerclements \textbf{anti-horaires}).
-\piege{BO stable ($P{=}0$) : $N{=}0$. BO instable ($P{>}0$) : il faut $P$ encerclements anti-horaires.}
+\piege{Valable uniquement si la \textbf{boucle ouverte est stable}. Si $G_o$ a des p\^oles instables, utiliser le crit\`ere de Nyquist complet (comptage d'encerclements).}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch5red!2,colframe=ch5red!80!black,title={Lieu des racines (rappel)}]
-Lieu des p\^oles BF quand $K$ varie ($0 \to \infty$) :
-\begin{itemize}
-  \item D\'epart : p\^oles de BO. Arriv\'ee : z\'eros de BO ou $\infty$
-  \item Nb branches $= n$. Asymptotes : angle $= \frac{(2k{+}1)\cdot 180°}{n-m}$
-  \item Centre : $\sigma_a = \frac{\sum p_i - \sum z_i}{n - m}$
-  \item Sur axe r\'eel : \`a droite d'un nombre \textbf{impair} de p\^oles+z\'eros
-  \item Instabilit\'e quand une branche traverse l'axe $j\omega$
-\end{itemize}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch5red!4,colframe=ch5red!80!black,title={Proc\'edure stabilit\'e param\'etrique en 5 \`etapes}]
+\begin{tcolorbox}[colback=ch5red!2,colframe=ch5red!80!black,title={M\'ethode de Bode : marche \`a suivre}]
+Synth\`ese d'un r\'egulateur pour imposer $\varphi_m$ et la rapidit\'e ($\omega_{co}$) :
 \begin{enumerate}
-  \item Former l'\'equation caract\'eristique : $1 + K\,G_o(s) = 0$
-  \item Mettre sous forme polynomiale : $a_n(K)s^n + \cdots + a_0(K)=0$
-  \item Construire Routh avec coefficients d\'ependant de $K$
-  \item Imposer 1\textsuperscript{\`ere} colonne $>0$ et r\'esoudre les in\'egalit\'es
-  \item Croiser avec les marges Bode/Nyquist pour garder une zone robuste
+  \item Choisir $\omega_{co}$ d\'esir\'ee (rapidit\'e : $T_{\text{r\'eg}}\approx\pi/\omega_{co}$)
+  \item Choisir $\varphi_m$ d\'esir\'ee (amortissement : $\zeta\approx\varphi_m/100$)
+  \item Tracer le Bode de $G_a$ (syst\`eme \`a r\'egler)
+  \item Choisir la structure du r\'egulateur $G_c$ (P, PI, PD, PID\dots)
+  \item \textbf{Phase} : \`a $\omega_{co}$, imposer $\angle G_o(\jw_{co}) = -180° + \varphi_m$ $\Rightarrow$ fixe les constantes de temps de $G_c$
+  \item \textbf{Gain} : ajuster $K_p$ pour que $|G_o(\jw_{co})| = 1$ (0~dB)
+  \item V\'erifier $A_m$ \`a $\omega_\pi$ et la pr\'ecision (gain permanent)
 \end{enumerate}
-\tightmath{
-\text{Zone utile en pratique : } \varphi_m\in[35^\circ,60^\circ],\quad A_m\ge 6\text{ dB}
-}
-\astuce{Si plusieurs intervalles de $K$ sont math\'ematiquement stables, choisir celui qui respecte aussi la rapidit\'e et le d\'epassement demand\'es.}
+\astuce{Compromis : $\omega_{co}$ grande $\Rightarrow$ rapide ; $\varphi_m$ grande $\Rightarrow$ peu de d\'epassement. Zone usuelle $\varphi_m\in[35°,60°]$, $A_m\ge 6$ dB.}
 \end{tcolorbox}
