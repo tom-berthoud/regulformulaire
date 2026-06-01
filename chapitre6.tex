@@ -303,6 +303,19 @@ Type & $G_o$ (BF) & $e_\infty$ \'ech. & $e_\infty$ rampe & Remarque \\
 \vars{$K_v = K_o/\tau_{\text{lent}}$ pour syst. type\,1 d'ordre\,2. Stabilit\'e : type \'elev\'e = plus difficile.}
 \end{tcolorbox}
 
+\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Lire le Bode \`a un autre $K_p$ (d\'ecalage de gain)}]
+Le Bode est trac\'e pour un $K_p^{\text{base}}$ donn\'e (souvent $1$ ou $100$). Changer $K_p$ \textbf{d\'ecale verticalement la courbe de gain}, la \textbf{phase est inchang\'ee} :
+\tightmath{
+\boxed{\;|G_o|^{\text{dB}}_{K_p} = |G_o|^{\text{dB}}_{K_p^{\text{base}}} + 20\log_{10}\!\frac{K_p}{K_p^{\text{base}}}\;},\qquad \angle G_o \text{ inchang\'e}
+}
+\textbf{Ex.} lire $K_p{=}2$ sur un Bode trac\'e pour $K_p^{\text{base}}$ :
+\begin{itemize}\setlength\itemsep{0pt}
+  \item base $100$ : $\Delta_{\text{dB}}{=}20\log\frac{2}{100}{=}-34$ dB $\Rightarrow$ \textbf{descendre} la courbe de 34 dB
+  \item base $1$ : $\Delta_{\text{dB}}{=}20\log 2{=}+6$ dB $\Rightarrow$ \textbf{monter} de 6 dB
+\end{itemize}
+\vars{Cons\'equence : $\omega_\pi$ \textbf{inchang\'ee} (phase intacte) mais $\omega_{co}$ se d\'eplace $\Rightarrow A_m$ et $\varphi_m$ changent. Rep\`eres : $\times2{\to}{+}6$ dB, $\times10{\to}{+}20$ dB, $\div10{\to}{-}20$ dB.}
+\end{tcolorbox}
+
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Correspondance BO $\to$ BF : r\`egles de pouce}]
 \begin{itemize}
   \item $\omega_{-3\text{dB}}^{BF} \approx \omega_{co}$ pour $30° < \varphi_m < 70°$
