@@ -6,14 +6,18 @@
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Notations (rappel cours)}]
 \begin{itemize}
   \item $G_c(s)$ : \textbf{r\'egulateur} (correcteur)
-  \item $G_a(s)$ : \textbf{syst\`eme \`a r\'egler} (ampli + actionneur + processus + capteur)
-  \item $G_o(s)=G_c\,G_a$ : \textbf{boucle ouverte}
+  \item $G_a(s)$ : \textbf{syst\`eme \`a r\'egler} (ampli + actionneur + processus + capteur) ; $K_a{=}G_a(0)$ = gain du proc\'ed\'e
+  \item $G_o(s)=G_c\,G_a$ : \textbf{boucle ouverte} (not\'ee aussi $L$) ; $K_o{=}\lim_{s\to0}G_o$ = gain permanent de boucle
   \item $G_{yw}=\frac{Y}{W}=\frac{G_o}{1+G_o}$ : BF \textbf{correspondance} (poursuite)
   \item $G_{ew}=\frac{E}{W}=\frac{1}{1+G_o}$ : transfert de l'\textbf{erreur} $=S$
   \item $G_{yv}=\frac{Y}{V}=\frac{G_p}{1+G_o}$ : BF \textbf{maintien} (rejet de $v$ ; $G_p$ = partie en aval de $v$)
+  \item $G_m$ : \textbf{capteur} (retour) ; r\'etroaction unitaire $\Leftrightarrow G_m{=}1$
   \item $S=G_{ew}$ (sensibilit\'e), $T=G_{yw}$ (compl\'em.) : $S+T=1$
+  \item \textbf{Param. r\'egulateur} : $K_p$ (gain prop.), $T_i$ (temps int\'egral), $T_d$ (temps d\'eriv\'e), $K_i{=}K_p/T_i$ ; $\alpha$ : facteur du PD r\'ealisable ($\approx0.1$--$0.2$)
+  \item \textbf{Constantes d'erreur} : $K_o$ (position), $K_v{=}\lim_{s\to0}sG_o$ (vitesse), $K_a^{\text{acc}}{=}\lim_{s\to0}s^2G_o$ (acc\'el.)
   \item $\varphi_m, A_m$ : marges de phase / gain ; $\omega_{co}$ : coupure 0~dB en BO ; $\omega_\pi$ : phase $-180°$
   \item $K_{cr}, T_{cr}$ : gain et p\'eriode critiques (limite de stabilit\'e)
+  \item \textbf{Perf.} (cf. ch.3) : $D_\%$ d\'ep., $t_r$ mont\'ee, $T_{\text{r\'eg}}$ r\'eglage, $\zeta$ amort., $\omega_n$ puls. nat.
 \end{itemize}
 \end{tcolorbox}
 
@@ -29,7 +33,7 @@ S(s) + T(s) = 1 \quad (S = G_{ew},\ T = G_{yw})
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Erreur permanente : constantes \& tableau}]
-$K_p = \lim_{s\to 0} G_o(s)$ (position), $K_v = \lim_{s\to 0} sG_o(s)$ (vitesse), $K_a = \lim_{s\to 0} s^2 G_o(s)$ (acc\'el.)
+$K_o = \lim_{s\to 0} G_o(s)$ (position), $K_v = \lim_{s\to 0} sG_o(s)$ (vitesse), $K_a^{\text{acc}} = \lim_{s\to 0} s^2 G_o(s)$ (acc\'el.)
 \begin{center}
 \renewcommand{\arraystretch}{1.1}
 \scriptsize
@@ -37,9 +41,9 @@ $K_p = \lim_{s\to 0} G_o(s)$ (position), $K_v = \lim_{s\to 0} sG_o(s)$ (vitesse)
 \toprule
 Entr\'ee $w(t)$ & Type 0 & Type 1 & Type 2 \\
 \midrule
-\'Echelon $A$ & $\frac{A}{1{+}K_p}$ & $0$ & $0$ \\[3pt]
+\'Echelon $A$ & $\frac{A}{1{+}K_o}$ & $0$ & $0$ \\[3pt]
 Rampe $At$ & $\infty$ & $\frac{A}{K_v}$ & $0$ \\[3pt]
-Parabole $\frac{A}{2}t^2$ & $\infty$ & $\infty$ & $\frac{A}{K_a}$ \\
+Parabole $\frac{A}{2}t^2$ & $\infty$ & $\infty$ & $\frac{A}{K_a^{\text{acc}}}$ \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -146,7 +150,7 @@ $+$ D ($T_d$) & -- & $\downarrow$ & -- & $\uparrow$ & -- \\
 \toprule
 R\'eg. & $G_c(s)$ & $e_\infty$ \'ech. & Effet principal \\
 \midrule
-P   & $K_p$ & $\frac{A}{1+K_p}{\neq}0$ & $t_r{\downarrow}$, $\omega_{co}{\uparrow}$, $D_\%{\uparrow}$, $\varphi_m{\downarrow}$ \\
+P   & $K_p$ & $\frac{A}{1+K_o}{\neq}0$ & $t_r{\downarrow}$, $\omega_{co}{\uparrow}$, $D_\%{\uparrow}$, $\varphi_m{\downarrow}$ \\
 I   & $\frac{K_i}{s}$ & $0$ & type $+1$ ; $\varphi_m{\downarrow}$ ($-90°$), lent, windup \\
 PI  & $K_p\frac{1{+}T_i s}{T_i s}$ & $0$ & pr\'ecision + compense p\^ole dom. ; $\varphi_m{\downarrow}$ \\
 PD  & $K_p(1{+}T_d s)$ & inchang\'e & $D_\%{\downarrow}$, $\varphi_m{\uparrow}$, $t_r{\downarrow}$ ; amplifie bruit HF \\
@@ -188,23 +192,6 @@ PD r\'eal. & $K_p\frac{1{+}(1{+}\alpha)T_d s}{1{+}\alpha T_d s}$ & $-\frac{1}{\a
 \vars{Le retard pur ne change pas le module ($|e^{-\jw T_r}|{=}1$) mais retranche $\omega T_r$ (rad) \`a la phase $\Rightarrow$ r\'eduit $\varphi_m$, d\'estabilisant.}
 \textbf{P\^ole dominant} (asservi) : $t_{s5} \approx 3/|\text{Re}(s_{\text{dom}})|$, $t_{s2} \approx 4/|\text{Re}(s_{\text{dom}})|$.
 \vars{Dominant si les autres p\^oles ont $|\text{Re}| \geq 5\times$ plus grande.}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Valeurs num\'eriques \& Conversions}]
-\begin{center}
-\renewcommand{\arraystretch}{1}
-\scriptsize
-\begin{tabular}{@{}ll|ll@{}}
-\toprule
-$\ln(0.05)$ & $-3.00$ & $\arctan(1)$ & $45°$ \\
-$\ln(0.02)$ & $-3.91$ & $\arctan(0.5)$ & $26.6°$ \\
-$\pi$ & $3.1416$ & $\sqrt{2}$ & $1.414$ \\
-$180/\pi$ & $57.3°$/rad & $\sqrt{3}$ & $1.732$ \\
-$20\log 2$ & $6.02$ dB & $20\log 5$ & $13.98$ dB \\
-$20\log 3$ & $9.54$ dB & $20\log 10$ & $20$ dB \\
-\bottomrule
-\end{tabular}
-\end{center}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Sensibilit\'e \& robustesse}]
@@ -252,7 +239,7 @@ y_\infty = \underbrace{G_{yw}(0)\cdot A}_{\text{d\^u \`a }w} + \underbrace{G_{yv
 }
 \textbf{Type 0} : $G_{yw}(0){=}\frac{K_o}{1{+}K_o}$, $G_{yv}(0){=}\frac{G_p(0)}{1{+}K_o}$ \\[1pt]
 \textbf{Type 1} : $G_{yw}(0){=}1$, $G_{yv}(0){=}\lim_{s\to 0}\frac{G_p(s)}{1{+}G_o(s)}$ (fini)
-\vars{Exemple type 1 : $L = 2K_p/[s(1{+}s)]$, $G_{yv}(0) = 1/(2K_p)$. Pour $V{=}0.5$ : $y_{v,\infty} = 0.5/(2K_p)$.}
+\vars{Exemple type 1 : $G_o = 2K_p/[s(1{+}s)]$, $G_{yv}(0) = 1/(2K_p)$. Pour $V{=}0.5$ : $y_{v,\infty} = 0.5/(2K_p)$.}
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Quel r\'egulateur choisir ?}]
@@ -292,7 +279,7 @@ $K_{cr}$ = gain du r\'egulateur P amenant la BF \`a la \textbf{limite de stabili
 Type & $G_o$ (BF) & $e_\infty$ \'ech. & $e_\infty$ rampe & Remarque \\
 \midrule
 0 & $\frac{K_o}{1{+}K_o}$ & $\frac{A}{1{+}K_o}$ & $\infty$ & Erreur stat. \\
-1 & $1$ & $0$ & $\frac{A}{K_v}$ & $K_v = \lim_{s\to0} sL$ \\
+1 & $1$ & $0$ & $\frac{A}{K_v}$ & $K_v = \lim_{s\to0} sG_o$ \\
 2 & $1$ & $0$ & $0$ & $e_\infty$ parabolique \\
 \bottomrule
 \end{tabular}
@@ -320,17 +307,15 @@ $\Rightarrow$ ajoute un p\^ole en 0 (type $+1$), phase BO $-90°$ suppl. $\Right
 
 \begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Interpr\'etation plan de Nyquist}]
 \begin{center}
-\begin{tikzpicture}[scale=0.74, transform shape, >=Stealth,
-   every node/.style={font=\fontsize{5.4}{6}\selectfont}]
+\begin{tikzpicture}[scale=0.78, transform shape, >=Stealth,
+   every node/.style={font=\fontsize{5.6}{6.4}\selectfont}]
   % --- axes ---
   \draw[->] (-2.5,0) -- (1.05,0) node[right]{Re};
   \draw[->] (0,-1.75) -- (0,1.55) node[above]{Im};
-  % --- cercle unité ---
-  \draw[gray!50, thin] (0,0) circle (1);
-  \node[gray!60] at (0.83,0.72) {\fontsize{4.4}{5}\selectfont $|G_o|{=}1$};
-  % --- point critique ---
-  \filldraw[red!80!black] (-1,0) circle (1.8pt);
-  \node[red!80!black, above left=-2pt and -3pt] at (-1,0.02) {$-1$};
+  % --- cercle unité : label déporté hors du lieu (haut-droite) ---
+  \draw[gray!45, thin] (0,0) circle (1);
+  \draw[gray!55, thin] (0.71,0.71) -- (1.02,1.06);
+  \node[gray!70, right] at (1.0,1.1) {$|G_o|{=}1$};
   % --- lieu omega>0 (trait plein) : depart omega->0 a droite, croise l'axe reel
   %     negatif en omega_pi (entre -1 et 0 => marges OK), puis -> origine ---
   \draw[very thick, ch6teal!80!black]
@@ -342,25 +327,29 @@ $\Rightarrow$ ajoute un p\^ole en 0 (type $+1$), phase BO $-90°$ suppl. $\Right
   \draw[very thick, ch6teal!80!black, dashed]
      (2.0,0.12) to[out=105,in=-20] (0.25,1.2)
      to[out=160,in=55] (-0.62,0);
-  \node[ch6teal!75!black] at (1.55,-0.4) {$\omega{\to}0$};
-  % --- omega_pi : croisement axe reel negatif ---
-  \filldraw[blue!75] (-0.62,0) circle (1.5pt);
-  \draw[blue!75, thin] (-0.62,0) -- (-0.62,-0.95);
-  \node[blue!75, below] at (-0.62,-0.95) {$\omega_\pi$};
-  % --- marge de gain : segment crossing -> (-1,0) ---
-  \draw[<->, green!55!black, thick] (-1,0) -- (-0.62,0);
-  \draw[green!55!black, thin] (-0.81,0) -- (-1.05,0.62);
-  \node[green!55!black, left] at (-1.05,0.66) {$1/A_m$};
+  \node[ch6teal!75!black] at (1.55,-0.42) {$\omega{\to}0$};
+  % --- point critique -1 (label en-dessous, hors zone marges) ---
+  \filldraw[red!80!black] (-1,0) circle (1.7pt);
+  \node[red!80!black, below left=-2pt and -2pt] at (-1,0) {$-1$};
+  % --- omega_pi : croisement axe reel negatif (repere vers le bas) ---
+  \filldraw[blue!75] (-0.62,0) circle (1.6pt);
+  \draw[blue!75, thin] (-0.62,0) -- (-0.62,-1.05);
+  \node[blue!75, below] at (-0.62,-1.08) {$\omega_\pi$};
+  % --- marge de gain : double-fleche fine -1 <-> croisement, label AU-DESSUS ---
+  \draw[<->, green!45!black, line width=0.45pt, >={Stealth[length=2.2pt]}]
+       (-1,0.13) -- (-0.62,0.13);
+  \draw[green!45!black, line width=0.3pt] (-0.81,0.15) -- (-0.81,0.36);
+  \node[green!45!black, above] at (-0.81,0.34) {$1/A_m$};
   % --- omega_co : croisement du cercle unite (3e quadrant) ---
   \coordinate (co) at ({cos(213)},{sin(213)});
-  \filldraw[orange!85!black] (co) circle (1.5pt);
-  \draw[orange!85!black, thin] (co) -- ({1.55*cos(213)},{1.5*sin(213)});
-  \node[orange!85!black, left] at ({1.7*cos(213)},{1.5*sin(213)}) {$\omega_{co}$};
-  % --- marge de phase : rayon vers omega_co + petit arc 180deg -> angle de omega_co ---
+  \filldraw[orange!85!black] (co) circle (1.6pt);
+  \draw[orange!85!black, thin] (co) -- ({1.62*cos(213)},{1.5*sin(213)});
+  \node[orange!85!black, left] at ({1.68*cos(213)},{1.5*sin(213)}) {$\omega_{co}$};
+  % --- marge de phase : rayon vers omega_co + arc 180deg -> angle de G_o(jw_co) ---
   \draw[gray!55, thin] (0,0) -- (co);
-  \draw[red!70!black, very thick] (180:0.55) arc (180:213:0.55);
-  \draw[red!70!black, thin] ({0.55*cos(197)},{0.55*sin(197)}) -- (0.32,-0.6);
-  \node[red!70!black, right] at (0.30,-0.64) {$\varphi_m$};
+  \draw[red!70!black, line width=0.9pt] (180:0.58) arc (180:213:0.58);
+  \draw[red!70!black, line width=0.3pt] ({0.58*cos(196.5)},{0.58*sin(196.5)}) -- (0.36,-0.54);
+  \node[red!70!black, right] at (0.34,-0.57) {$\varphi_m$};
 \end{tikzpicture}
 \end{center}
 \vars{Lieu de $G_o(\jw)$. Trait plein : $\omega>0$ ; tiret : $\omega<0$ (sym. conj.). $A_m{=}1/|G_o(\jw_\pi)|$ (croisement axe r\'eel n\'eg.). $\varphi_m$ = angle entre $-$axe r\'eel et $G_o(\jw_{co})$ sur le cercle unit\'e. Stable (revers) : $(-1,0)$ \`a gauche du lieu.}
@@ -382,4 +371,35 @@ s^2 + bs + c = 0 \;\Rightarrow\; \omega_n = \sqrt{c},\quad \zeta = \frac{b}{2\sq
 \piege{Valable si $G_a$ \textbf{stable en BO}. Le p\^ole compens\'e reste dans $G_{yv}$ (maintien).}\\[1pt]
 \textbf{Dimensionnement sous contrainte} : PID factoris\'e $G_c=k_c\frac{(s-z_{c1})(s-z_{c2})}{s}$. \`A $\omega_{co,d}$ : (1) avance $\varphi_c=\angle(j\omega_{co,d}{-}z_{c1}){+}\angle(j\omega_{co,d}{-}z_{c2})$ pour imposer $\varphi_{m,d}$ ; (2) \textbf{affaiblir le gain dynamique} $|G_c(j\omega_{co,d})|$ (pas le permanent) $\Rightarrow$ maximiser le gain permanent $\Rightarrow$ pr\'ecision ; (3) $K_p$ pour $|G_o(j\omega_{co,d})|{=}1$.
 \astuce{Z\'eros \textbf{complexes} ($\zeta_c$ faible) $\Rightarrow$ anti-r\'esonance abaissant le gain dynamique.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=ch6teal!4,colframe=ch6teal!80!black,title={Ex. r\'eglage PI/PID par compensation + $T_{\text{r\'eg}}$}]
+\textbf{Deux gains \`a ne pas confondre} ($K_a$ = gain du proc\'ed\'e $G_a$) :
+\tightmath{
+\boxed{K_o = \frac{K_p\,K_a}{T_i}} \;\;(\text{gain de \textbf{boucle}}) \qquad \boxed{K_p = \frac{K_o\,T_i}{K_a}} \;\;(\text{gain \textbf{r\'egulateur}})
+}
+\textbf{M\'ethode} (4 \'etapes) :
+\begin{enumerate}\setlength\itemsep{0pt}
+  \item Compenser les p\^oles dominants $\Rightarrow$ $G_o = \dfrac{K_o}{s}\cdot\dfrac{1}{1{+}\tau_r s}$ ($\tau_r$ = p\^ole rapide restant)
+  \item N\'egliger $\tau_r$ $\Rightarrow$ BF du 1\textsuperscript{er} ordre, p\^ole en $-K_o$ : $T_{\text{r\'eg},5\%} = \dfrac{3}{K_o}$
+  \item Gain de boucle : $K_o = \dfrac{3}{T_{\text{r\'eg}}}$ \quad (ou lu sur le Bode)
+  \item Gain r\'egulateur : $K_p = \dfrac{K_o\,T_i}{K_a}$
+\end{enumerate}
+\vars{V\'erifier $\omega_{co}{=}K_o \ll 1/\tau_r$, sinon l'approx. 1\textsuperscript{er} ordre tombe.}
+
+\textbf{PI} : $G_a = \dfrac{2}{(1{+}0.5s)(1{+}0.05s)}$, vise $T_{\text{r\'eg}} = 0.3$ s.
+\tightmath{
+T_i = \tau_{a,\max} = 0.5 \;\Rightarrow\; G_o = \frac{K_o}{s(1{+}0.05s)},\quad K_o = \frac{K_p K_a}{T_i} = 4K_p
+}
+\tightmath{
+K_o = \frac{3}{0.3} = 10 \;\Rightarrow\; K_p = \frac{K_o T_i}{K_a} = \frac{10\cdot 0.5}{2} = 2.5
+}
+
+\textbf{PID} : $G_a = \dfrac{K_a}{(1{+}0.5s)(1{+}0.1s)(1{+}0.02s)}$.
+\tightmath{
+T_i = \tau_1{+}\tau_2 = 0.6\text{ s},\qquad T_d = \frac{\tau_1\tau_2}{T_i} = 0.083\text{ s}
+}
+\tightmath{
+G_o = \frac{K_o}{s(1{+}0.02s)} \;\Rightarrow\; K_o = \frac{3}{T_{\text{r\'eg}}},\quad K_p = \frac{K_o T_i}{K_a}
+}
 \end{tcolorbox}
