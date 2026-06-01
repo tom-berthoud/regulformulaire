@@ -143,6 +143,22 @@ $+$ D ($T_d$) & -- & $\downarrow$ & -- & $\uparrow$ & -- \\
 \end{center}
 \end{tcolorbox}
 
+\begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Questions qualitatives : effet d'un r\'eglage sur la BF}]
+\textbf{Recette} : toute question \og effet de \dots\ ? \fg{} se traite sur \textbf{3 axes}, chacun \textbf{justifi\'e} par sa cha\^ine cause$\to$effet.
+\begin{enumerate}\setlength\itemsep{0pt}
+  \item \textbf{Stabilit\'e} ($\varphi_m, A_m$) : $K_p$ ne d\'eplace que le \textbf{gain} BO $\Rightarrow$ d\'eplace $\omega_{co}$ ; $\varphi_m$ se lit \`a $\omega_{co}$, $A_m$ \`a $\omega_\pi$.
+  \item \textbf{Pr\'ecision} ($e_\infty$) : regarder le \textbf{TYPE} (nb d'int\'egrateurs), \emph{pas} la valeur de $K_p$. Int\'egrateur pur $\Rightarrow e_\infty^{\text{\'ech}}{=}0$ quel que soit $K_p$ ; type 0 $\Rightarrow e_\infty{=}\frac{A}{1+K_o}$ ($K_o{\propto}K_p$).
+  \item \textbf{Rapidit\'e} ($t_r, T_{\text{r\'eg}}$) : bande passante BF $\omega_{-3\text{dB}}^{BF}\approx\omega_{co}$ ; $T_{\text{r\'eg}}\approx\pi/\omega_{co}$.
+\end{enumerate}
+\textbf{Ex. r\'eduire $K_p$} (gain BO $\downarrow$) :
+\begin{itemize}\setlength\itemsep{0pt}
+  \item Stab. \textbf{$\uparrow$} : $\omega_{co}\downarrow$ (croisement 0~dB plus t\^ot) $\Rightarrow$ phase plus haute $\Rightarrow \varphi_m\uparrow$ ; lieu s'\'eloigne de $-1 \Rightarrow A_m\uparrow$.
+  \item Pr\'ec. \textbf{$=$} si int\'egrateur pur ($e_\infty{=}0$), sinon \textbf{$\downarrow$} ($e_\infty\uparrow$).
+  \item Rapid. \textbf{$\downarrow$} : $\omega_{co}\downarrow \Rightarrow$ BF plus lente ($T_{\text{r\'eg}}\uparrow$).
+\end{itemize}
+\astuce{\textbf{Justifier par la cha\^ine}, jamais juste \og \c{c}a augmente \fg{} : \og $K_p\downarrow \Rightarrow$ gain BO$\downarrow \Rightarrow \omega_{co}\downarrow \Rightarrow$ (phase plus haute) $\varphi_m\uparrow$ \fg{}. Pour $K_p\uparrow$ : inverser toutes les fl\`eches.}
+\end{tcolorbox}
+
 \begin{tcolorbox}[colback=ch6teal!2,colframe=ch6teal!80!black,title={Comparatif des r\'egulateurs P / I / PI / PD / PID}]
 \renewcommand{\arraystretch}{1.18}
 \scriptsize
