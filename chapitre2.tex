@@ -3,7 +3,7 @@
 % ============================================================
 \chapterbanner{Chapitre 2 --- Laplace \& Fonctions de transfert}{ch2orange}
 
-\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Table de Laplace essentielle}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Table de Laplace essentielle}]
 \begin{center}
 \renewcommand{\arraystretch}{1.05}
 \scriptsize
@@ -28,7 +28,7 @@ $1 - e^{-t/\tau}$ & $1/[s(1{+}\tau s)]$ & R\'ep.ind. 1\textsuperscript{er} o. \\
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!2,colframe=ch2orange!80!black,title={Propri\'et\'es de la transform\'ee}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Propri\'et\'es de la transform\'ee}]
 \begin{center}
 \renewcommand{\arraystretch}{1.05}
 \scriptsize
@@ -51,7 +51,7 @@ Convolution & $\Lap\{f*g\} = F(s)\cdot G(s)$ \\
 \piege{Th. valeur finale : valable \textbf{ssi} tous les p\^oles de $sF(s)$ ont Re~$< 0$ (sauf \'event. un p\^ole simple en $s{=}0$). Ne pas appliquer si syst\`eme instable !}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Fonction de transfert}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Fonction de transfert}]
 \tightmath{
 \boxed{G(s) = \frac{Y(s)}{U(s)} = \frac{b_m s^m + \cdots + b_0}{a_n s^n + \cdots + a_0}}
 }
@@ -62,7 +62,7 @@ Convolution & $\Lap\{f*g\} = F(s)\cdot G(s)$ \\
 \end{itemize}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!2,colframe=ch2orange!80!black,title={Trois formes de $G(s)$}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Trois formes de $G(s)$}]
 \textbf{1. Forme de Bode} (normalis\'ee) :
 \tightmath{
 G(s) = \frac{K}{s^\alpha}\cdot\frac{(1{+}\tau_{z_1}s)(1{+}2\zeta_z\frac{s}{\omega_z}{+}\frac{s^2}{\omega_z^2})\cdots}{(1{+}\tau_{p_1}s)(1{+}2\zeta_p\frac{s}{\omega_p}{+}\frac{s^2}{\omega_p^2})\cdots}
@@ -78,7 +78,7 @@ G(s) = \frac{b_m}{a_n}\cdot\frac{(s{-}z_1)(s{-}z_2)\cdots}{(s{-}p_1)(s{-}p_2)\cd
 \vars{\textbf{Passage} : $K = b_0/a_0$ (forme Bode, $\alpha{=}0$). Gain permanent : $K = \lim_{s\to 0} s^\alpha G(s)$. Constantes : $\tau_i = -1/p_i$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Changement de forme}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Changement de forme}]
 \begin{minipage}[t]{0.48\linewidth}
 \textbf{Laplace $\rightarrow$ Bode}
 
@@ -114,7 +114,7 @@ K_{\text{Laplace}} = K_{\text{Bode}}\,\omega_n^2
 \vars{Id\'ee : en forme de Bode, la constante dans les parenth\`eses vaut $1$ ; en forme de Laplace, on red\'eveloppe et on r\'einjecte les facteurs sortis.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Type $\alpha$, Retard pur, Gain permanent}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Type $\alpha$, Retard pur, Gain permanent}]
 \textbf{Type $\alpha$} = nb de p\^oles en $s{=}0$ (int\'egrateurs en BO) :
 \begin{itemize}
   \item $\alpha{=}0$ : erreur statique $\neq 0$ pour \'echelon
@@ -131,35 +131,7 @@ K_{\text{Laplace}} = K_{\text{Bode}}\,\omega_n^2
 \piege{Le retard fait chuter la phase ind\'efiniment $\Rightarrow$ d\'estabilisant !}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!2,colframe=ch2orange!80!black,title={Alg\`ebre des sch\'emas blocs}]
-\tightmath{
-\textbf{S\'erie} :\ G = G_1 \cdot G_2 \cdot \ldots \cdot G_n
-}
-\tightmath{
-\textbf{Parall\`ele} :\ G = G_1 \pm G_2
-}
-\tightmath{
-\textbf{BF (r\'etro. $-$)} :\ \boxed{G_{BF} = \frac{G_1}{1 + G_1 G_2}} \quad \textbf{(r\'etro. $+$)} :\ \frac{G_1}{1 - G_1 G_2}
-}
-\piege{Signe $+$ au d\'enom. pour r\'etroaction \textbf{n\'egative}. Signe $-$ si positive.}
-
-\begin{center}
-\renewcommand{\arraystretch}{1}
-\scriptsize
-\begin{tabular}{@{}ll@{}}
-\toprule
-Op\'eration & R\'esultat \\
-\midrule
-Sommateur avant bloc $G$ & Ajouter $1/G$ dans branche \\
-Sommateur apr\`es bloc $G$ & Ajouter $G$ dans branche \\
-Pt pr\'el\`evement avant $G$ & Ajouter $G$ dans branche \\
-Pt pr\'el\`evement apr\`es $G$ & Ajouter $1/G$ dans branche \\
-\bottomrule
-\end{tabular}
-\end{center}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Cha\^ine d'action \& boucle ferm\'ee}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Cha\^ine d'action \& boucle ferm\'ee}]
 \textbf{Cha\^ine d'action} : $G = G_1G_2\cdots G_n$. \quad
 \textbf{Boucle ouverte} : $G_o(s)=G_c\,G_a$ ($G_a$=syst\`eme \`a r\'egler).
 
@@ -226,7 +198,7 @@ Pt pr\'el\`evement apr\`es $G$ & Ajouter $1/G$ dans branche \\
 \vars{Mason : $T=\dfrac{P_1}{\Delta}$ avec $\Delta = 1 - \sum(\text{gains de boucle}) + \cdots$ ; donc une boucle n\'egative de gain $-GH$ donne bien $1+GH$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={D\'ecomposition en fractions partielles}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={D\'ecomposition en fractions partielles}]
 \textbf{P\^oles simples} $p_i$ :
 \tightmath{
 \frac{N(s)}{(s{-}p_1)(s{-}p_2)\cdots} = \sum_i \frac{A_i}{s - p_i} \quad \boxed{A_i = \lim_{s\to p_i}(s{-}p_i) G(s)}
@@ -242,7 +214,7 @@ $A = \lim_{s\to p}(s{-}p)^2 G(s)$, \; $B = \lim_{s\to p}\frac{d}{ds}[(s{-}p)^2 G
 \vars{Conversions : Hz$\to$rad/s : $\omega{=}2\pi f$. dB$\to$lin : $|G|{=}10^{G_{\text{dB}}/20}$. lin$\to$dB : $20\log_{10}|G|$. $6$~dB $\approx \times 2$. $20$~dB $= \times 10$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!2,colframe=ch2orange!80!black,title={Inversion de Laplace : recette d'examen}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Inversion de Laplace : recette d'examen}]
 \begin{enumerate}
   \item V\'erifier si la fraction est propre (sinon division polynomiale)
   \item Factoriser le d\'enominateur en p\^oles simples/r\'ep\'et\'es/complexes
@@ -256,7 +228,7 @@ $A = \lim_{s\to p}(s{-}p)^2 G(s)$, \; $B = \lim_{s\to p}\frac{d}{ds}[(s{-}p)^2 G
 \astuce{Pour un \'echelon : $Y(s)=G(s)\,\frac{A}{s}$, le p\^ole suppl\'ementaire en $s=0$ est normal.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={M\'ethodologie : esquisse de la r\'ep. temporelle},top=0.3mm,bottom=0.3mm,before skip=0.8pt,after skip=0.8pt]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={M\'ethodologie : esquisse de la r\'ep. temporelle},top=0.3mm,bottom=0.3mm,before skip=0.8pt,after skip=0.8pt]
 \textbf{\'Etapes pour esquisser $y(t)$ \`a un signal d'entr\'ee quelconque :}
 \begin{itemize}
   \item Trouver $K$, $y_\infty$ et le retard $T_r$
@@ -377,7 +349,7 @@ $A = \lim_{s\to p}(s{-}p)^2 G(s)$, \; $B = \lim_{s\to p}\frac{d}{ds}[(s{-}p)^2 G
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!2,colframe=ch2orange!80!black,title={Identification d'un syst\`eme oscillant}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Identification d'un syst\`eme oscillant}]
 \tightmath{
 G(s)=\frac{K_0}{1+\frac{2\zeta}{\omega_n}s+\frac{s^2}{\omega_n^2}}
 }
@@ -399,7 +371,7 @@ T_p=\text{p\'eriode des oscillations}
 \vars{$D_1$ = 1\textsuperscript{er} d\'epassement relatif. Pour un \'echelon de hauteur $\Delta U$, on a $y(\infty)=K_0\Delta U$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch2orange!4,colframe=ch2orange!80!black,title={Lecture d'un diagramme de Bode}]
+\begin{tcolorbox}[colback=ch2orange!5,colframe=ch2orange!80!black,title={Lecture d'un diagramme de Bode}]
 \textbf{Type $\alpha$} $\leftarrow$ pente \`a basse fr\'equence :
 \tightmath{
   \alpha = -\frac{\text{pente BF (dB/d\'ec)}}{20}
@@ -492,14 +464,4 @@ $-40$ dB/d\'ec & $2$ & $G(s)=\frac{K}{s^2(\cdots)}$ \\
 \end{tikzpicture}
 \end{center}
 \piege{\textbf{Sur graph} : lire la pente avant tout p\^ole/z\'ero (zone plate ou rampe), pas autour d'un pic de r\'esonance.}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch2orange!2,colframe=ch2orange!80!black,title={Astuces \& Pi\`eges Ch.2},top=0.4mm,bottom=0.4mm,before skip=1pt,after skip=1pt]
-\begin{itemize}
-  \item VF : $\lim_{t\to\infty}f(t)=\lim_{s\to0}sF(s)$ \textbf{ssi stable}
-  \item Bode : normaliser, ex. $\frac{2}{s+4}=\frac{0.5}{1+0.25s}$
-  \item BF : r\'etroaction $(-)\Rightarrow 1+G_1G_2$, r\'etroaction $(+)\Rightarrow 1-G_1G_2$
-  \item Retard pur : $|e^{-sT_r}|=1$, p\^oles inchang\'es
-  \item \'Eq. diff $\to G(s)$ : Laplace CI nulles puis isoler $Y/U$
-\end{itemize}
 \end{tcolorbox}

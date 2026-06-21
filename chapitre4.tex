@@ -3,7 +3,7 @@
 % ============================================================
 \chapterbanner{Chapitre 4 --- R\'eponse fr\'equentielle \& Bode}{ch4purple}
 
-\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={\'El\'ements de base du Bode},unbreakable]
+\begin{tcolorbox}[colback=ch4purple!5,colframe=ch4purple!80!black,title={\'El\'ements de base du Bode},unbreakable]
 {\fontsize{5.4}{6.2}\selectfont
 \colorlet{crv}{green!52!black}
 \colorlet{asy}{red!72!black}
@@ -16,10 +16,9 @@
 \draw[->](-0.1,0.8)--(3.3,0.8);
 \draw[->](0,0.3)--(0,2.2) node[above left]{\tiny dB};
 \draw[crv,thick](0.1,1.75)--(3.1,1.75) node[right]{$20\log|K|$};
-\draw[asy,thick,dashed](0.1,1.20)--(3.1,1.20) node[right]{$K{<}0$};
-\draw[->](-0.1,-0.55)--(3.3,-0.55);
+\draw[->](-0.1,-0.72)--(3.3,-0.72);
 \draw[->](0,-1.45)--(0,-0.15) node[above left]{\tiny$\varphi$};
-\draw[crv,thick](0.1,-0.72)--(3.1,-0.72) node[right]{$0°$};
+\draw[crv,thick](0.0,-0.72)--(3,-0.72) node[above right]{$0°$};
 \draw[asy,thick,dashed](0.1,-1.22)--(3.1,-1.22) node[right]{$-180°$};
 \node[left] at (0,-0.72){$0°$};
 \node[left] at (0,-1.22){$-180°$};
@@ -217,7 +216,7 @@
 }
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Principe fondamental}]
+\begin{tcolorbox}[colback=ch4purple!5,colframe=ch4purple!80!black,title={Principe fondamental}]
 Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
 \tightmath{
 \boxed{y_{rp}(t) = A\,|G(\jw)|\,\sin\!\big(\omega t + \angle G(\jw)\big)}
@@ -225,7 +224,7 @@ Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
 \vars{L'amplitude est $\times |G(\jw)|$ et la phase est d\'ecal\'ee de $\angle G(\jw)$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={Diagramme de Bode : 2 graphiques vs $\log\omega$}]
+\begin{tcolorbox}[colback=ch4purple!5,colframe=ch4purple!80!black,title={Diagramme de Bode : 2 graphiques vs $\log\omega$}]
 \begin{itemize}
   \item \textbf{Module} : $|G(\jw)|_{\text{dB}} = 20\log_{10}|G(\jw)|$
   \item \textbf{Phase} : $\angle G(\jw)$ en degr\'es
@@ -233,26 +232,15 @@ Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
 \astuce{\textbf{Propri\'et\'e cl\'e} : les contributions de chaque facteur s'\textbf{additionnent} en dB et en phase.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={R\'esonance (2\textsuperscript{nd} ordre)}]
+\begin{tcolorbox}[colback=ch4purple!5,colframe=ch4purple!80!black,title={R\'esonance (2\textsuperscript{nd} ordre)}]
 \tightmath{
 \boxed{\omega_r = \omega_n\sqrt{1 - 2\zeta^2}} \quad \boxed{M_r = \frac{K}{2\zeta\sqrt{1{-}\zeta^2}}}
 }
 \vars{Existe si $\zeta < 1/\sqrt{2}$. $M_{r,\text{dB}} = -20\log(2\zeta\sqrt{1{-}\zeta^2}) + 20\log K$. Si $K{=}1$ et $\zeta$ faible : $M_{r,\text{dB}} \approx 20\log\!\big(\frac{1}{2\zeta}\big)$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Construction du Bode -- M\'ethode pas-\`a-pas}]
-\begin{enumerate}
-  \item Mettre $G(s)$ sous \textbf{forme de Bode} ($1{+}\tau s$ normalis\'es)
-  \item Identifier : $K$, type $\alpha$, chaque $\tau_i$ ou $(\omega_{n_j}, \zeta_j)$
-  \item Tracer asymptote BF : $20\log K - 20\alpha\log\omega$
-  \item \`A chaque $\omega_{c_i} = 1/\tau_i$ : \textbf{casser} la pente de $\pm 20$ dB/d\'ec
-  \item Pour 2\textsuperscript{nd} ordre : casser de $\pm 40$ dB/d\'ec \`a $\omega_n$
-  \item Phase : sommer les contributions
-  \item Corriger : $\pm 3$ dB aux cassures, pic si $\zeta < 0.707$
-\end{enumerate}
-\end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={Identification depuis un Bode}]
+\begin{tcolorbox}[colback=ch4purple!5,colframe=ch4purple!80!black,title={Identification depuis un Bode}]
 \begin{itemize}
   \item Pente BF ($\omega \to 0$) $= -20\alpha$ dB/d\'ec $\Rightarrow$ type $\alpha$
   \item Pente HF $= -20(n{-}m)$ dB/d\'ec $\Rightarrow$ degr\'e relatif
@@ -266,7 +254,7 @@ Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
 \astuce{Cassure vers le BAS = p\^ole. Cassure vers le HAUT = z\'ero.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch4purple!4,colframe=ch4purple!80!black,title={Bande passante \& Nyquist (rappel)}]
+\begin{tcolorbox}[colback=ch4purple!5,colframe=ch4purple!80!black,title={Bande passante \& Nyquist (rappel)}]
 \textbf{Bande passante} $\omega_B$ : $|G(\jw_B)| = |G(0)|/\sqrt{2}$ ($-3$ dB).\\
 1\textsuperscript{er} ordre : $\omega_B = 1/\tau$. Relation : $\omega_B \cdot t_r \approx 1.5$ \`a $2.5$.
 
@@ -278,7 +266,7 @@ Entr\'ee sinus. $u(t) = A\sin(\omega t)$, sortie en r\'egime permanent :
 \end{itemize}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch4purple!2,colframe=ch4purple!80!black,title={Exemples de Bode classiques}]
+\begin{tcolorbox}[colback=ch4purple!5,colframe=ch4purple!80!black,title={Exemples de Bode classiques}]
 \textbf{1\textsuperscript{er} o.} $\frac{10}{1{+}0.1s}$ : $K{=}10$ (20 dB), $\omega_p{=}10$, pente $0 \to -20$ dB/d\'ec.
 
 \textbf{Intég. + 1\textsuperscript{er} o.} $\frac{5}{s(1{+}0.01s)}$ : pente init. $-20$, cassure \`a $\omega{=}100$ vers $-40$ dB/d\'ec. Phase $-90° \to -180°$.

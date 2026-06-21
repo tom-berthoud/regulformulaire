@@ -59,7 +59,9 @@
   arc=0.6mm,
   left=0.55mm, right=0.55mm, top=0.45mm, bottom=0.45mm,
   before skip=0.7pt, after skip=0.7pt,
-  fonttitle=\bfseries\fontsize{6.5}{6.9}\selectfont,
+  coltitle=white,
+  toptitle=0.35mm, bottomtitle=0.35mm,
+  fonttitle=\bfseries\fontsize{7.3}{7.6}\selectfont,
   breakable
 }
 
@@ -69,11 +71,11 @@
 
 % --- Bannière chapitre ---
 \newcommand{\chapterbanner}[2]{%
-  \vspace{0.9pt}%
-  \begin{tcolorbox}[colback=#2!8,colframe=#2!85!black,left=0.7mm,right=0.7mm,top=0.28mm,bottom=0.28mm,boxsep=0pt,arc=0.8mm]
-  {\fontsize{6.9}{7.2}\selectfont\bfseries\color{#2!50!black} #1}
+  \vspace{1.4pt}%
+  \begin{tcolorbox}[colback=#2!85!black,colframe=#2!85!black,boxrule=0pt,left=0.7mm,right=0.7mm,top=0.55mm,bottom=0.55mm,boxsep=0pt,arc=0.8mm]
+  {\fontsize{8.2}{8.6}\selectfont\bfseries\color{white} #1}
   \end{tcolorbox}
-  \vspace{0.3pt}%
+  \vspace{0.6pt}%
 }
 
 % --- Note/variable en petit ---

@@ -3,7 +3,7 @@
 % ============================================================
 \chapterbanner{Chapitre 1 --- Introduction \& Mod\'elisation}{ch1blue}
 
-\begin{tcolorbox}[colback=ch1blue!4,colframe=ch1blue!75!black,title={Signaux d'un syst\`eme r\'egul\'e}]
+\begin{tcolorbox}[colback=ch1blue!5,colframe=ch1blue!75!black,title={Signaux d'un syst\`eme r\'egul\'e}]
 \begin{itemize}
   \item $w(t)$ : consigne (setpoint, valeur d\'esir\'ee)
   \item $y(t)$ : grandeur r\'egl\'ee (sortie mesur\'ee par capteur)
@@ -15,7 +15,7 @@
 \end{itemize}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch1blue!2,colframe=ch1blue!75!black,title={Sch\'ema bloc canonique}]
+\begin{tcolorbox}[colback=ch1blue!5,colframe=ch1blue!75!black,title={Sch\'ema bloc canonique}]
 \begin{center}
 \begin{tikzpicture}[>=Stealth, scale=0.52, transform shape,
   block/.style={draw, minimum height=0.72cm, minimum width=1.45cm, font=\tiny, align=center},
@@ -45,7 +45,7 @@
 \vars{Le bloc \og Syst\`eme \`a r\'egler\fg{} regroupe l'amplificateur/actionneur, le processus et le capteur.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch1blue!4,colframe=ch1blue!75!black,title={Modes de r\'egulation (correspondance / maintien)}]
+\begin{tcolorbox}[colback=ch1blue!5,colframe=ch1blue!75!black,title={Modes de r\'egulation (correspondance / maintien)}]
 \begin{itemize}
   \item \textbf{Maintien} (r\'egulation) : $w = \text{cst}$, rejeter $v(t)$
   \item \textbf{Poursuite} (asservissement) : $y(t)$ suit $w(t)$ variable
@@ -54,7 +54,7 @@
 \end{itemize}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch1blue!2,colframe=ch1blue!75!black,title={Lin\'earit\'e \& Superposition (LTI)}]
+\begin{tcolorbox}[colback=ch1blue!5,colframe=ch1blue!75!black,title={Lin\'earit\'e \& Superposition (LTI)}]
 \begin{itemize}
   \item \textbf{Homog\'en\'eit\'e} : $u \to y \Rightarrow \alpha u \to \alpha y$
   \item \textbf{Additivit\'e} : $u_1 \to y_1,\; u_2 \to y_2 \Rightarrow u_1{+}u_2 \to y_1{+}y_2$
@@ -63,7 +63,7 @@
 \vars{\textbf{Superposition} : la r\'eponse totale = somme des r\'eponses \`a chaque entr\'ee prise isol\'ement (les autres mises \`a 0).}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch1blue!4,colframe=ch1blue!75!black,title={Mod\'elisation par \'eq. diff\'erentielle}]
+\begin{tcolorbox}[colback=ch1blue!5,colframe=ch1blue!75!black,title={Mod\'elisation par \'eq. diff\'erentielle}]
 Forme g\'en\'erale d'ordre $n$ :
 \tightmath{
 \sum_{k=0}^{n} a_k \frac{d^k y}{dt^k} = \sum_{k=0}^{m} b_k \frac{d^k u}{dt^k}
@@ -87,48 +87,14 @@ Masse-amort. & $m\dot{v} + R_f v = F$ & $m/R_f$ \\
 \end{center}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch1blue!2,colframe=ch1blue!75!black,title={Gain statique \& Convolution}]
+\begin{tcolorbox}[colback=ch1blue!5,colframe=ch1blue!75!black,title={Gain statique}]
 \tightmath{
 \boxed{K = \frac{\Delta y_\infty}{\Delta u_\infty} = \lim_{s \to 0} G(s) = \frac{b_0}{a_0}}
 }
-\vars{Unit\'es : $[K] = [\text{sortie}] / [\text{entr\'ee}]$.}
-\textbf{Convolution} (r\'eponse \`a une entr\'ee quelconque) :
-\tightmath{
-\boxed{y(t) = g(t) * u(t) = \int_0^t g(\tau)\, u(t{-}\tau)\, d\tau}
-}
-\vars{$g(t) = \Lap^{-1}\{G(s)\}$ = r\'eponse impulsionnelle. La r\'eponse indicielle est l'int\'egrale de $g(t)$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch1blue!4,colframe=ch1blue!75!black,title={Lin\'earisation \& Moteur CC}]
-\textbf{Lin\'earisation} autour de $x_0$ :
-\tightmath{
-f(x) \approx f(x_0) + \left.\frac{\partial f}{\partial x}\right|_{x_0}\!(x - x_0)
-}
-On travaille avec les variations $\Delta x = x - x_0$, $\Delta y = y - y_0$.
 
-\textbf{Moteur CC} simplifi\'e ($L_a \approx 0$) :
-\tightmath{
-\boxed{G_{mot}(s) = \frac{K}{(1{+}\tau_m s)(1{+}\tau_e s)} \approx \frac{K}{1 + \tau_m s}}
-}
-\vars{$K = \dfrac{K_T}{fR_a + K_T K_E} \approx \dfrac{1}{K_E}$ (si $f\to0$), $\tau_m = \dfrac{JR_a}{fR_a + K_T K_E}$, $\tau_e = \dfrac{L_a}{R_a}$.}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch1blue!2,colframe=ch1blue!75!black,title={M\'ethode de mod\'elisation (pas \`a pas)}]
-\begin{enumerate}
-  \item Choisir les variables d'entr\'ee/sortie : $u(t)$, $y(t)$ et les perturbations $v(t)$
-  \item \'Ecrire les lois physiques (KCL/KVL, Newton, bilan \'energ\'etique)
-  \item Lin\'eariser autour d'un point de fonctionnement $(x_0,u_0,y_0)$
-  \item Passer en Laplace (CI nulles) et obtenir $G(s)=Y(s)/U(s)$
-  \item Identifier $K$, ordre $n$, type $\alpha$, constantes de temps $\tau_i$
-  \item Valider : causalit\'e ($n\ge m$), unit\'es, signe de $K$, ordre de grandeur
-\end{enumerate}
-\tightmath{
-\text{Exemple : } RC\,\dot y + y = u \Rightarrow G(s)=\frac{1}{1+RCs},\ K=1,\ \tau=RC
-}
-\piege{Lin\'earisation valable pour petites variations autour du point choisi.}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=ch1blue!4,colframe=ch1blue!75!black,title={Sch\'ema bloc avec int\'egrateurs (\'eq. diff $\to$ bloc)}]
+\begin{tcolorbox}[colback=ch1blue!5,colframe=ch1blue!75!black,title={Sch\'ema bloc avec int\'egrateurs (\'eq. diff $\to$ bloc)}]
 Pour $\ddot y + a_1 \dot y + a_0 y = b_0\,u$ (ordre 2) :
 \begin{itemize}
   \item Isoler la d\'eriv\'ee la plus haute : $\ddot y = b_0 u - a_1 \dot y - a_0 y$
@@ -171,7 +137,7 @@ Pour $\ddot y + a_1 \dot y + a_0 y = b_0\,u$ (ordre 2) :
 \astuce{Forme g\'en\'erale : nb int\'egrateurs = ordre $n$ du d\'enominateur.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch1blue!2,colframe=ch1blue!75!black,title={P\^oles, p\^ole dominant \& dur\'ee du r\'egime transitoire}]
+\begin{tcolorbox}[colback=ch1blue!5,colframe=ch1blue!75!black,title={P\^oles, p\^ole dominant \& dur\'ee du r\'egime transitoire}]
 \textbf{P\^oles} $p_i$ = racines du d\'enominateur de $G(s)$ :
 \begin{itemize}
   \item R\'eels $p_i < 0$ : mode ap\'eriodique, $e^{p_i t}$
@@ -185,10 +151,9 @@ Pour $\ddot y + a_1 \dot y + a_0 y = b_0\,u$ (ordre 2) :
 
 \vars{$t_r$ : temps de mont\'ee. $T_{\text{r\'eg}}$ : temps pour entrer \emph{et rester} dans la bande $\pm5\%$ ; le facteur $3$ est d\'ej\`a inclus dans la formule. $T_0$ : p\'eriode des oscillations.}
 \vars{Si un p\^ole est en $s=0$, alors c'est lui le p\^ole dominant : il est plus lent que tout p\^ole de partie r\'eelle strictement n\'egative.}
-\piege{Si un p\^ole est en $s{=}0$ (type $\alpha{\ge}1$) : gain statique $= \infty$ ; utiliser le \textbf{gain permanent} $K{=}\lim_{s\to 0}s^\alpha G(s)$.}
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=ch1blue!4,colframe=ch1blue!75!black,title={Astuces \& Pi\`eges Ch.1}]
+\begin{tcolorbox}[colback=ch1blue!5,colframe=ch1blue!75!black,title={Astuces \& Pi\`eges Ch.1}]
 \piege{\textbf{Gain statique $\neq$ gain permanent} : gain stat. $= \lim_{s\to 0}G(s)$ (peut valoir $\infty$ si $\alpha{\ge}1$). Gain permanent $K{=}\lim_{s\to 0}s^\alpha G(s)$ (toujours fini).}\\[1pt]
 \piege{\textbf{Ordre $n$ vs type $\alpha$} : $n$ = degr\'e du d\'enom. ; $\alpha$ = nb de p\^oles en $s{=}0$.}\\[1pt]
 \piege{\textbf{P\^ole dominant} : ignorer les p\^oles $\gg 10\times$ plus rapides. Un z\'ero proche d'un p\^ole l'annule (simplification p\^ole-z\'ero).}\\[1pt]
