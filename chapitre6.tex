@@ -269,49 +269,52 @@ Le Bode est trac\'e pour un $K_p^{\text{base}}$ donn\'e (souvent $1$ ou $100$). 
 
 \begin{tcolorbox}[colback=ch6teal!5,colframe=ch6teal!80!black,title={Interpr\'etation plan de Nyquist}]
 \begin{center}
-\begin{tikzpicture}[scale=0.78, transform shape, >=Stealth,
-   every node/.style={font=\fontsize{5.6}{6.4}\selectfont}]
+\begin{tikzpicture}[scale=1.02, transform shape, >=Stealth,
+   every node/.style={font=\fontsize{6.0}{6.8}\selectfont}]
+  % --- omega_co : croisement EXACT du lieu et du cercle unite (3e quadrant) ---
+  \coordinate (co) at ({cos(235)},{sin(235)});
   % --- axes ---
   \draw[->] (-2.5,0) -- (1.05,0) node[right]{Re};
-  \draw[->] (0,-1.75) -- (0,1.55) node[above]{Im};
+  \draw[->] (0,-1.85) -- (0,1.55) node[above]{Im};
   % --- cercle unité : label déporté hors du lieu (haut-droite) ---
   \draw[gray!45, thin] (0,0) circle (1);
   \draw[gray!55, thin] (0.71,0.71) -- (1.02,1.06);
   \node[gray!70, right] at (1.0,1.1) {$|G_o|{=}1$};
-  % --- lieu omega>0 (trait plein) : depart omega->0 a droite, croise l'axe reel
-  %     negatif en omega_pi (entre -1 et 0 => marges OK), puis -> origine ---
+  % --- lieu omega>0 (trait plein) : depart omega->0 a droite, descend, croise le
+  %     cercle unite en omega_co, puis l'axe reel negatif en omega_pi (entre -1 et
+  %     0 => marges OK), puis -> origine ---
   \draw[very thick, ch6teal!80!black]
-     (2.0,-0.12) to[out=-105,in=20] (0.25,-1.2)
-     to[out=200,in=-55] (-0.62,0)
+     (2.0,-0.12) to[out=-100,in=18] (0.2,-1.18)
+     to[out=198,in=-70] (co)
+     to[out=110,in=-58] (-0.62,0)
      to[out=125,in=-150] (-0.30,0.5)
      to[out=30,in=170] (0.02,0.05);
   % --- conjugue omega<0 (tiret) ---
   \draw[very thick, ch6teal!80!black, dashed]
-     (2.0,0.12) to[out=105,in=-20] (0.25,1.2)
-     to[out=160,in=55] (-0.62,0);
+     (2.0,0.12) to[out=100,in=-18] (0.2,1.18)
+     to[out=162,in=58] (-0.62,0);
   \node[ch6teal!75!black] at (1.55,-0.42) {$\omega{\to}0$};
   % --- point critique -1 (label en-dessous, hors zone marges) ---
   \filldraw[red!80!black] (-1,0) circle (1.7pt);
   \node[red!80!black, below left=-2pt and -2pt] at (-1,0) {$-1$};
   % --- omega_pi : croisement axe reel negatif (repere vers le bas) ---
   \filldraw[blue!75] (-0.62,0) circle (1.6pt);
-  \draw[blue!75, thin] (-0.62,0) -- (-0.62,-1.05);
-  \node[blue!75, below] at (-0.62,-1.08) {$\omega_\pi$};
+  \draw[blue!75, thin] (-0.62,0) -- (-0.98,-0.40);
+  \node[blue!75, left] at (-1.0,-0.42) {$\omega_\pi$};
   % --- marge de gain : double-fleche fine -1 <-> croisement, label AU-DESSUS ---
   \draw[<->, green!45!black, line width=0.45pt, >={Stealth[length=2.2pt]}]
        (-1,0.13) -- (-0.62,0.13);
   \draw[green!45!black, line width=0.3pt] (-0.81,0.15) -- (-0.81,0.36);
   \node[green!45!black, above] at (-0.81,0.34) {$1/A_m$};
-  % --- omega_co : croisement du cercle unite (3e quadrant) ---
-  \coordinate (co) at ({cos(213)},{sin(213)});
-  \filldraw[orange!85!black] (co) circle (1.6pt);
-  \draw[orange!85!black, thin] (co) -- ({1.62*cos(213)},{1.5*sin(213)});
-  \node[orange!85!black, left] at ({1.68*cos(213)},{1.5*sin(213)}) {$\omega_{co}$};
-  % --- marge de phase : rayon vers omega_co + arc 180deg -> angle de G_o(jw_co) ---
+  % --- omega_co : marqueur place exactement sur le lieu (= sur le cercle) ---
+  \filldraw[orange!85!black] (co) circle (1.7pt);
+  \draw[orange!85!black, thin] (co) -- ({1.5*cos(235)},{1.5*sin(235)});
+  \node[orange!85!black, below] at ({1.52*cos(235)},{1.56*sin(235)}) {$\omega_{co}$};
+  % --- marge de phase : rayon vers omega_co + arc -axe reel -> G_o(jw_co) ---
   \draw[gray!55, thin] (0,0) -- (co);
-  \draw[red!70!black, line width=0.9pt] (180:0.58) arc (180:213:0.58);
-  \draw[red!70!black, line width=0.3pt] ({0.58*cos(196.5)},{0.58*sin(196.5)}) -- (0.36,-0.54);
-  \node[red!70!black, right] at (0.34,-0.57) {$\varphi_m$};
+  \draw[red!70!black, line width=0.9pt] (180:0.55) arc (180:235:0.55);
+  \draw[red!70!black, line width=0.3pt] ({0.55*cos(207.5)},{0.55*sin(207.5)}) -- (0.30,-0.5);
+  \node[red!70!black, right] at (0.28,-0.52) {$\varphi_m$};
 \end{tikzpicture}
 \end{center}
 \vars{Lieu de $G_o(\jw)$. Trait plein : $\omega>0$ ; tiret : $\omega<0$ (sym. conj.). $A_m{=}1/|G_o(\jw_\pi)|$ (croisement axe r\'eel n\'eg.). $\varphi_m$ = angle entre $-$axe r\'eel et $G_o(\jw_{co})$ sur le cercle unit\'e. Stable (revers) : $(-1,0)$ \`a gauche du lieu.}
