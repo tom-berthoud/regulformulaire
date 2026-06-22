@@ -114,8 +114,8 @@ Pour $\ddot y + a_1 \dot y + a_0 y = b_0\,u$ (ordre 2) :
   \node[block, right=0.6 of int1] (int2) {$\dfrac{1}{s}$};
   \node[coordinate, right=0.7 of int2] (out) {};
 
-  \node[gain] (a1) at (1.35,-1.15) {$-a_1$};
-  \node[gain] (a0) at (2.95,-1.55) {$-a_0$};
+  \node[gain] (a1) at (1.35,-1.15) {$a_1$};
+  \node[gain] (a0) at (2.95,-1.55) {$a_0$};
 
   \draw[->] (-2.3,0) node[left] {$u$} -- (b0);
   \draw[->] (b0) -- (sum);
@@ -130,7 +130,7 @@ Pour $\ddot y + a_1 \dot y + a_0 y = b_0\,u$ (ordre 2) :
   \draw[->] (a0) -| (sum.south);
 
   \node[font=\tiny] at (-0.3,0.2) {$+$};
-  \node[font=\tiny] at (+0.2,-0.35) {$+$};
+  \node[font=\tiny] at (+0.2,-0.35) {$-$};
 \end{tikzpicture}
 
 \end{center}
