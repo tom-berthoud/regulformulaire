@@ -12,3 +12,6 @@
 main.pdf
 .codex
 
+
+# Supports de cours des enseignants : gardés en local, pas publiés
+assets/*.pdf

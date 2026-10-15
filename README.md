@@ -13,7 +13,7 @@ Format dense : A4 paysage, 3 colonnes, boites `tcolorbox` coloriees par chapitre
 
 - `main.tex` : document principal (préambule, macros, gestion des versions)
 - `chapitre1.tex` … `chapitre6.tex` : contenu du formulaire
-- `assets/` : ressources PDF et documents de référence (notes de cours, énoncés)
+- `assets/` : supports de cours locaux (non publiés, voir `.gitignore`)
 
 ### Chapitres
 
